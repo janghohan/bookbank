@@ -1,0 +1,539 @@
+<?php 
+include './dbConnect.php';
+include './API/visit_chk_api.php';
+ ?>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>북뱅크</title>
+	<meta name="naver-site-verification" content="ebbbda54b581c9fe94944c308e7b519afa458575" />
+	<meta name="description" content="북뱅크">
+	<meta name="robots" content="index, follow">
+	<meta name="code" charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1"/>
+	<meta property="og:type" content="website"> 
+	<meta property="og:title" content="북뱅크">
+	<meta property="og:description" content="도서대여,책대여,책방,책빌리는곳2">
+	<!-- <meta property="og:image" content="http://www.mysite.com/myimage.jpg"> -->
+	<meta property="og:url" content="http://jeojeon.com">
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<!-- <script type="text/javascript" src="STATIC/js/common.js"></script> -->
+	<script type="text/javascript" src="STATIC/js/swiper-bundle.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/swiper-bundle.min.css"/>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/style.css"/>
+</head>
+<body>
+	<?php include 'header.html'; ?>	
+
+	<style type="text/css">
+	/* 슬라이드 컨테이너 스타일 */
+	#main-container {
+        max-width: 100%;/*
+        position: relative;
+        margin: auto;
+        overflow: hidden*/;
+    }
+    .innerBanner{
+    	position: relative;
+    }
+
+    .list_area ul{
+    	margin-bottom: 120px;
+    }
+
+
+ 
+</style>
+	<div id="main-container">
+		<section class="visula_slide">
+			<div class="inner">
+				<div class="swiper mySwiper">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<a href="">
+								<img src="STATIC/img/banner/main001.png">
+							</a>
+						</div>
+						<div class="swiper-slide">
+							<a href="">
+								<img src="STATIC/img/banner/main002.png">
+							</a>
+						</div>
+						<div class="swiper-slide">
+							<a href="">
+								<img src="STATIC/img/banner/main003.png">
+							</a>
+						</div>
+					</div>
+	      			<div class="pagenation-inner">
+	      				<div class="swiper-pagination"></div>
+	      			</div>
+				</div>
+				<button class="swiper-button-prev"></button>
+      			<button class="swiper-button-next"></button>
+				<script type="text/javascript">
+					var swiper = new Swiper(".mySwiper", {
+						slidesPerView: 'auto',
+						// centeredSlides: true,
+						spaceBetween: 0,
+						speed : 500,
+						loop: true,
+						observer: true,
+						observeParents: true,
+						autoResize: true,
+						navigation: {
+							nextEl: ".swiper-button-next",
+							prevEl: ".swiper-button-prev",
+						},
+						pagination: {
+				          el: ".swiper-pagination",
+				          clickable : true,
+				        },
+					    on: {
+
+						}
+					});
+				</script>
+			</div>
+			<hr class="mobile_line">
+		</section>
+	</div>
+	<style type="text/css">
+		#container{
+			margin-top: 80px;
+		}
+		.tool{
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+			cursor: pointer;
+		}
+		.tool img{
+			width: 60px;
+		}
+	</style>
+
+
+	<div id="container">
+		
+		<section class="campaign__">
+			<div class="inner">
+				<div class="title HOT">
+					<h1>대여 가능 도서</h1>
+					<div class="tool">
+						<a class="more">
+							<img src="./STATIC/img/icon/moreBtn.png">
+						</a>
+					</div>
+				</div>
+				<section class="list_area scroll">
+					<ul>
+						<li>
+							<a href="detail.html">
+								<div class="imgBox">
+									<img src="STATIC/img/book/9788934942467.jpg">
+								</div>
+								<div class="details">
+									<h3>총균쇠</h3>
+									<!-- <div class="tag_area">
+										<img src="STATIC/img/icon/asset/tag_blog.svg">
+										<img src="STATIC/img/icon/asset/tag_instar.svg">
+										<img src="STATIC/img/icon/asset/tag_cafe.svg">
+										<img src="STATIC/img/icon/asset/tag_store.svg">
+										<img src="STATIC/img/icon/asset/tag_ytb.svg">
+										<span>제품</span>
+									</div>
+									<div class="appli_area">
+										<div>
+											<span>신청</span>
+											<b>3</b>
+											<span>/</span>
+											<span>5명</span>
+										</div>
+										<div>
+											<div class="dday">D-13</div>
+										</div>
+									</div>
+									<div class="subject">프리미엄 기능성 편안한 신발 아치 깔창 2차</div>
+									<div class="desc">신발 아치깔창 1개</div>
+									<div class="point_tag">
+										<span class="point">공통 3,000P</span>
+										<span class="point bonus">보너스 50,000P</span>
+									</div> -->
+								</div>
+							</a>
+						</li>
+						<li>
+							<a href="캠페인상세.html">
+								<div class="imgBox">
+									<img src="STATIC/img/book/9791197021633.jpg">
+								</div>
+								<div class="details">
+									<h3>검은꽃</h3>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a href="캠페인상세.html">
+								<div class="imgBox">
+									<img src="STATIC/img/book/9791191114225.jpg">
+								</div>
+								<div class="details">
+									<h3>작별인사</h3>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a href="캠페인상세.html">
+								<div class="imgBox">
+									<img src="STATIC/img/book/9791191114072.jpg">
+								</div>
+								<div class="details">
+									<h3>나는 나늘 파괴할 권리가 있다</h3>
+								</div>
+							</a>
+						</li>
+					</ul>
+					<ul>
+						<li>
+							<a href="캠페인상세.html">
+								<div class="imgBox">
+									<img src="STATIC/img/book/9788965964223.jpg">
+								</div>
+								<div class="details">
+									<h3>타인을 읽는 말</h3>
+									<!-- <div class="tag_area">
+										<img src="STATIC/img/icon/asset/tag_blog.svg">
+										<img src="STATIC/img/icon/asset/tag_instar.svg">
+										<img src="STATIC/img/icon/asset/tag_cafe.svg">
+										<img src="STATIC/img/icon/asset/tag_store.svg">
+										<img src="STATIC/img/icon/asset/tag_ytb.svg">
+										<span>제품</span>
+									</div>
+									<div class="appli_area">
+										<div>
+											<span>신청</span>
+											<b>3</b>
+											<span>/</span>
+											<span>5명</span>
+										</div>
+										<div>
+											<div class="dday">D-13</div>
+										</div>
+									</div>
+									<div class="subject">프리미엄 기능성 편안한 신발 아치 깔창 2차</div>
+									<div class="desc">신발 아치깔창 1개</div>
+									<div class="point_tag">
+										<span class="point">공통 3,000P</span>
+										<span class="point bonus">보너스 50,000P</span>
+									</div> -->
+								</div>
+							</a>
+						</li>
+						<li>
+							<a href="캠페인상세.html">
+								<div class="imgBox">
+									<img src="STATIC/img/book/9791186993095.jpg">
+								</div>
+								<div class="details">
+									<h3>성격의 탄생</h3>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a href="캠페인상세.html">
+								<div class="imgBox">
+									<img src="STATIC/img/book/9791170400523.jpg">
+								</div>
+								<div class="details">
+									<h3>마지막 수업</h3>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a href="캠페인상세.html">
+								<div class="imgBox">
+									<img src="STATIC/img/book/9791191071030.jpg">
+								</div>
+								<div class="details">
+									<h3>프리즘</h3>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</section>
+			</div>
+		</section>
+		<!-- <section class="campaign__">
+			<div class="inner">
+				<div class="title NEW">
+					<h1>신규 캠페인</h1>
+					<div class="tool">
+						<a href="" class="more">더보기</a>
+					</div>
+				</div>
+				<section class="list_area scroll">
+					<ul>
+						<li>
+							<a href="캠페인상세.html">
+								<div class="imgBox">
+									<img src="STATIC/img/campaign/신발깔창.png">
+								</div>
+								<div class="details">
+									<div class="tag_area">
+										<img src="STATIC/img/icon/asset/tag_blog.svg">
+										<img src="STATIC/img/icon/asset/tag_instar.svg">
+										<img src="STATIC/img/icon/asset/tag_cafe.svg">
+										<img src="STATIC/img/icon/asset/tag_store.svg">
+										<img src="STATIC/img/icon/asset/tag_ytb.svg">
+										<span>제품</span>
+									</div>
+									<div class="appli_area">
+										<div>
+											<span>신청</span>
+											<b>3</b>
+											<span>/</span>
+											<span>5명</span>
+										</div>
+										<div>
+											<div class="timer">13:05:05</div>
+										</div>
+									</div>
+									<div class="subject">프리미엄 기능성 편안한 신발 아치 깔창 2차</div>
+									<div class="desc">신발 아치깔창 1개</div>
+									<div class="point_tag">
+										<span class="point">공통 3,000P</span>
+										<span class="point bonus">보너스 50,000P</span>
+									</div>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a href="캠페인상세.html">
+								<div class="imgBox">
+									<img src="STATIC/img/campaign/신발깔창.png">
+								</div>
+								<div class="details">
+									<div class="tag_area">
+										<img src="STATIC/img/icon/asset/tag_blog.svg">
+										<img src="STATIC/img/icon/asset/tag_instar.svg">
+										<img src="STATIC/img/icon/asset/tag_cafe.svg">
+										<img src="STATIC/img/icon/asset/tag_store.svg">
+										<img src="STATIC/img/icon/asset/tag_ytb.svg">
+										<span>제품</span>
+									</div>
+									<div class="appli_area">
+										<div>
+											<span>신청</span>
+											<b>3</b>
+											<span>/</span>
+											<span>5명</span>
+										</div>
+										<div>
+											<div class="timer">13:05:05</div>
+										</div>
+									</div>
+									<div class="subject">프리미엄 기능성 편안한 신발 아치 깔창 2차</div>
+									<div class="desc">신발 아치깔창 1개</div>
+									<div class="point_tag">
+										<span class="point">공통 3,000P</span>
+										<span class="point bonus">보너스 50,000P</span>
+									</div>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a href="캠페인상세.html">
+								<div class="imgBox">
+									<img src="STATIC/img/campaign/신발깔창.png">
+								</div>
+								<div class="details">
+									<div class="tag_area">
+										<img src="STATIC/img/icon/asset/tag_blog.svg">
+										<img src="STATIC/img/icon/asset/tag_instar.svg">
+										<img src="STATIC/img/icon/asset/tag_cafe.svg">
+										<img src="STATIC/img/icon/asset/tag_store.svg">
+										<img src="STATIC/img/icon/asset/tag_ytb.svg">
+										<span>제품</span>
+									</div>
+									<div class="appli_area">
+										<div>
+											<span>신청</span>
+											<b>3</b>
+											<span>/</span>
+											<span>5명</span>
+										</div>
+										<div>
+											<div class="timer">13:05:05</div>
+										</div>
+									</div>
+									<div class="subject">프리미엄 기능성 편안한 신발 아치 깔창 2차</div>
+									<div class="desc">신발 아치깔창 1개</div>
+									<div class="point_tag">
+										<span class="point">공통 3,000P</span>
+										<span class="point bonus">보너스 50,000P</span>
+									</div>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a href="캠페인상세.html">
+								<div class="imgBox">
+									<img src="STATIC/img/campaign/신발깔창.png">
+								</div>
+								<div class="details">
+									<div class="tag_area">
+										<img src="STATIC/img/icon/asset/tag_blog.svg">
+										<img src="STATIC/img/icon/asset/tag_instar.svg">
+										<img src="STATIC/img/icon/asset/tag_cafe.svg">
+										<img src="STATIC/img/icon/asset/tag_store.svg">
+										<img src="STATIC/img/icon/asset/tag_ytb.svg">
+										<span>제품</span>
+									</div>
+									<div class="appli_area">
+										<div>
+											<span>신청</span>
+											<b>3</b>
+											<span>/</span>
+											<span>5명</span>
+										</div>
+										<div>
+											<div class="timer">13:05:05</div>
+										</div>
+									</div>
+									<div class="subject">프리미엄 기능성 편안한 신발 아치 깔창 2차</div>
+									<div class="desc">신발 아치깔창 1개</div>
+									<div class="point_tag">
+										<span class="point">공통 3,000P</span>
+										<span class="point bonus">보너스 50,000P</span>
+									</div>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a href="캠페인상세.html">
+								<div class="imgBox">
+									<img src="STATIC/img/campaign/신발깔창.png">
+								</div>
+								<div class="details">
+									<div class="tag_area">
+										<img src="STATIC/img/icon/asset/tag_blog.svg">
+										<img src="STATIC/img/icon/asset/tag_instar.svg">
+										<img src="STATIC/img/icon/asset/tag_cafe.svg">
+										<img src="STATIC/img/icon/asset/tag_store.svg">
+										<img src="STATIC/img/icon/asset/tag_ytb.svg">
+										<span>제품</span>
+									</div>
+									<div class="appli_area">
+										<div>
+											<span>신청</span>
+											<b>3</b>
+											<span>/</span>
+											<span>5명</span>
+										</div>
+										<div>
+											<div class="timer">13:05:05</div>
+										</div>
+									</div>
+									<div class="subject">프리미엄 기능성 편안한 신발 아치 깔창 2차</div>
+									<div class="desc">신발 아치깔창 1개</div>
+									<div class="point_tag">
+										<span class="point">공통 3,000P</span>
+										<span class="point bonus">보너스 50,000P</span>
+									</div>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</section>
+			</div>
+		</section> -->
+	</div>
+		<!-- <hr class="mobile_line">
+		<section class="footer_top">
+			<div class="inner">
+				<section class="gnb_">
+					<article>
+						<div class="title">
+							<a href="고객센터.html">고객센터</a>
+						</div>
+						<ul>
+							<li>상담시간 10:00 ~ 18:00</li>
+							<li>점심시간 13:00 ~ 14:00</li>
+							<li>주말, 공휴일 휴무</li>
+						</ul>
+					</article>
+					<article>
+						<div class="title">빠른문의</div>
+						<div>
+							<a href="" class="ch_link"><img src="STATIC/img/icon/asset/ch.svg">광고주 문의</a>
+							<a href="" class="ch_link"><img src="STATIC/img/icon/asset/ch.svg">리뷰어/인플루언서 문의</a>
+						</div>
+					</article>
+					<article>
+						<div class="title">COMPANY</div>
+						<ul>
+							<li><a href="">개인정보처리방침</a></li>
+							<li><a href="">이용약관</a></li>
+						</ul>
+					</article>
+				</section>
+				<section class="socials_">
+					<a href="">
+						<div class="imgBox about"></div>
+						<p>아싸뷰 소개</p>
+					</a>
+					<a href="">
+						<div class="imgBox blog"></div>
+						<p>블로그</p>
+					</a>
+					<a href="">
+						<div class="imgBox instar"></div>
+						<p>인스타그램</p>
+					</a>
+				</section>
+			</div>
+		</section> -->
+		 <?php include 'footer.html'; ?>	
+
+	<section id="mobile_bottom">
+		<ul class="menu">
+			<li class="active">
+				<a href="index.html">
+					<i class="icon home"></i>
+					<p>홈</p>
+				</a>
+			</li>
+			<li>
+				<a href="카테고리.html">
+					<i class="icon campaign"></i>
+					<p>캠페인</p>
+				</a>
+			</li>
+			<li>
+				<a href="광고주센터.html">
+					<i class="icon advert"></i>
+					<p>광고주센터</p>
+				</a>
+			</li>
+			<li>
+				<a href="고객센터.html">
+					<i class="icon customer"></i>
+					<p>고객센터</p>
+				</a>
+			</li>
+			<li>
+				<a href="모바일마이페이지.html">
+					<i class="icon mypage"></i>
+					<p>마이페이지</p>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<script type="text/javascript">
+			
+
+		
+	</script>
+</body>
+</html>
