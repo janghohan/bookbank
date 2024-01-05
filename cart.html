@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="code" charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0,maximum-scale=10,user-scalable=yes"/>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="STATIC/js/common.js"></script>
+	<script type="text/javascript" src="STATIC/js/swiper-bundle.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/swiper-bundle.min.css"/>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/style.css"/>
+</head>
+<style type="text/css">
+
+	.imgBox{
+		width: 300px;
+		height: 450px;
+	}
+	.imgBox img{
+		width: 100%;
+	}
+	.cart-book-info .info-box .prod_price{
+		padding-bottom: 15px;
+	}
+	.cart-book-info .info-box .percent{
+		display: inline-block;
+	    margin-right: 6px;
+	    color: #4dac27;
+	    font-size: 16px;
+	    line-height: 36px;
+	    letter-spacing: -0.01em;
+	    font-weight: 700;
+	    vertical-align: top;
+	}
+	.cart-book-info .info-box .price{
+		display: inline-block;
+	    margin-right: 4px;
+	    color: #000;
+	    font-size: 18px;
+	    line-height: 33px;
+	    letter-spacing: -0.01em;
+	    vertical-align: top;
+	}
+	.cart-book-info .info-box .price .val{
+		display: inline-block;
+    	font-weight: 700;
+	}
+	.cart-book-info .info-box .sale_price{
+		display: inline-block;
+	    margin-bottom: 2px;
+	    color: #767676;
+	    font-size: 14px;
+	    line-height: 33px;
+	    letter-spacing: -0.01em;
+	    vertical-align: bottom;
+	}
+
+	.guide_box{
+	    display: flex;
+	    justify-content: space-between;
+	    padding: 15px 0px;
+	}
+	.guide_box .guide_title{
+	    font-size: 14px;
+	    line-height: 22px;
+	    letter-spacing: -0.01em;
+	    
+	}
+	.guide_cont .val{
+	    color: #4dac27;
+	    font-size: 15px;
+	    line-height: 23px;
+	    letter-spacing: -0.01em;
+	    font-weight: 700;
+	    vertical-align: top;
+	}
+	.prod_alarm_text {
+	    color: #595959;
+	    font-size: 13px;
+	    display: inline-block;
+	    width: 190px;
+	}
+	.btn_line_primary{
+		color: #474c98;
+	    border: 1px solid #5055b1;
+	    background: #fff;
+	    transition: background-color 0.2s ease-out, border-color 0.2s ease-out;
+	    padding: 5px;
+	}
+
+
+	/*cart*/
+	.aside_section .inner > .content{
+		width: 1200px;
+	}
+	h1{
+		font-size: 28px;
+	}
+	.cart_details{
+		position: relative;
+	}
+	.cart_details .content {
+	    margin-bottom: 70px;
+	    width: 850px;
+
+	}
+	.cart_details .side_area {
+	    width: 300px;
+	    height: 100%;
+	    position: absolute;
+	    left: 900px;
+	    top: 0;
+	}
+
+	.cart_details .side_area .sticky {
+	    position: relative;
+	    top: 0px;
+	    left: 0;
+	}
+	.cart_details .cart-header{
+		border-top: 2px solid #e7e7e7e7;
+		border-bottom: 1px solid #eaeaea;
+
+	}
+
+	.cart-header .checkbox_{
+		display: flex;
+	    position: relative;
+	    height: 100%;
+	    background-color: #f7f7f7;
+	    height: 50px;
+	    padding-left: 15px;
+	    margin-bottom: 22px;
+	}
+
+	.cart-con{
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		margin-top: 15px;
+		padding-bottom: 20px;
+		border-bottom: 1px solid #eaeaea;
+	}
+	.cart-book-info{
+		display: flex;
+		justify-content: flex-start;
+		align-items: flex-start;
+	}
+	.cart-book-info img{
+		width: 80px;
+		height: 120px;
+	}
+	.cart-book-info .info-box{
+		padding-left: 30px;
+	}
+	#swal2-content{
+		font-size: 14px !important;
+		font-weight: 700 !important;
+	}
+	.swal2-popup{
+		width: 300px !important;
+		height: 190px;
+	}
+</style>
+<body>
+	<?php include 'header.html'; ?>	
+	<div id="container">
+		<section class="aside_section">
+			<div class="inner">
+				<article class="content">
+					<h1 class="mb15">장바구니</h1>
+					<section class="cart_details">
+						
+						<article class="content">
+							<section class="detailArea">
+								<div class="cart-header">
+									<div class="checkbox_">
+										<input type="checkbox" name="checkTrem">
+										<label>전체선택</label>
+									</div>
+								</div>
+								<ul>
+									<li class="cart-con">
+										<div class="cart-book-info">
+											<div class="checkbox_">
+												<input type="checkbox" name="checkTrem">
+												<label></label>
+											</div>
+											<img src="./STATIC/img/book/9788934942467.jpg">
+											<div class="info-box">
+												<h4 class="title">총균쇠</h4>
+												<div class="prod_price_box">
+										            <div class="prod_price">
+										                <span class="percent">90%</span>
+										                <span class="price">
+										                    <span class="val">1,980<span class="unit">원</span></span>
+										                </span>
+										                <span class="sale_price">
+										                    <s class="val">19,800<span class="unit">원</span></s>
+										                </span>
+										            </div>
+										        </div>
+											</div>
+										</div>
+										<div>
+											<button class="delete-btn" data-id=""></button>
+										</div>
+									</li>
+									<li class="cart-con">
+										<div class="cart-book-info">
+											<div class="checkbox_">
+												<input type="checkbox" name="checkTrem">
+												<label></label>
+											</div>
+											<img src="./STATIC/img/book/9788934942467.jpg">
+											<div class="info-box">
+												<h4 class="title">총균쇠</h4>
+												<div class="prod_price_box">
+										            <div class="prod_price">
+										                <span class="percent">90%</span>
+										                <span class="price">
+										                    <span class="val">1,980<span class="unit">원</span></span>
+										                </span>
+										                <span class="sale_price">
+										                    <s class="val">19,800<span class="unit">원</span></s>
+										                </span>
+										            </div>
+										        </div>
+											</div>
+										</div>
+										<div>
+											<button class="delete-btn" data-id=""></button>
+										</div>
+									</li>
+									<li class="cart-con">
+										<div class="cart-book-info">
+											<div class="checkbox_">
+												<input type="checkbox" name="checkTrem">
+												<label></label>
+											</div>
+											<img src="./STATIC/img/book/9788934942467.jpg">
+											<div class="info-box">
+												<h4 class="title">총균쇠</h4>
+												<div class="prod_price_box">
+										            <div class="prod_price">
+										                <span class="percent">90%</span>
+										                <span class="price">
+										                    <span class="val">1,980<span class="unit">원</span></span>
+										                </span>
+										                <span class="sale_price">
+										                    <s class="val">19,800<span class="unit">원</span></s>
+										                </span>
+										            </div>
+										        </div>
+											</div>
+										</div>
+										<div>
+											<button class="delete-btn" data-id=""></button>
+										</div>
+									</li>
+									<li class="cart-con">
+										<div class="cart-book-info">
+											<div class="checkbox_">
+												<input type="checkbox" name="checkTrem">
+												<label></label>
+											</div>
+											<img src="./STATIC/img/book/9788934942467.jpg">
+											<div class="info-box">
+												<h4 class="title">총균쇠</h4>
+												<div class="prod_price_box">
+										            <div class="prod_price">
+										                <span class="percent">90%</span>
+										                <span class="price">
+										                    <span class="val">1,980<span class="unit">원</span></span>
+										                </span>
+										                <span class="sale_price">
+										                    <s class="val">19,800<span class="unit">원</span></s>
+										                </span>
+										            </div>
+										        </div>
+											</div>
+										</div>
+										<div>
+											<button class="delete-btn" data-id=""></button>
+										</div>
+									</li>
+									<li class="cart-con">
+										<div class="cart-book-info">
+											<div class="checkbox_">
+												<input type="checkbox" name="checkTrem">
+												<label></label>
+											</div>
+											<img src="./STATIC/img/book/9788934942467.jpg">
+											<div class="info-box">
+												<h4 class="title">총균쇠</h4>
+												<div class="prod_price_box">
+										            <div class="prod_price">
+										                <span class="percent">90%</span>
+										                <span class="price">
+										                    <span class="val">1,980<span class="unit">원</span></span>
+										                </span>
+										                <span class="sale_price">
+										                    <s class="val">19,800<span class="unit">원</span></s>
+										                </span>
+										            </div>
+										        </div>
+											</div>
+										</div>
+										<div>
+											<button class="delete-btn" data-id=""></button>
+										</div>
+									</li>
+									<li class="cart-con">
+										<div class="cart-book-info">
+											<div class="checkbox_">
+												<input type="checkbox" name="checkTrem">
+												<label></label>
+											</div>
+											<img src="./STATIC/img/book/9788934942467.jpg">
+											<div class="info-box">
+												<h4 class="title">총균쇠</h4>
+												<div class="prod_price_box">
+										            <div class="prod_price">
+										                <span class="percent">90%</span>
+										                <span class="price">
+										                    <span class="val">1,980<span class="unit">원</span></span>
+										                </span>
+										                <span class="sale_price">
+										                    <s class="val">19,800<span class="unit">원</span></s>
+										                </span>
+										            </div>
+										        </div>
+											</div>
+										</div>
+										<div>
+											<button class="delete-btn" data-id=""></button>
+										</div>
+									</li>
+									<li class="cart-con">
+										<div class="cart-book-info">
+											<div class="checkbox_">
+												<input type="checkbox" name="checkTrem">
+												<label></label>
+											</div>
+											<img src="./STATIC/img/book/9788934942467.jpg">
+											<div class="info-box">
+												<h4 class="title">총균쇠</h4>
+												<div class="prod_price_box">
+										            <div class="prod_price">
+										                <span class="percent">90%</span>
+										                <span class="price">
+										                    <span class="val">1,980<span class="unit">원</span></span>
+										                </span>
+										                <span class="sale_price">
+										                    <s class="val">19,800<span class="unit">원</span></s>
+										                </span>
+										            </div>
+										        </div>
+											</div>
+										</div>
+										<div>
+											<button class="delete-btn" data-id=""></button>
+										</div>
+									</li>
+								</ul>
+							</section>
+							<style type="text/css">
+								.caution_wrap{
+									margin: 0 auto;
+									margin-top: 80px;
+								}
+								.caution_title{
+									min-height: 38px;
+									padding-bottom: 32px;
+								}
+								.caution_title .title_div{
+									font-size: 20px;
+									font-weight: bold;
+								}
+								.caution_info{
+									border-top: 1px solid #000;
+									padding: 15px 0;
+								}
+								.caution_sub_info {
+									border-bottom: 1px solid #eaeaea;
+									padding: 40px 0;
+								}
+								.caution_sub_info:last-child{
+									border-bottom: none;
+								}
+								.caution_sub_info .caution_sub_title{
+									font-size: 16px;
+									font-weight: bold;
+									padding-bottom: 8px;
+									color: #000;
+								}
+								.caution_sub_info .caution_sub_con{
+									line-height: 25px;
+								}
+							</style>
+							<!-- <section class="caution_wrap" id="caution_wrap">
+								<ul class="caution_info">
+									<li class="caution_sub_info">
+										<div class="caution_sub_title">
+											장바구니 주의사항
+										</div>
+										<p class="caution_sub_con">
+											택배 및 회수배송비 5,000원이 부과됩니다.
+											<br>상품은 묶음으로 한번에 배송됩니다.
+
+										</p>
+									</li>
+								</ul>
+							</section> -->
+						</article>
+
+
+						<style type="text/css">
+							.list_area{
+								border: 1px solid #eaeaea;
+								border-radius: 10px;
+							}
+
+							.list_area .details{
+								padding: 15px;
+							}
+						</style>
+
+						<article class="side_area">
+							<section class="sticky">
+								<article class="list_area">
+									<div class="details">
+								        <div class="guide_box ">
+								        	<div class="guide_title">
+								        		상품금액
+								        	</div>
+								        	<div class="guide_cont">
+								        		1,980원
+								        	</div>
+								        </div>
+								        <div class="guide_box bt-bar">
+								        	<div class="guide_title">
+								        		배송비
+								        	</div>
+								        	<div class="guide_cont">
+								        		+ 5,000원
+								        	</div>
+								        </div>
+								        <div class="guide_box ">
+								        	<div class="guide_title fw700 c00">
+								        		총 결제 금액
+								        	</div>
+								        	<div class="guide_cont">
+								        		<div class="val fs22">
+								        			6,980원
+								        		</div>
+								        	</div>
+								        </div>
+								        <div class="guide_box">
+								        	<div class="guide_title">
+								        		적립예정 포인트
+								        	</div>
+								        	<div class="guide_cont">
+								        		55P
+								        	</div>
+								        </div>
+									</div>
+								</article>
+								<article class="apply_area mt30">
+									<div class="btn_area mt0">
+										<button class="submitBtn">주문하기</button>
+									</div>
+								</article>
+							</section>
+						</article>
+					</section>
+				</article>
+			</div>
+		</section>
+
+	</div>
+	<?php include './footer.html'; ?>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+	<script type="text/javascript">
+		$(window).on('load', function() {
+		  	var fixedDiv = $(".side_area");
+		  	var initialOffset = fixedDiv.offset().top;
+
+		  	$(window).scroll(function() {
+		    	var scrollTop = $(window).scrollTop();
+		    	var leftOffset = $(".detailArea").offset().left;
+
+		    
+		    	if (scrollTop >= initialOffset) {
+			      	// 스크롤 위치가 초기 위치를 넘어갈 때 고정
+			      	fixedDiv.css({
+			        	position: "fixed",
+			        	top: 50,
+			        	left: leftOffset+900
+			      	});
+			    } else {
+			      	// 스크롤 위치가 초기 위치 이하일 때 절대 위치로 변경
+			      	fixedDiv.css({
+			        	position: "absolute",
+			        	top: 0,
+			        	left:900
+			      	});
+			    }
+			});
+		});
+		
+		$(".submitBtn").click(function(){
+
+			Swal.fire({
+		      	text: "도서를 대여하시겠습니까?",
+		      	showCancelButton: true,
+		      	confirmButtonColor: '#4dac27',
+		      	cancelButtonColor: '#767676',
+		      	confirmButtonText: '확인',
+		      	cancelButtonText: '취소',
+		    }).then((result) => {
+		      	if (result.isConfirmed) {
+		       		booking();
+		      	} else if (result.dismiss === Swal.DismissReason.cancel) {
+		        // Swal.fire('취소', '작업이 취소되었습니다.', 'error');
+		        // 여기에 취소 버튼을 눌렀을 때의 동작을 추가할 수 있습니다.
+		      	}
+		    });
+
+		});
+
+	</script>
+</body>
+</html>

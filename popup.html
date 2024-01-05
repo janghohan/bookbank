@@ -1,0 +1,176 @@
+<?php 
+include './dbConnect.php';
+
+$popupSql = "SELECT * FROM popup_list WHERE is_show='1' ORDER BY create_time DESC";
+$popupResult = $conn->query($popupSql);
+
+$today = date("Y-m-d");
+$popupCount = $popupResult->num_rows;
+
+
+ ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sequential Popups</title>
+    <style>
+        /* 팝업을 가리키는 클래스 */
+        .popup {
+            display: none;
+            position: fixed;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            width: 400px;
+            height: 580px;
+        }
+    </style>
+    <!-- jQuery 라이브러리 추가 -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+
+            // 현재 열린 팝업의 인덱스
+            var currentPopupIndex = 1;
+            var cookiePattern = 'popup';
+            var cookieArray = document.cookie.split(';');
+
+
+            for(var currentPopupIndex=1; currentPopupIndex<=<?=$popupCount?>; currentPopupIndex++){
+
+                var popupName = 'popup'+currentPopupIndex;
+                var popup = $('#popup' + currentPopupIndex);
+                var isCookie = false;
+
+                for( var i=0; i <cookieArray.length; i++){
+                    var cookie = cookieArray[i].trim();
+                    console.log(cookie);
+                    if (cookie.indexOf(cookiePattern) === 0) {
+                        var parts = cookie.split('=');
+                        var cookieName = parts[0];
+                        var cookieValue = parts[1];
+
+                        if(popupName==cookieName && cookieValue=="<?=$today?>"){
+                            isCookie = true;
+                        }
+                    }
+                }
+
+
+                // 팝업 위치 설정 (왼쪽 상단)
+                popup.css({
+                    left: currentPopupIndex * 180, // 20px 간격
+                    top: currentPopupIndex * 30
+                });
+
+                // 팝업 표시
+                if(!isCookie) popup.fadeIn();
+                
+
+                // 다음 팝업을 위해 인덱스 증가
+
+            }
+
+            // // 팝업 열기
+            // $('.open-popup').click(function() {
+            //     var targetPopup = $(this).data('target');
+            //     var popup = $('#' + targetPopup);
+
+            //     // 팝업 위치 설정 (왼쪽 상단)
+            //     popup.css({
+            //         left: currentPopupIndex * 50, // 20px 간격
+            //         top: currentPopupIndex * 50
+            //     });
+
+            //     // 팝업 표시
+            //     popup.fadeIn();
+
+            //     // 다음 팝업을 위해 인덱스 증가
+            //     currentPopupIndex++;
+            // });
+
+            // 팝업 닫기
+            $('.close-popup').click(function() {
+                $(this).closest('.popup').fadeOut();
+            });
+        });
+    </script>
+</head>
+<style type="text/css">
+    .popup-layer{
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+    .popup-layer p{
+        height: 550px;
+    }
+    .popup-layer img{
+        width: 100% !important;
+    }
+    .btn-box{
+        height: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #eee;
+    }
+    .close-popup{
+        padding: 5px;
+        margin: 0 5px;
+    }
+</style>
+<body>
+
+
+    <?php 
+
+    $number = 1;
+    while($popupRow = $popupResult->fetch_assoc()){
+
+     ?>
+    <!-- <button class="open-popup" data-target="popup<?=$number?>">팝업 <?=$number?> 열기</button> -->
+
+    <div id="popup<?=$number?>" class="popup">
+        <div class="popup-layer">
+            <?=$popupRow['popup_content']?>
+            <div class="btn-box">
+                <button class="close-popup today-close" data-id='popup<?=$number?>'>오늘하루 열지않음</button>
+                <button class="close-popup">닫기</button>
+            </div>
+        </div>
+    </div>
+
+    <?php 
+    $number ++;
+    } ?>
+
+  
+</body>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        // 팝업을 드래그 가능하게 만들기
+        $('.popup').draggable();
+    });
+
+    $(".today-close").click(function(){
+        console.log("pop id :"+$(this).attr('data-id'));
+        $.ajax({
+          type: "POST",
+          url: "API/popup_close_api.php", // 서버 엔드포인트를 적절히 변경
+          data: {popup_id:$(this).attr('data-id')},
+          success: function(response) {
+              console.log(response);
+          },
+          error: function(error) {
+              // 서버로부터 오류 응답을 받았을 때 처리
+              console.error("Error:", error);
+          }
+        });
+    });
+</script>
+</html>

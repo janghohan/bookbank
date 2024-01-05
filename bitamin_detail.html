@@ -1,0 +1,265 @@
+<?php 
+include './dbConnect.php';
+
+$serviceId = isset($_GET['service_id']) ? $_GET['service_id'] : 1;
+$serviceSql = "SELECT * FROM service_list WHERE service_id='$serviceId'";
+$serviceResult = $conn->query($serviceSql);
+$serviceRow = $serviceResult->fetch_assoc();
+
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="code" charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0,maximum-scale=10,user-scalable=yes"/>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="STATIC/js/swiper-bundle.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/swiper-bundle.min.css"/>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/style.css"/>
+</head>
+<body>
+	<?php include 'header.html'; ?>	
+
+	<style type="text/css">
+		.detail-fullbox{
+			margin: 0 auto;
+			margin-top: 150px;
+			overflow: hidden;
+			margin-bottom: 50px;
+			max-width: 1440px;
+		}
+		.detail-container{
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			width: 1440px;
+			margin: 0 auto;
+		}
+		.text-container h1::before{
+			content: "";
+		    display: inline-block;
+		    width: 1px;
+		    height: 100%;
+		    background-color: #aaa;
+		    margin-right: 20px;
+		    height: 25px;
+		}
+
+		.text-container h1{
+			font-size: 32px;
+		    text-decoration: underline;
+		    text-decoration-color: #eb5d3e;
+		    text-decoration-thickness: 5px;
+		    text-underline-offset: 10px;
+		    margin-bottom: 15px;
+		
+		}
+		.text-container .detail-info{
+			width: 520px;
+			margin-top: 70px;
+		}
+		.text-container .detail-info .detail-line {
+			display: flex;
+			justify-content: flex-start;
+			align-items: center;
+			border-bottom: 1px solid #CAC5C5;
+			padding: 8px 0;
+		}
+		.detail-line h4{
+			min-width: 100px;
+		    padding-left: 15px;
+		    line-height: 23px;
+		    height: 28px;
+		}
+		.detail-line .img-box{
+			width: 21px;
+		}
+		.detail-line p{
+			padding-right: 50px;
+			line-height: 23px;
+   			height: 28px;
+		}
+		.image-container{
+			position: relative;
+			width: 800px;
+			height: 600px;
+		}
+
+		.image-container .swiper{
+		    position: relative;
+		    overflow: hidden;
+		    z-index: 0;
+		    height: 600px;
+		    object-fit: cover;
+		}
+		.image-container img{
+			vertical-align: top;
+		    width: 100%;
+		    height: 100%;
+		    object-fit: cover;
+		}
+
+		.online-text{
+			margin-top: 60px;
+			font-size: 22px;
+			line-height: 30px;
+		}
+
+		.week-container{
+			margin-top: 150px;
+			overflow: hidden;
+		}
+
+		.map-container {
+			margin-top: 80px;
+		}
+	</style>
+	<section class="detail-fullbox">
+		<div class="detail-container">
+			<div class="text-container">
+				<h1><?=$serviceRow['service_name']?></h1>
+				<p>#<?=$serviceRow['service_subtxt']?></p>
+				<div class="detail-info">
+					<div class="detail-line">
+						<div class="img-box">
+							<img src="STATIC/img/icon/map.png" class="icon">
+						</div>
+						<h4>주소</h4>
+						<p><?=$serviceRow['service_address']?></p>
+					</div>
+					<div class="detail-line">
+						<div class="img-box">
+							<img src="STATIC/img/icon/call.png" class="icon">
+						</div>
+						<h4>예약문의</h4>
+						<p><?=$serviceRow['service_contact']?></p>
+					</div>
+					<div class="detail-line">
+						<div class="img-box">
+							<img src="STATIC/img/icon/fee.png" class="icon">
+						</div>
+						<h4>이용요금</h4>
+						<p><?=$serviceRow['service_price_txt']?></p>
+					</div>
+					<div class="detail-line">
+						<div class="img-box">
+							<img src="STATIC/img/icon/facility.png" class="icon">
+						</div>
+						<h4>주요시설</h4>
+						<span><?=$serviceRow['service_facility']?></span>
+					</div>
+				</div>
+			</div>
+			<div class="image-container">
+				<div class="visula_slide">
+					<div class="swiper mySwiper">
+						<div class="swiper-wrapper">
+							<?php 
+							$imgSql = "SELECT * FROM img_list WHERE service_id='$serviceId'";
+							$imgResult = $conn->query($imgSql);
+							while($imgRow = $imgResult->fetch_assoc()){
+							 ?>
+							
+							<div class="swiper-slide">
+								<a href="">
+									<img src="STATIC/img/<?=$imgRow['img_url']?>" title="<?=$imgRow['img_title']?>">
+								</a>
+							</div>
+							
+							<?php } ?>
+						</div>
+		      			<div class="pagenation-inner">
+		      				<div class="swiper-pagination"></div>
+		      			</div>
+					</div>
+					<button class="swiper-button-prev"></button>
+	      			<button class="swiper-button-next"></button>
+					<script type="text/javascript">
+						var swiper = new Swiper(".mySwiper", {
+							slidesPerView: '1',
+							// centeredSlides: true,
+							spaceBetween: 0,
+							speed : 500,
+							loop: true,
+							observer: true,
+							observeParents: true,
+							autoResize: true,
+							navigation: {
+								nextEl: ".swiper-button-next",
+								prevEl: ".swiper-button-prev",
+							},
+							
+						    on: {
+
+							}
+						});
+					</script>
+				</div>
+				</div>
+		</div>
+		<p class="online-text"><?=$serviceRow['service_txt']?></p>
+		
+		<style type="text/css">
+			
+			.btn-container{
+				margin: 0 auto;
+				margin-top: 150px;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				width: 520px;
+			}
+			.btn-reserve {
+				width: 230px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				border: 1px solid #000;
+			    border-radius: 30px;
+			    height: 50px;
+			    font-size: 24px;
+			    cursor: pointer;
+			}
+			.btn-check {
+				width: 230px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				border: 1px solid #000;
+			    border-radius: 30px;
+			    height: 50px;
+			    font-size: 24px;
+			    cursor: pointer;
+			}
+			.btn-container span{
+				padding-left: 15px;
+			}
+		</style>
+		<div class="btn-container">
+			<div class="btn-reserve">
+				<img src="./STATIC/img/icon/booking.png">
+				<span>
+					<a href="./month_time.php?service_id=<?=$serviceId?>">예약하기</a>
+				</span>
+			</div>
+			<div class="btn-check">
+				<img src="./STATIC/img/icon/mycheck.png">
+				<?php 
+				if(isset($_COOKIE['login_id'])){
+				 ?>
+				<span><a href="./info_reserve.html">예약조회</a></span>
+				<?php }else { ?>
+				<span><a href="./reserve_check.html">예약조회</a></span>
+				<?php } ?>
+			</div>
+		</div>
+		<div class="map-container">
+			<?=$serviceRow['service_map']?>
+		</div>
+	</section>
+
+	<?php include 'footer.html'; ?>
+</body>
+</html>

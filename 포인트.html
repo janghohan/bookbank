@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="code" charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0,maximum-scale=10,user-scalable=yes"/>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="STATIC/js/common.js"></script>
+	<script type="text/javascript" src="STATIC/js/modal.js"></script>
+	<script type="text/javascript" src="STATIC/js/swiper-bundle.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/swiper-bundle.min.css"/>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/style.css"/>
+</head>
+<body>
+	<?php include './header.html'; ?>
+	<div id="container">
+		<section class="aside_section">
+			<div class="inner">
+				<aside class="side_menu">
+					<div class="sticky">
+						<article class="profile_area">
+							<div class="profile_img"></div>
+							<div class="profile_info">
+								<div class="name">홍길동</div>
+							</div>
+							<div class="email">studio_monde@naver.com</div>
+							<div class="tier">
+								<div>회원등급</div>
+								<div><img src="STATIC/img/icon/asset/v0.svg"></div>
+							</div>
+						</article>
+						<article class="menu">
+							<ul>
+								<li><a href="프로필편집.html">프로필 편집</a></li>
+								<li class="active"><a href="포인트.html">아싸뷰 포인트</a></li>
+								<li><a href="알림함.html">알림함</a></li>
+								<li><a href="나의캠페인.html">나의캠페인</a></li>
+								<li><a href="찜리스트.html">찜리스트</a></li>
+								<li><a href="계정.html">포트폴리오</a></li>
+								<li><a href="계정.html">계정 설정</a></li>
+							</ul>
+						</article>
+					</div>
+				</aside>
+				<article class="content">
+					<h1 class="ct_title">아싸뷰 포인트</h1>
+					<section class="point_area">
+						<div>
+							<img src="STATIC/img/icon/asset/coin.svg">
+							<b>홍길동님</b>의 <b>아싸뷰 포인트</b>를 확인해보세요.
+						</div>
+						<div>
+							<div class="point_">
+								<p>보유포인트</p>
+								<p>3,000 P</p>
+							</div>
+							<a href="javascript:widthdraw()" class="btn_"><img src="STATIC/img/icon/fe/withdraw.svg"> 포인트 출금 신청</a>
+						</div>
+					</section>
+					<section class="withdraw_history">
+						<div class="tool">
+						<div>
+							<h1>적립/출금 내역</h1>
+						</div>
+						<div>
+							<div class="select__wrap">
+					   			<div class="selectBox__ selectSort2">
+							        <div class="box__">
+							            <div class="select__">
+							                <div class="text">전체보기</div>
+							            </div>
+							            <ul class="list__">
+							            	<li class="selected">
+							                	<div class="text">전체보기</div>
+							                </li>
+							                <li>
+							                	<div class="text">적립 포인트</div>
+							                </li>
+							                <li>
+							                	<div class="text">출금 포인트</div>
+							                </li>
+							            </ul>
+							        </div>
+							    </div>
+							</div>
+						</div>
+					</div>
+						<ul>
+							<li class="plus">
+								<div class="details_">
+									<span>적립</span>
+									<p>2022.06.08</p>
+									<div>포인트 적립-회원가입</div>
+								</div>
+								<div class="point_">
+									<p>+3,000</p>
+									<p>적립완료</p>
+								</div>
+							</li>
+							<li class="minus">
+								<div class="details_">
+									<span>적립</span>
+									<p>2022.06.08</p>
+									<div>포인트 적립-회원가입</div>
+								</div>
+								<div class="point_">
+									<p>-3,000</p>
+									<p>출금요청</p>
+								</div>
+							</li>
+							<li class="plus">
+								<div class="details_">
+									<span>적립</span>
+									<p>2022.06.08</p>
+									<div>포인트 적립-회원가입</div>
+								</div>
+								<div class="point_">
+									<p>+3,000</p>
+									<p>적립완료</p>
+								</div>
+							</li>
+							<li class="minus">
+								<div class="details_">
+									<span>적립</span>
+									<p>2022.06.08</p>
+									<div>포인트 적립-회원가입</div>
+								</div>
+								<div class="point_">
+									<p>-3,000</p>
+									<p>출금요청</p>
+								</div>
+							</li>
+						</ul>
+					</section>
+					<section class="btn_area">
+						<a href="" class="moreBtn">더보기 <img src="STATIC/img/icon/tool/more.svg"></a>
+					</section>
+				</article>
+			</div>
+		</section>
+	</div>
+	<?php include './footer.html'; ?>
+	<section class="modal-dialog">
+		<div class="dim"></div>
+        <div class="modal-content" id="widthdraw">
+           <article class="modal-layer">
+           		<div class="closer"></div>
+           		<div class="head"><h1>포인트 출금</h1></div>
+           		<div class="content">
+           			<article class="field_area">
+           				<div class="field">
+           					<label>입금 은행</label>
+           					<div class="select__wrap">
+					   			<div class="selectBox__ bank_">
+							        <div class="box__">
+							            <div class="select__">
+							                <div class="text holder">선택</div>
+							            </div>
+							            <ul class="list__">
+							                <li>
+							                	<div class="text">우리</div>
+							                </li>
+							                <li>
+							                	<div class="text">국민</div>
+							                </li>
+							                <li>
+							                	<div class="text">신한</div>
+							                </li>
+							                <li>
+							                	<div class="text">농협</div>
+							                </li>
+							            </ul>
+							        </div>
+							    </div>
+							</div>
+           				</div>
+           				<div class="field">
+           					<label>입금계좌번호</label>
+           					<input type="" name="" placeholder="계좌번호를 입력하세요">
+           				</div>
+           				<div class="field">
+           					<label>예금주 이름</label>
+           					<input type="" name="" placeholder="예금주 이름을 입력하세요">
+           				</div>
+           				<div class="field top_">
+           					<label>주민등록번호</label>
+           					<div class="item">
+           						<div class="check_wrap">
+           							<div class="checkbox_">
+           								<input type="radio" name="national" checked>
+           								<label>내국인</label>
+           							</div>
+           							<div class="checkbox_">
+           								<input type="radio" name="national">
+           								<label>외국인</label>
+           							</div>
+           						</div>
+           						<input type="" name="" placeholder="주민등록번호or외국인등록번호">
+           						<div class="check_wrap">
+           							<div class="checkbox_">
+           								<input type="checkbox" name="">
+           								<label>정산 계좌 정보 저장</label>
+           							</div>
+           						</div>
+           					</div>
+           				</div>
+           				<div class="field">
+           					<label>출금포인트</label>
+           					<input type="" name="" placeholder="출금하실 포인트를 입력하세요">
+           				</div>
+           				<div class="point_">출금 가능 포인트: <b>3,000 P</b></div>
+           				<div class="notice_">
+           					<h1><i class="exmark"></i> 출금안내사항</h1>
+           					<div class="desc">출금안내사항 영역</div>
+           				</div>
+           			</article>
+           			<article class="btn_area">
+           				<button class="submitBtn submit">포인트 출금 신청</button>
+           			</article>
+           		</div>
+           </article>
+        </div>
+    </section>
+    <script type="text/javascript">
+    	function widthdraw(){
+    		ModalConfirm('#widthdraw', function(){
+
+    		});
+    	}
+
+    	$( function(){
+    		var select = new CustomSelectBox('.bank_');
+    		var select2 = new CustomSelectBox('.selectSort2');
+    	})
+
+    </script>
+</body>
+</html>

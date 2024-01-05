@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="code" charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0,maximum-scale=10,user-scalable=yes"/>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="STATIC/js/common.js"></script>
+	<script type="text/javascript" src="STATIC/js/swiper-bundle.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/swiper-bundle.min.css"/>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/style.css"/>
+</head>
+<style type="text/css">
+	.detailArea {
+		display: flex;
+		justify-content: center;
+	}
+	.imgBox{
+		width: 300px;
+		height: 450px;
+	}
+	.imgBox img{
+		width: 100%;
+	}
+	.prod_price{
+		padding-bottom: 15px;
+	}
+	.percent{
+		display: inline-block;
+	    margin-right: 6px;
+	    color: #4dac27;
+	    font-size: 24px;
+	    line-height: 36px;
+	    letter-spacing: -0.01em;
+	    font-weight: 700;
+	    vertical-align: top;
+	}
+	.price{
+		display: inline-block;
+	    margin-right: 4px;
+	    color: #000;
+	    font-size: 24px;
+	    line-height: 36px;
+	    letter-spacing: -0.01em;
+	    vertical-align: top;
+	}
+	.price .val{
+		display: inline-block;
+    	font-weight: 700;
+	}
+	.sale_price{
+		display: inline-block;
+	    margin-bottom: 2px;
+	    color: #767676;
+	    font-size: 14px;
+	    line-height: 22px;
+	    letter-spacing: -0.01em;
+	    vertical-align: bottom;
+	}
+	.bt-bar{
+		border-bottom: 1px solid #eaeaea;
+	}
+	.guide_box{
+	    display: flex;
+	    justify-content: space-between;
+	    padding: 15px 0px;
+	}
+	.guide_box .guide_title{
+	    color: #000;
+	    font-size: 14px;
+	    line-height: 22px;
+	    letter-spacing: -0.01em;
+	    font-weight: 700;
+	}
+	.guide_cont .val{
+	    color: #4dac27;
+	    font-size: 15px;
+	    line-height: 23px;
+	    letter-spacing: -0.01em;
+	    font-weight: 700;
+	    vertical-align: top;
+	}
+	.prod_alarm_text {
+	    color: #595959;
+	    font-size: 13px;
+	    display: inline-block;
+	    width: 190px;
+	}
+	.btn_line_primary{
+		color: #474c98;
+	    border: 1px solid #5055b1;
+	    background: #fff;
+	    transition: background-color 0.2s ease-out, border-color 0.2s ease-out;
+	    padding: 5px;
+	}
+</style>
+<body>
+	<?php include 'header.html'; ?>	
+	<div id="container">
+		<section class="aside_section">
+			<div class="inner">
+				<article class="content">
+					<section class="compain_detials">
+						
+						<article class="content">
+							<section class="detailArea">
+								<div class="imgBox">
+									<img src="STATIC/img/book/9791189352745.jpg">
+								</div>
+							</section>
+							
+						</article>
+						<article class="side_area">
+							<section class="sticky">
+								<article class="list_area">
+									<div class="titleBox">
+										<h3>내가 한 말을 내가 오해하지 않기로 함</h3>
+										<p>문상훈 저자</p>
+									</div>
+									<div class="details">
+										<div class="prod_price_box bt-bar">
+								            <div class="prod_price">
+								                <span class="percent">90%</span>
+								                <span class="price">
+								                    <span class="val">1,980<span class="unit">원</span></span>
+								                </span>
+								                <span class="sale_price">
+								                    <s class="val">19,800<span class="unit">원</span></s>
+								                </span>
+								            </div>
+								        </div>
+								        <div class="guide_box bt-bar">
+								        	<div class="guide_title">
+								        		적립/혜택
+								        	</div>
+								        	<div class="guide_cont">
+								        		<div class="val">
+								        			55P
+								        		</div>
+								        	</div>
+								        </div>
+								        <div class="guide_box bt-bar">
+								        	<div class="guide_title">
+								        		대여기간
+								        	</div>
+								        	<div class="guide_cont">
+								        		기본 7일
+								        	</div>
+								        </div>
+								        <div class="guide_box bt-bar">
+								        	<div class="guide_title">
+								        		배송안내
+								        	</div>
+								        	<div class="guide_cont">
+								        		왕복배송비 5,000원
+								        	</div>
+								        </div>
+										<div class="guide_box">
+									        <p class="prod_alarm_text">알림 신청하시면 대여가 가능할때 알림을 받을 수 있습니다.</p>
+									        <div class="right_area">
+									            
+									            <button type="button" class="btn_xs btn_line_primary" onclick="ga360.GA_Event('click_종이책_상품상세_PC', '상단', '', '알림신청', '');"><span class="ico_alarm"></span><span class="text">알림신청</span></button>
+									        </div>
+									    </div>
+									</div>
+								</article>
+								<article class="apply_area">
+									<div class="btn_area">
+										<button class="subBtn">장바구니</button>
+									</div>
+									<div class="btn_area">
+										<button class="submitBtn">대여하기</button>
+									</div>
+								</article>
+							</section>
+						</article>
+					</section>
+				</article>
+			</div>
+		</section>
+		<style type="text/css">
+			.tap_wrap{
+				margin-top: 80px;
+				border-bottom: 1px solid #eaeaea;
+			}
+			.tap_list{
+				width: 1200px;
+				margin: 0 auto;
+				display: flex;
+				justify-content: flex-start;
+				align-items: center;
+			}
+			.tap_list .tap{
+				height: 50px;
+				padding-right: 50px;
+				color: #767676;
+			}
+		</style>
+		<div class="tap_wrap">
+			<ul class="tap_list">
+				<li class="tap">
+					<a href="">소개</a>
+				</li>
+				<!-- <li class="tap">
+					<a href="">리뷰</a>
+				</li> -->
+				<li class="tap">
+					<a href="#caution_wrap">주의사항</a>
+				</li>
+			</ul>
+		</div>
+		<style type="text/css">
+			.intro_wrap{
+				width: 1200px;
+				margin: 0 auto;
+				margin-top: 80px;
+			}
+			.intro_title{
+				min-height: 38px;
+				padding-bottom: 32px;
+			}
+			.intro_title .title_div{
+				font-size: 20px;
+				font-weight: bold;
+			}
+			.intro_info{
+				border-top: 1px solid #000;
+				padding: 15px 0;
+			}
+			.intro_sub_info {
+				border-bottom: 1px solid #eaeaea;
+				padding: 40px 0;
+			}
+			.intro_sub_info:last-child{
+				border-bottom: none;
+			}
+			.intro_sub_info .caution_sub_title{
+				font-size: 16px;
+				font-weight: bold;
+				padding-bottom: 8px;
+				color: #000;
+			}
+			.intro_sub_info .intro_sub_con{
+				line-height: 25px;
+			}
+		</style>
+		<section class="intro_wrap" id="intro_wrap">
+			<div class="intro_title">
+				<h2 class="title_div">책 소개</h2>
+			</div>
+			<ul class="intro_info">
+				<li class="intro_sub_info">
+					<p class="intro_sub_con">
+						133만 명의 구독자를 보유한 유튜브 채널 〈빠더너스〉의 크리에이터 문상훈이 첫 산문집을 출간했다. 문쌤, 문이병, 문상 등 다양한 부캐로 그를 기억하는 사람들에게는 이 소식이 새삼스러울지도 모른다. 하지만 그의 오랜 팬이라면, 혹은 매체를 통해 그의 편지글 한 문장이라도 본 사람이라면 누구보다 기다려왔을 소식임이 분명하다.
+
+문상훈을 대표하는 〈빠더너스〉 채널 소개란에는 “하이퍼 리얼리즘의 콩트와 코미디 영상을 만듭니다”라고 적혀있다. 뛰어난 캐릭터 분석과 시대의 흐름을 관통하는 메시지를 담은 코미디로 웃음을 주는 것이 그의 본업인 것이다. 하지만 그는 대중을 상대로 말하는 직업을 가졌음에도 ‘말’이 가장 어렵다. 사람들이 자신의 말을 오해할까 봐 끊임없이 “자기검열”을 한다. 그러나 마침내 그는 이 책에서 고백한다. 자신의 말을 가장 오해한 사람은 문상훈, 자신이었다고. 이 책은 『내가 한 말을 내가 오해하지 않기로 함』이라는 제목처럼 문상훈 스스로에 대한 다짐이자, 우리가 잘 안다고 생각했던 문상훈의 새로운 얼굴이다.
+					</p>
+				</li>
+				<li class="intro_sub_info">
+					<div class="caution_sub_title">
+						작가 이슬아
+					</div>
+					<p class="intro_sub_con">
+						“그렇게 많은 문상훈을 봤는데도
+						여전히 새로운 문상훈의 얼굴이 이 책에 있다.” (작가 이슬아)
+					</p>
+				</li>
+
+				
+			</ul>
+		</section>
+		<style type="text/css">
+			.caution_wrap{
+				width: 1200px;
+				margin: 0 auto;
+				margin-top: 80px;
+			}
+			.caution_title{
+				min-height: 38px;
+				padding-bottom: 32px;
+			}
+			.caution_title .title_div{
+				font-size: 20px;
+				font-weight: bold;
+			}
+			.caution_info{
+				border-top: 1px solid #000;
+				border-bottom: 1px solid #000;
+				padding: 15px 0;
+			}
+			.caution_sub_info {
+				border-bottom: 1px solid #eaeaea;
+				padding: 40px 0;
+			}
+			.caution_sub_info:last-child{
+				border-bottom: none;
+			}
+			.caution_sub_info .caution_sub_title{
+				font-size: 16px;
+				font-weight: bold;
+				padding-bottom: 8px;
+				color: #000;
+			}
+			.caution_sub_info .caution_sub_con{
+				line-height: 25px;
+			}
+		</style>
+		<section class="caution_wrap" id="caution_wrap">
+			<div class="caution_title">
+				<h2 class="title_div">서비스 이용 및 주의사항</h2>
+			</div>
+			<ul class="caution_info">
+				<li class="caution_sub_info">
+					<div class="caution_sub_title">
+						대여 조건 및 정책
+					</div>
+					<p class="caution_sub_con">
+						책 한권당 기본 대여기간은 일주일입니다. <br>책이 추가됨에 따라 대여기간이 연장됩니다.
+						<br>책 대여기간동안 대여기간은 연장신청이 가능합니다.
+						<br>책 연체시 연체비용(1권당 1일 500원)이 부과될 수 있습니다.
+						<br>기본 대여기간이 끝나기전 수동으로 회수를 요청할 수 있습니다.
+					</p>
+				</li>
+				<li class="caution_sub_info">
+					<div class="caution_sub_title">
+						예약과 대여 가능 여부 확인
+					</div>
+					<p class="caution_sub_con">
+						대여중인 책의 경우, 책 정보 우측 "알림신청" 기능을 통해 대여가 가능할 경우 알림을 받을 수 있습니다.
+					</p>
+				</li>
+				<li class="caution_sub_info">
+					<div class="caution_sub_title">
+						책 상태와 반납 정책
+					</div>
+					<p class="caution_sub_con">
+						받으셨던 택배박스에 다시 포장하여 두시면 기사님이 수거할 예정입니다.
+					</p>
+				</li>
+				<li class="caution_sub_info">
+					<div class="caution_sub_title">
+						분실 또는 손상 시의 책임
+					</div>
+					<p class="caution_sub_con">
+						책 분실시 책 원가의 100% 금액이 청구됩니다.
+						<br>책이 훼손되었을 경우 정도에 따라 책 원가(30% ~ 100%)금액이 청구 될 수 있음을 알려드립니다.
+						<br>반복되는 책 훼손의 경우 서비스 이용이 중지될 수 있습니다.
+					</p>
+				</li>
+			</ul>
+		</section>
+	</div>
+	<?php include './footer.html'; ?>
+	<script type="text/javascript">
+			
+		// 공유하기
+		$('.shareBtn').on('click', function(){
+			$(this).siblings('.toggle_item').fadeIn(300);
+			return false;
+		});
+		// 공유하기 닫기
+		$('.toggle_item .close').on('click', function(){
+			$(this).parents('.toggle_item').fadeOut(300);
+		});
+
+		// 찜하기
+		$('.favBtn').on('click', function(){
+			$(this).toggleClass('active');
+		});
+
+		// 복사하기
+		$('#copyBtn').click( function(){
+			clipboard();
+		});
+
+		function clipboard(){
+			var content = document.getElementById('copyText');
+			content.select();
+			document.execCommand('copy');
+			alert('복사');
+		}
+
+		$('.moreBtn').on('click', function(){
+			$(this).siblings('.wrap').addClass('active');
+		});
+
+		
+	</script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="22.414" viewBox="0 0 20 22.414">
+  <g id="그룹_184" data-name="그룹 184" transform="translate(0.25 0.664)">
+    <g id="그룹_185" data-name="그룹 185">
+      <path id="패스_168" data-name="패스 168" d="M9.75,6.75v-6l-2,2" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      <line id="선_36" data-name="선 36" x2="2" y2="2" transform="translate(9.75 0.75)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      <path id="패스_169" data-name="패스 169" d="M4.75,10.75c-4,0-4,1.79-4,4v1c0,2.76,0,5,5,5h8c4,0,5-2.24,5-5v-1c0-2.21,0-4-4-4a2.362,2.362,0,0,0-1.8.6l-1.02,1.08a3,3,0,0,1-4.241.129c-.044-.041-.087-.085-.129-.129L6.55,11.35A2.362,2.362,0,0,0,4.75,10.75Z" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      <path id="패스_170" data-name="패스 170" d="M2.75,10.75v-2c0-2.01,0-3.67,3-3.96" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      <path id="패스_171" data-name="패스 171" d="M16.75,10.75v-2c0-2.01,0-3.67-3-3.96" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    </g>
+  </g>
+</svg>

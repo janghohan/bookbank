@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="code" charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0,maximum-scale=10,user-scalable=yes"/>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="STATIC/js/common.js"></script>
+	<script type="text/javascript" src="STATIC/js/swiper-bundle.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/swiper-bundle.min.css"/>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/style.css"/>
+</head>
+<body>
+	<?php include './header.html'; ?>
+	<div id="container">
+		<section class="aside_section">
+			<div class="inner">
+				<aside class="side_menu">
+					<div class="sticky">
+						<article class="menu">
+							<ul>
+								<li class="active"><a href="">공지사항</a></li>
+								<li><a href="qna.html">문의사항</a></li>
+							</ul>
+						</article>
+					</div>
+				</aside>
+				<article class="content">
+					<section class="favorite_area">
+						<h1 class="ct_title">공지사항</h1>
+						<section class="customer_area"><!-- 
+							<article class="customer_tool">
+								<div class="search_">
+									<div>검색</div>
+									<input type="" name="" placeholder="검색어를 입력하세요">
+									<button class="submitBtn">SEARCH</button>
+								</div>
+							</article> -->
+							<article class="customer_his_area">
+								<div class="divTable">
+									<div class="thead_">
+										<dl>
+											<dt>NO</dt>
+											<dt>분류</dt>
+											<dt>제목</dt>
+											<dt>등록일</dt>
+											<dt>조회수</dt>
+										</dl>
+									</div>
+									<div class="notice_list">
+										
+									</div>
+							</article>
+							<article class="pagenate">
+								
+							</article>
+						</section>
+					</section>
+				</article>
+			</div>
+		</section>
+	</div>
+	<?php include './footer.html'; ?>
+
+	<script type="text/javascript">
+		var currentPage = 1;
+
+		var jumpPage = 1;
+		getNoticeList(currentPage);
+      	setPageButton(currentPage);
+
+      	// 페이지 클릭 이벤트 처리
+	    $(document).on('click', '.paginate_button_num', function(){
+	        var page = $(this).attr('data-page');
+	        getNoticeList(page);
+	        currentPage = page;
+	        setPageButton(currentPage);
+	    });
+    	
+
+    	$(document).on("click", ".drop_btn", function() {
+    		var $this = $(this);
+			var $parent = $this.parents('li');
+			$this.toggleClass('active');
+			if($this.hasClass('active')){
+				$parent.find('.full-text').slideDown(300);
+			} else {
+				$parent.find('.full-text').slideUp(300);
+			}
+    	})
+
+    	$(".moreBtn").click(function(){
+    		pageNum ++;
+    		getMyReserveList(pageNum);
+    	});
+
+		function getNoticeList(page){
+			$.ajax({
+	          	type: 'POST',
+	          	url: 'get_noticeList.php', // 서버 측의 파일 경로 또는 URL
+	          	dataType: 'json',
+	          	data: { page: page },
+	          	success: function (response) {
+	            // 서버로부터의 응답 처리
+	            	console.log(response);
+	            	$(".notice_list").html(response.data);
+
+	            	if ((page - 1) % 5 === 0) {
+	                  loadPagination(response.startPage,response.endPage,response.totalPages);
+	                  setPageButton(page);
+	                }
+
+	          	},
+	          	error: function () {
+	            // 오류 처리
+	            	$('#result').text('Error occurred.');
+	          	}
+	        });
+		}
+
+		function loadPagination(startPage,endPage,totalPages){
+			var paginationHtml = '<ul>';
+
+			if(startPage!=1){
+				paginationHtml += '<li id="prev_btn" class="first_">';
+				paginationHtml += '<a><img src="STATICE/img/icon/tool/first_.svg"></a>';
+				paginationHtml += '</li>';
+			}
+
+			for(var i = startPage; i <= endPage; i++){
+				paginationHtml += '<li id="page-'+i+'" class="paginate_button_num" data-page="'+i+'">';
+				paginationHtml += '<a>'+i+'</a></li>';
+			}
+
+			if(endPage!=totalPages){
+				paginationHtml += '<li id="next-btn" class="last_">';
+				paginationHtml += '<a><img src="STATIC/img/icon/tool/last_.svg"></a>';
+				paginationHtml += '</li>';
+			}
+
+			paginationHtml += '</ul>';
+
+			$('.pagenate').html(paginationHtml);
+		}
+
+		function setPageButton(currentPage) {
+	        $(".paginate_button_num").removeClass('active');
+	        $("#page-"+currentPage).addClass('active');
+	    }
+
+	    $(document).on("click", "#prev-btn", function() {
+	        jumpPage -= 10;
+	        loadTableData(jumpPage);
+	        setPageButton(jumpPage);
+	    });
+
+	    $(document).on("click", "#next-btn", function() {
+	        jumpPage += 10;
+	        console.log(jumpPage);
+	        loadTableData(jumpPage);
+	        setPageButton(jumpPage);
+	    });
+		
+	</script>
+</body>
+</html>

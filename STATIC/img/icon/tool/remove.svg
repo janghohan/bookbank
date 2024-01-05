@@ -1,0 +1,14 @@
+<svg id="구성_요소_3_1" data-name="구성 요소 3 – 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="30" height="30" viewBox="0 0 30 30">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="사각형_309" data-name="사각형 309" width="11.4" height="14.25" fill="#fff"/>
+    </clipPath>
+  </defs>
+  <g id="그룹_253" data-name="그룹 253" transform="translate(-770 -365)">
+    <rect id="사각형_303" data-name="사각형 303" width="30" height="30" rx="5" transform="translate(770 365)" fill="#ff4848" opacity="0.9"/>
+  </g>
+  <g id="그룹_246" data-name="그룹 246" transform="translate(10 8)" clip-path="url(#clip-path)">
+    <path id="패스_239" data-name="패스 239" d="M11.044,1.425H8.7L7.273,0H4.128L2.7,1.425H.357c-.2,0-.357.32-.357.515v.91H11.4V1.94c0-.2-.16-.515-.356-.515M4.423.712H6.978l.712.712H3.71Z" fill="#fff"/>
+    <path id="패스_240" data-name="패스 240" d="M1.375,17.365c0,.2.16.2.356.2h9.263c.2,0,.357,0,.357-.2V6.875H1.375Zm5.7-8.353h.713v5.7H7.075Zm-2.138,0H5.65v5.7H4.937Z" transform="translate(-0.663 -3.313)" fill="#fff"/>
+  </g>
+</svg>

@@ -1,0 +1,81 @@
+<?php 
+include './dbConnect.php';
+
+$noticeId = isset($_GET['notice_id']) ? $_GET['notice_id'] : 1;
+$noticeSql = "SELECT * FROM notice_list WHERE notice_id = '$noticeId'";
+$noticeResult = $conn->query($noticeSql);
+$noticeRow = $noticeResult->fetch_assoc();
+
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="code" charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0,maximum-scale=10,user-scalable=yes"/>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="STATIC/js/common.js"></script>
+	<script type="text/javascript" src="STATIC/js/swiper-bundle.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/swiper-bundle.min.css"/>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/style.css"/>
+</head>
+<body>
+	<?php include './header.html'; ?>
+	<div id="container">
+		<section class="aside_section">
+			<div class="inner">
+				<aside class="side_menu">
+					<div class="sticky">
+						<article class="menu">
+							<ul>
+								<li class="active"><a href="">공지사항</a></li>
+								<li><a href="qna.html">문의사항</a></li>
+							</ul>
+						</article>
+					</div>
+				</aside>
+				<article class="content">
+					<section class="favorite_area">
+						<h1 class="ct_title">공지사항</h1>
+						<section class="customer_details">
+							<article class="head">
+								<div class="subject">
+									<span>NOTICE</span>
+									<h1><?=$noticeRow['notice_title']?></h1>
+								</div>
+								<div class="tool">
+									<div class="date"><?=$noticeRow['create_date']?></div>
+									<div class="views"><?=$noticeRow['notice_views']?></div>
+								</div>
+							</article>
+							<article class="conetent">
+								<?=$noticeRow['notice_content']?>
+							</article>
+						</section>
+					</section>
+				</article>
+			</div>
+		</section>
+	</div>
+	<?php include './footer.html'; ?>
+
+	<script type="text/javascript">
+		increaseViews();
+			
+		function increaseViews(){
+			$.ajax({
+				type: "POST",
+				url: "./API/views_api.php",
+				data : {notice_id: "<?=$noticeId?>"},
+				dataType: 'json',
+				success: function(response){
+				    console.log(response);
+				},
+				
+				error: function(xhr, status,error) {
+					console.log(error);
+				}
+			});
+		}
+	</script>
+</body>
+</html>

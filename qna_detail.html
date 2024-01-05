@@ -1,0 +1,144 @@
+<?php 
+include './dbConnect.php';
+
+$qnaId = isset($_GET['qna_id']) ? $_GET['qna_id'] : 1;
+$qnaSql = "SELECT user_list.id,qna_list.qna_title,qna_list.qna_content,qna_list.create_date,qna_list.is_secret,qna_list.answer_content,qna_list.is_answered,qna_list.category FROM qna_list JOIN user_list ON qna_list.user_id = user_list.user_id AND qna_list.qna_id = '$qnaId'";
+$qnaResult = $conn->query($qnaSql);
+$qnaRow = $qnaResult->fetch_assoc();
+
+
+$length = strlen($qnaRow['id']);
+// 문자열의 절반부터 끝까지를 '*'로 채우기
+$idStar = substr($qnaRow['id'], 0, $length / 2) . str_repeat('*', $length / 2);
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="code" charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0,maximum-scale=10,user-scalable=yes"/>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="STATIC/js/swiper-bundle.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/swiper-bundle.min.css"/>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/style.css"/>
+</head>
+<body>
+	<?php include './header.html'; ?>
+	<style type="text/css">
+		.pwdDiv{
+			text-align: center;
+		    height: 400px;
+		    margin-top: 50px;
+		}
+		.qnaPwd{
+			flex-grow: 1;
+		    background-color: #F5F5FA;
+		    border-radius: 10px;
+		    border: none;
+		    padding: 0 20px;
+		    min-height: 50px;
+		    width: 258px;
+		}
+		.submitBtn{
+			display: block;
+		    margin: 0 auto;
+		    width: 258px;
+		    margin-top: 15px;
+		}
+		.customer_details .conetent{
+			border: none;
+			width: 70%;
+			min-height: 250px;
+		}
+		.bar{
+			border-top: 1px solid #ccc;
+		}
+	</style>
+	<div id="container">
+		<section class="aside_section">
+			<div class="inner">
+				<aside class="side_menu">
+					<div class="sticky">
+						<article class="menu">
+							<ul>
+								<li><a href="notice.html">공지사항</a></li>
+								<li class="active"><a href="qna.html">문의사항</a></li>
+							</ul>
+						</article>
+					</div>
+				</aside>
+				<article class="content">
+					<?php
+
+					$cookieName = 'qnaPwd_' . $qnaId;
+					if(!isset($_COOKIE[$cookieName]) && $qnaRow['is_secret']==1){
+
+					?>
+					<div class="pwdDiv">
+						<h1 class="ct_title">비밀번호 입력</h1>
+						<div>
+							<input type="password" class="qnaPwd">
+							<button class="submitBtn">비밀번호 확인</button>
+						</div>
+					</div>
+					<?php }else{ ?>
+					<section class="favorite_area">
+						<h1 class="ct_title">문의사항</h1>
+						<section class="customer_details">
+							<article class="head">
+								<div class="subject">
+									<span><?=$qnaRow['category']?></span>
+									<h1><?=$qnaRow['qna_title']?></h1>
+								</div>
+								<div class="tool">
+									<div class="date"><?=$qnaRow['create_date']?></div>
+									<div class="views"><?=$idStar?></div>
+								</div>
+							</article>
+							<div class="bar"></div>
+							<article class="conetent">
+								<?=$qnaRow['qna_content']?>
+							</article>
+							
+							<?php 
+							if($qnaRow['is_answered']==1){
+							 ?>
+							<div class="bar"></div>
+							<article class="conetent">
+								<h1 style="padding-bottom: 15px;">답변</h1>
+								<?=$qnaRow['answer_content']?>
+							</article>
+							<?php } ?>
+						</section>
+					</section>
+					<?php } ?>
+				</article>
+			</div>
+		</section>
+	</div>
+	<?php include './footer.html'; ?>
+
+	<script type="text/javascript">
+
+		$(".submitBtn").click(function(){
+			$.ajax({
+	          	type: 'POST',
+	          	url: './API/chk_qnapwd_api.php', // 서버 측의 파일 경로 또는 URL
+	          	data: { qna_id: "<?=$qnaId?>", qna_pwd:$(".qnaPwd").val() },
+	          	success: function (response) {
+	            // 서버로부터의 응답 처리
+	            	if(response==0){
+	            		alert("비밀번호가 일치하지 않습니다.");
+	            	}else{
+	            		location.reload();
+	            	}
+	          	},
+	          	error: function () {
+	            // 오류 처리
+	            	$('#result').text('Error occurred.');
+	          	}
+	        });
+		});
+		
+	</script>
+</body>
+</html>

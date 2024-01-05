@@ -1,0 +1,115 @@
+<?php 
+
+$find_id = isset($_COOKIE['find_id']) ? $_COOKIE['find_id'] : '';
+
+setcookie('find_id', "", time() - 3600, "/");
+
+ ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="code" charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0,maximum-scale=10,user-scalable=yes"/>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="STATIC/js/common.js"></script>
+	<script type="text/javascript" src="STATIC/js/swiper-bundle.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/swiper-bundle.min.css"/>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/style.css"/>
+</head>
+<body>
+	<?php include './header.html'; ?>
+	<style type="text/css">
+		.log_wrap{
+			padding-top: 125px;
+		}
+		.log_wrap h1{
+			font-size: 22px;
+			text-align: center;
+			margin-bottom: 30px;
+		}
+		input[type="number"]::-webkit-outer-spin-button,
+		input[type="number"]::-webkit-inner-spin-button {
+		    -webkit-appearance: none;
+		    margin: 0;
+		}
+		.field_alert{
+			/*display: none;*/
+		}
+		.blue{
+			color: #0000ff;
+		}
+		.emph_txt{
+			color: #eb5d3e;
+		}
+		.btn{
+			height: 45px;
+			width: 100%;
+			justify-content: space-between;
+			border: none;
+			margin-top: 30px;
+		}
+		.subBtn{
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		.submitBtn,
+		.subBtn{
+			width: 45%;
+		}
+	</style>
+	<div id="container">
+		<section class="log_wrap">
+			<h1>아이디 찾기</h1>
+			<article class="form_area signup_area">
+				<div class="cont_find">
+		            <p class="desc_find">한장호님의 아이디는 <span class="emph_txt"><?=$find_id?></span> 입니다.</p>  
+		            <div class="wrap_link btn">
+		                <a href="./login.html" class="submitBtn">로그인</a>
+		                <a href="./find_pwd.html" class="subBtn">비밀번호 찾기</a>
+		            </div>
+		        </div>
+			</article>
+		</section>
+	</div>
+	<?php include './footer.html'; ?>
+
+	<script type="text/javascript">
+		//각각의 동의 체크박스
+		$(".submit").click(function (){
+			if($("input[name='user_name']").val()=="") {
+				alert('이름을 확인해주세요.');
+				return false;
+			}
+			if($("input[name='user_auth']").val()==""){
+				alert('인증번호를 확인해주세요.');
+				return false;
+			}
+        // Ajax 요청
+        	var formData = $("#find_form").serialize();
+
+	        $.ajax({
+	          	type: "POST",
+	          	url: './API/find_id_api.php', // 실제 서버 엔드포인트로 교체
+	          	data: formData,
+	          	success: function (response) {
+	            // 성공적으로 응답을 받았을 때의 처리;
+	            	console.log(response);
+	            	if(response==200){
+	            		// location.href='./find_list.html'
+	            	}else{
+	            		alert('일치하는 아이디가 없습니다.');
+	            	}
+	          	},
+	          	error: function (error) {
+	            // 오류 발생 시의 처리
+	            	console.error("Error:", error);
+	          	}
+	        });
+		})
+
+
+	</script>
+</body>
+</html>

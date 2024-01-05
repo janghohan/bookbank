@@ -1,0 +1,313 @@
+<?php 
+include './dbConnect.php';
+
+if(!isset($_COOKIE['login_id'])){
+	echo "<script> alert('로그인이 필요한 페이지입니다.'); </script>";
+	echo "<script> location.href = './login.html';</script>";
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="code" charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0,maximum-scale=10,user-scalable=yes"/>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="STATIC/js/modal.js"></script>
+	<script type="text/javascript" src="STATIC/js/swiper-bundle.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/swiper-bundle.min.css"/>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/style.css"/>
+</head>
+<body>
+	<?php include './header.html'; ?>
+	<div id="container">
+		<section class="aside_section">
+			<div class="inner">
+				<aside class="side_menu">
+					<div class="sticky">
+						<article class="profile_area">
+							<div class="profile_info">
+								<div class="name"><?=$_COOKIE['login_name']?></div>
+							</div>
+							<div class="email"><?=$_COOKIE['login_email']?></div>
+						</article>
+						<article class="menu">
+							<ul>
+								<li><a href="info.html">정보 변경</a></li>
+								<li class="active"><a href="info_reserve.html">예약 내역</a></li>
+								<li><a href="info_qna.html">문의 내역</a></li>
+							</ul>
+						</article>
+					</div>
+				</aside>
+				<style type="text/css">
+					.reserve-row{
+						display: flex;
+						justify-content: space-between;
+					    align-items: center;
+					    min-height: 90px;
+					    letter-spacing: -0.3px;
+					    padding: 0 40px;
+					}
+					.full-text{
+						padding: 0 40px;
+						display: none;
+
+					}
+					.full-text .bar{
+						border-bottom: 1px solid #e7e7e7;
+					}
+					.data-row{
+						margin: 10px 0 5px 0;
+						color: #888;
+					}
+					.data-row .title{
+						margin-right: 10px;
+					}
+					.blank_div{
+						display: none;
+						height: 300px;
+						text-align: center;
+    					line-height: 130px;
+					}
+					.serviceSelect{
+						/*width: 220px;*/
+						border-radius: 5px;
+					}
+				</style>
+				<article class="content">
+					<section class="withdraw_history">
+						<div class="tool">
+							<div>
+								<h1>나의 예약 내역</h1>
+								<select class="serviceSelect" name="serviceSelect">
+									<?php 
+									$cateSql = "SELECT service_id,service_name FROM service_list LIMIT 7";
+									$cateResult = $conn->query($cateSql);
+									while($cateRow = $cateResult->fetch_assoc()){
+									 ?>
+									<option value="<?=$cateRow['service_id']?>"><?=$cateRow['service_name']?></option>
+									<?php } ?>
+								</select>
+							</div>
+						</div>
+						<ul class="booked_list">
+							<div class="blank_div">
+								<div>예약된 내역이 없습니다.</div>
+							</div>
+							<div class="data-list">
+								
+							</div>
+							<!-- <li class="booking">
+								<div class="reserve-row">
+									<div class="details_">
+										<span>예약대기</span>
+										<p>2023.11.30 ~ 2023.12.01</p>
+										<div>어여와 2호</div>
+									</div>
+									<div class="point_">
+										<div class="drop_btn">전체보기</div>
+									</div>	
+								</div>
+								<div class="full-text">
+									<div class="bar"></div>
+									<div class="data-row">
+										<span class="title">예약자 이름 : </span>
+										<span>한장호</span>
+									</div>
+									<div class="data-row">
+										<span class="title">예약자 연락처 : </span>
+										<span>010-5613-5430</span>
+									</div>
+									<div class="data-row">
+										<span class="title">결제방법 : </span>
+										<span>카드결제</span>
+									</div>
+									<div class="data-row">
+										<span class="title">결제일 : </span>
+										<span>2023-11-27 15:33:27</span>
+									</div>
+								</div>
+							</li>
+							<li class="booked">
+								<div class="reserve-row">
+									<div class="details_">
+										<span>예약완료</span>
+										<p>2023.11.30 ~ 2023.12.01</p>
+										<div>어여와 2호</div>
+									</div>
+									<div class="point_">
+										<div class="drop_btn">전체보기</div>
+									</div>	
+								</div>
+								<div class="full-text">
+									<div class="bar"></div>
+									<div class="data-row">
+										<span class="title">예약자 이름 : </span>
+										<span>한장호</span>
+									</div>
+									<div class="data-row">
+										<span class="title">예약자 연락처 : </span>
+										<span>010-5613-5430</span>
+									</div>
+									<div class="data-row">
+										<span class="title">결제방법 : </span>
+										<span>카드결제</span>
+									</div>
+									<div class="data-row">
+										<span class="title">결제일 : </span>
+										<span>2023-11-27 15:33:27</span>
+									</div>
+								</div>
+							</li> -->
+						</ul>
+					</section>
+					<section class="btn_area">
+						<a class="moreBtn">더보기</a>
+					</section>
+				</article>
+			</div>
+		</section>
+	</div>
+	<?php include './footer.html'; ?>
+	<section class="modal-dialog">
+		<div class="dim"></div>
+        <div class="modal-content" id="widthdraw">
+           <article class="modal-layer">
+           		<div class="closer"></div>
+           		<div class="head"><h1>포인트 출금</h1></div>
+           		<div class="content">
+           			<article class="field_area">
+           				<div class="field">
+           					<label>입금 은행</label>
+           					<div class="select__wrap">
+					   			<div class="selectBox__ bank_">
+							        <div class="box__">
+							            <div class="select__">
+							                <div class="text holder">선택</div>
+							            </div>
+							            <ul class="list__">
+							                <li>
+							                	<div class="text">우리</div>
+							                </li>
+							                <li>
+							                	<div class="text">국민</div>
+							                </li>
+							                <li>
+							                	<div class="text">신한</div>
+							                </li>
+							                <li>
+							                	<div class="text">농협</div>
+							                </li>
+							            </ul>
+							        </div>
+							    </div>
+							</div>
+           				</div>
+           				<div class="field">
+           					<label>입금계좌번호</label>
+           					<input type="" name="" placeholder="계좌번호를 입력하세요">
+           				</div>
+           				<div class="field">
+           					<label>예금주 이름</label>
+           					<input type="" name="" placeholder="예금주 이름을 입력하세요">
+           				</div>
+           				<div class="field top_">
+           					<label>주민등록번호</label>
+           					<div class="item">
+           						<div class="check_wrap">
+           							<div class="checkbox_">
+           								<input type="radio" name="national" checked>
+           								<label>내국인</label>
+           							</div>
+           							<div class="checkbox_">
+           								<input type="radio" name="national">
+           								<label>외국인</label>
+           							</div>
+           						</div>
+           						<input type="" name="" placeholder="주민등록번호or외국인등록번호">
+           						<div class="check_wrap">
+           							<div class="checkbox_">
+           								<input type="checkbox" name="">
+           								<label>정산 계좌 정보 저장</label>
+           							</div>
+           						</div>
+           					</div>
+           				</div>
+           				<div class="field">
+           					<label>출금포인트</label>
+           					<input type="" name="" placeholder="출금하실 포인트를 입력하세요">
+           				</div>
+           				<div class="point_">출금 가능 포인트: <b>3,000 P</b></div>
+           				<div class="notice_">
+           					<h1><i class="exmark"></i> 출금안내사항</h1>
+           					<div class="desc">출금안내사항 영역</div>
+           				</div>
+           			</article>
+           			<article class="btn_area">
+           				<button class="submitBtn submit">포인트 출금 신청</button>
+           			</article>
+           		</div>
+           </article>
+        </div>
+    </section>
+    <script type="text/javascript">
+
+    	var pageNum = 1;
+    	var serviceId = 1;
+    	getMyReserveList(pageNum);
+
+    	$(document).on("click", ".drop_btn.show", function() {
+    		var $this = $(this);
+			var $parent = $this.parents('li');
+			$this.toggleClass('active');
+			if($this.hasClass('active')){
+				$parent.find('.full-text').slideDown(300);
+			} else {
+				$parent.find('.full-text').slideUp(300);
+			}
+    	})
+
+    	$(".moreBtn").click(function(){
+    		pageNum ++;
+    		getMyReserveList(pageNum);
+    	});
+
+    	$(".serviceSelect").change(function(){
+    		serviceId = $(this).val();
+    		pageNum = 1;
+    		$(".data-list").html('');
+        	getMyReserveList(pageNum);
+        	
+    	});
+
+		function getMyReserveList(page){
+			$.ajax({
+	          	type: 'POST',
+	          	url: 'get_myreserveList.php', // 서버 측의 파일 경로 또는 URL
+	          	dataType: 'json',
+	          	data: { page: page, serviceId:serviceId },
+	          	success: function (response) {
+	            // 서버로부터의 응답 처리
+	            	console.log(response);
+	            	$(".data-list").append(response.data);
+	            	if(response.data==''){
+	            		$(".blank_div").css('display','block');
+	            	}else{
+	            		$(".blank_div").css('display','none');
+	            	}
+	            	if(response.nextNum>0){
+	            		$(".moreBtn").css('display','flex');
+	            	}else{
+	            		$(".moreBtn").css('display','none');
+	            	}
+	          	},
+	          	error: function () {
+	            // 오류 처리
+	            	$('#result').text('Error occurred.');
+	          	}
+	        });
+		}
+
+    </script>
+</body>
+</html>

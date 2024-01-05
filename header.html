@@ -1,0 +1,351 @@
+<style type="text/css">
+	.menu_all_area .wrap article{
+		visibility: hidden;
+	}
+	.menu_all_area .wrap article.active{
+		visibility: visible;
+	}
+
+	.topDesign{
+		background-color: #f4f4f4;
+	}
+	#header .gnb img{
+		width: 40px;
+	}
+</style>
+
+<header id="header">
+	<section class="tool_area">
+		<div class="topDesign">
+			<div class="inner topInner">
+				<div class="gnb">
+				<!-- 	<ul>
+						<li><a href="login.html">시작페이지로</a></li>
+						<li><a href="signup.html">즐겨찾기 추가</a></li>
+					</ul> -->
+				</div>
+				<div class="gnb">
+					<ul>
+						<?php 
+						if(!isset($_COOKIE['login_id'])){
+						?>
+							<li><a href="login.html">로그인</a></li>
+							<li><a href="signup.html">회원가입</a></li>
+							<li><a href="cscenter.html">고객센터</a></li>
+						<?php }else{ ?>
+							<li><a href="info.html">내정보</a></li>
+						<?php } ?>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="inner">
+			<a href="index.html" class="logo">
+				<img src="./temp_logo.png">
+			</a>
+			<div class="search_area">
+				<input type="" name="" placeholder="도서를 검색하세요.">
+				<button></button>
+			</div>
+			<div class="gnb">
+				<ul>
+					<li>
+						<a href="./cart.html"><img src="STATIC/img/icon/cart.png"></a>
+					</li>
+					<li>
+						<a href="./my.html"><img src="STATIC/img/icon/user.png"></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+	
+	<!-- <section class="catagory_area">
+		<div class="inner">
+			<div class="menu">
+				<ul>
+					<li class="menu_all"><img src="STATIC/img/all.jpg" style="padding-top: 8px;"></li>
+					<li class="centerli menu_all"><a>전체 카테고리</a></li>
+					<li class="centerli jeojeon_menu"><a>마을조합</a></li>
+					<li class="centerli hotel_menu"><a>어여와</a></li>
+					<li class="centerli nanum_menu"><a>저전나눔터</a></li>
+					<li class="centerli bitamin_menu"><a>비타민센터</a></li>
+					<li class="centerli house_menu"><a>쉐어하우스</a></li>
+					<li class="notice_menu"><a>게시판</a></li>
+				</ul>
+			</div>
+			<section class="menu_all_area ">
+				<div class="wrap">
+					<article></article>
+					<article >
+						<div class="title"><a href="about.html">마을조합</a></div>
+						
+					</article>
+					<article >
+						<div class="title"><a href="">어여와</a></div>
+						<ul>
+							<li><a href="detail.html?service_id=1">어여와 1호</a></li>
+							<li><a href="detail.html?service_id=2">어여와 2호</a></li>
+							<li><a href="detail.html?service_id=3">어여와 3호</a></li>
+						</ul>
+					</article>
+					<article>
+						<div class="title"><a href="nanum_detail.html?service_id=4">저전나눔터</a></div>
+					
+					</article>
+					<article>
+						<div class="title"><a href="">비타민센터</a></div>
+						<ul>
+							<li><a href="bitamin_detail.html?service_id=5">1층 공유주방</a></li>
+							<li><a href="bitamin_detail.html?service_id=6">3층 비타민실</a></li>
+							<li><a href="bitamin_detail.html?service_id=7">3층 작은활동실</a></li>
+						</ul>
+					</article>
+					<article>
+						<div class="title"><a href="">쉐어하우스</a></div>
+						<ul>
+							<li><a href="share_detail.html?service_id=8">1호</a></li>
+							<li><a href="share_detail.html?service_id=9">2호</a></li>
+							<li><a href="share_detail.html?service_id=10">3호</a></li>
+							<li><a href="share_detail.html?service_id=11">4호</a></li>
+						</ul>
+					</article>
+					<article>
+						<div class="title"><a href="">게시판</a></div>
+						<ul>
+							<li><a href="notice.html">공지사항</a></li>
+							<li><a href="qna.html">문의사항</a></li>
+						</ul>
+					</article>
+				</div>
+			</section>
+		</div>
+	</section> -->
+	<script type="text/javascript">
+		var totalOpen = 0;
+		$(document).ready(function() {
+		  $('.catagory_area .menu li').click(function() {
+		    var index = $(this).index();
+		    // alert('선택한 li는 ' + index + '번째 li입니다.');
+		    var articles = $('.menu_all_area .wrap article');
+		    if(index!=0 && index!=1){ //전체가 아닌 각각을 누를때
+		    	if(totalOpen==1) return false;
+
+		    	newIndex = index-1;
+		    	if($('.menu_all_area .wrap article').eq(newIndex).hasClass('active')){
+		    		$('.menu_all_area .wrap article').eq(newIndex).removeClass('active');
+		    	}else{
+		    		$('.menu_all_area').addClass('active');
+		    		$('.menu_all_area .wrap article').removeClass('active');
+		    		$('.menu_all_area .wrap article').eq(newIndex).addClass('active');
+		    	}
+		    }else{
+		    	//전체를 누르면 전체가 켜지고 꺼진다.
+		    	if(totalOpen==0){
+		    		$('.menu_all_area .wrap article').addClass('active');
+		    		$('.menu_all_area').addClass('active');
+		    		totalOpen = 1;
+		    	}else{
+		    		$('.menu_all_area .wrap article').removeClass('active');
+		    		$('.menu_all_area').removeClass('active');
+		    		totalOpen = 0;
+		    	}
+		    	
+
+		    }
+		 
+		    
+		  });
+		});
+	</script>
+	<!-- <section class="mobile_area">
+		<article class="head">
+			<div class="m_trigger"></div>
+			<div class="title">
+				<a href="">
+					<img src="STATIC/img/logo/Logo.png">
+				</a>
+			</div>
+			<div class="searchBtn"></div>
+		</article>
+		<article class="search_area">
+			<input type="" name="" placeholder="캠페인을 검색하세요.">
+			<div class="close"></div>
+		</article>
+		<article class="side_area">
+			<div class="wrap">
+				<div class="close"></div>
+				<section class="use_area">
+					<a href="로그인.html" class="user signout"><b>로그인</b>해주세요.</a>
+				</section>
+				<section class="menu_area">
+					<article>
+						<div class="title"><img src="STATIC/img/icon/fe/menu_cp.svg">캠페인</div>
+						<div class="depth">
+							<ul>
+								<li><a href="카테고리.html">전체 캠페인</a></li>
+								<li><a href="카테고리.html">제품 캠페인</a></li>
+								<li><a href="카테고리.html">지역 캠페인</a></li>
+								<li><a href="카테고리.html">선착순 캠페인</a></li>
+								<li><a href="카테고리.html">기자단</a></li>
+							</ul>
+						</div>
+					</article>
+					<article>
+						<div class="title"><img src="STATIC/img/icon/fe/menu_ct.svg">고객센터</div>
+						<div class="depth">
+							<ul>
+								<li><a href="공지사항.html">공지사항</a></li>
+								<li><a href="">이용방법</a></li>
+								<li><a href="FAQ.html">자주묻는질문</a></li>
+								<li><a href="문의하기.html">1:1문의/a></li>
+							</ul>
+						</div>
+					</article>
+					<article>
+						<div class="title"><img src="STATIC/img/icon/fe/menu_ad.svg">광고주센터</div>
+						<div class="depth">
+							<ul>
+								<li><a href="">아싸뷰 소개</a></li>
+								<li><a href="">상품 안내</a></li>
+								<li><a href="">가격 안내</a></li>
+							</ul>
+						</div>
+					</article>
+				</section>
+			</div>
+		</article>
+	</section> -->
+</header>
+<style type="text/css">
+	.scroll-header{
+		background-color: rgba(235,93,62,0.75);
+		width: 100%;
+		height: 280px;
+		position: fixed;
+	    top: 0;
+	    z-index: 111;
+	    color: #fff;
+	    display: none;
+	}
+	.scroll-container{
+		width: 1440px;
+		margin: 0 auto;
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+	}
+	.scroll-container ul{
+		text-align: center;
+	}
+	.scroll-container ul li:first-child{
+		font-size: 22px;
+	}
+	.scroll-container ul li{
+		padding-top: 15px;
+	}
+	#ham-button{
+		right: 0px;
+	    position: fixed;
+	    top: 0px;
+	    /* width: 29px; */
+	    z-index: 150;
+	    display: none;
+	    width: 60px;
+	}
+	#close-button{
+		right: 5px;
+	    position: fixed;
+	    top: 5px;
+	    /* width: 29px; */
+	    z-index: 150;
+	    display: none;
+	    width: 50px;
+	}
+</style>
+<img src="./STATIC/img/icon/newham-1.jpg" id="ham-button">
+
+<img src="./STATIC/img/icon/close.png" id="close-button">
+<section class="scroll-header">
+	<div class="scroll-container">
+		<ul>
+			<li>
+				<a href="./">홈</a>
+			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="./about.html">마을조합</a>
+			</li>
+		</ul>
+		<ul>
+			<li><a>어여와</a></li>
+			<li><a href="./detail.html?service_id=1">어여와 1호</a></li>
+			<li><a href="./detail.html?service_id=2">어여와 2호</a></li>
+			<li><a href="./detail.html?service_id=3">어여와 3호</a></li>
+		</ul>
+		<ul>
+			<li><a href="./nanum_detail.html?service_id=4">저전나눔터</a></li>
+		</ul>
+		<ul>
+			<li><a>비타민센터</a></li>
+			<li><a href="./bitamin_detail.html?service_id=5">1층 공유주방</a></li>
+			<li><a href="./bitamin_detail.html?service_id=6">3층 비타민실</a></li>
+			<li><a href="./bitamin_detail.html?service_id=7">3층 작은활동실</a></li>
+		</ul>
+		<ul>
+			<li><a>쉐어하우스</a></li>
+			<li><a href="./share_detail.html?service_id=8">1호</a></li>
+			<li><a href="./share_detail.html?service_id=9">2호</a></li>
+			<li><a href="./share_detail.html?service_id=10">3호</a></li>
+			<li><a href="./share_detail.html?service_id=11">4호</a></li>
+		</ul>
+		<ul>
+			<li><a>게시판</a></li>
+			<li><a href="./notice.html">공지사항</a></li>
+			<li><a href="./qna.html">문의사항</a></li>
+		</ul>
+	</div>
+
+</section>
+<script type="text/javascript">
+	let prevScrollPos = window.pageYOffset;
+	const headerHeight = 272; // 헤더의 높이에 따라 조절
+
+
+	window.onscroll = function() {
+	  let currentScrollPos = window.pageYOffset;
+	  if (prevScrollPos > currentScrollPos) {
+	    // 스크롤을 올릴 때
+
+	    if(currentScrollPos < headerHeight) {
+	    	document.getElementById("header").style.top = "0";
+		    document.getElementById("ham-button").style.display = "none";
+		    $(".scroll-header").css('display','none');
+		    $("#close-button").css("display", 'none');
+	    }
+	    
+	  } else {
+	    // 스크롤을 내릴 때
+	    document.getElementById("header").style.top = "-262px"; // 헤더의 높이에 따라 조절
+	    if($("#close-button").css('display')=='none'){
+	    	document.getElementById("ham-button").style.display = "block";
+	    }
+	  }
+
+	  prevScrollPos = currentScrollPos;
+	};
+
+	$("#ham-button").click(function (){
+		$(".scroll-header").css('display','block');
+		$("#ham-button").css("display", 'none');
+		$("#close-button").css("display", 'block');
+	});
+
+	$("#close-button").click(function (){
+		$(".scroll-header").css('display','none');
+		$("#ham-button").css("display", 'block');
+		$("#close-button").css("display", 'none');
+	});
+
+</script>

@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="code" charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0,maximum-scale=10,user-scalable=yes"/>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="STATIC/js/common.js"></script>
+	<script type="text/javascript" src="STATIC/js/modal.js"></script>
+	<script type="text/javascript" src="STATIC/js/swiper-bundle.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/swiper-bundle.min.css"/>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/style.css"/>
+</head>
+<body>
+	<header id="header">
+		<section class="tool_area">
+			<div class="inner">
+				<a href="index.html" class="logo">
+					<img src="STATIC/img/logo/Logo.png">
+				</a>
+				<div class="search_area">
+					<input type="" name="" placeholder="캠페인을 검색하세요.">
+					<button></button>
+				</div>
+				<div class="gnb">
+					<ul>
+						<li><a href="회원가입.html">회원가입</a></li>
+						<li><a href="로그인.html">로그인</a></li>
+						<li><a href="고객센터.html">고객센터</a></li>
+						<li><a href="광고주센터.html">광고주센터</a></li>
+					</ul>
+				</div>
+			</div>
+		</section>
+		<section class="catagory_area">
+			<div class="inner">
+				<div>
+					<div class="menu_all">전체 카테고리</div>
+				</div>
+				<div class="menu">
+					<ul>
+						<li><a href="">선착순</a></li>
+						<li><a href="">제품</a></li>
+						<li><a href="">지역</a></li>
+						<li><a href="">기자단</a></li>
+					</ul>
+				</div>
+				<section class="menu_all_area">
+					<div class="wrap">
+						<article>
+							<div class="title"><img src="STATIC/img/icon/fe/menu_cp.svg">캠페인</div>
+							<ul>
+								<li><a href="캠페인.html">전체 캠페인</a></li>
+								<li><a href="">제품 캠페인</a></li>
+								<li><a href="">지역 캠페인</a></li>
+								<li><a href="">선착순 캠페인</a></li>
+								<li><a href="">기자단</a></li>
+							</ul>
+						</article>
+						<article>
+							<div class="title"><img src="STATIC/img/icon/fe/menu_ct.svg">고객센터</div>
+							<ul>
+								<li><a href="">전체 캠페인</a></li>
+								<li><a href="">제품 캠페인</a></li>
+								<li><a href="">지역 캠페인</a></li>
+								<li><a href="">선착순 캠페인</a></li>
+								<li><a href="">기자단</a></li>
+							</ul>
+						</article>
+						<article>
+							<div class="title"><img src="STATIC/img/icon/fe/menu_ad.svg">광고주센터</div>
+							<ul>
+								<li><a href="">전체 캠페인</a></li>
+								<li><a href="">제품 캠페인</a></li>
+								<li><a href="">지역 캠페인</a></li>
+								<li><a href="">선착순 캠페인</a></li>
+								<li><a href="">기자단</a></li>
+							</ul>
+						</article>
+					</div>
+				</section>
+			</div>
+		</section>
+		<section class="mobile_area">
+			<article class="head">
+				<a class="his_back" href="javascript:window.history.back();"></a>
+				<div class="title">포트폴리오</div>
+				<div class="searchBtn"></div>
+			</article>
+			<article class="search_area">
+				<input type="" name="" placeholder="캠페인을 검색하세요.">
+				<div class="close"></div>
+			</article>
+			<article class="side_area">
+				<div class="wrap">
+					<div class="close"></div>
+					<section class="use_area">
+						<a href="" class="user signout"><b>로그인</b>해주세요.</a>
+					</section>
+					<section class="menu_area">
+						<article>
+							<div class="title"><img src="STATIC/img/icon/fe/menu_cp.svg">캠페인</div>
+							<div class="depth">
+								<ul>
+									<li><a href="">전체 캠페인</a></li>
+									<li><a href="">제품 캠페인</a></li>
+									<li><a href="">지역 캠페인</a></li>
+									<li><a href="">선착순 캠페인</a></li>
+									<li><a href="">기자단</a></li>
+								</ul>
+							</div>
+						</article>
+						<article>
+							<div class="title"><img src="STATIC/img/icon/fe/menu_ct.svg">고객센터</div>
+							<div class="depth">
+								<ul>
+									<li><a href="">공지사항</a></li>
+									<li><a href="">이용방법</a></li>
+									<li><a href="">자주묻는 질문</a></li>
+									<li><a href="">1:1문의</a></li>
+								</ul>
+							</div>
+						</article>
+						<article>
+							<div class="title"><img src="STATIC/img/icon/fe/menu_ad.svg">광고주센터</div>
+							<div class="depth">
+								<ul>
+									<li><a href="">아싸뷰 소개</a></li>
+									<li><a href="">상품 안내</a></li>
+									<li><a href="">가격 안내</a></li>
+								</ul>
+							</div>
+						</article>
+					</section>
+				</div>
+			</article>
+		</section>
+	</header>
+	<div id="container">
+		<section class="aside_section">
+			<div class="inner">
+				<aside class="side_menu">
+					<div class="sticky">
+						<article class="profile_area">
+							<div class="profile_img"></div>
+							<div class="profile_info">
+								<div class="name">홍길동</div>
+							</div>
+							<div class="email">studio_monde@naver.com</div>
+							<div class="tier">
+								<div>회원등급</div>
+								<div><img src="STATIC/img/icon/asset/v0.svg"></div>
+							</div>
+						</article>
+						<article class="menu">
+							<ul>
+								<li><a href="프로필편집.html">프로필 편집</a></li>
+								<li><a href="포인트.html">아싸뷰 포인트</a></li>
+								<li><a href="알림함.html">알림함</a></li>
+								<li><a href="나의캠페인.html">나의캠페인</a></li>
+								<li><a href="찜리스트.html">찜리스트</a></li>
+								<li class="active"><a href="포트폴리오.html">포트폴리오</a></li>
+								<li><a href="계정.html">계정 설정</a></li>
+							</ul>
+						</article>
+					</div>
+				</aside>
+				<article class="content">
+					<h1 class="ct_title mB"><span class="name">홍길동</span>님의 포트폴리오</h1>
+					<article class="about_area">
+						<section class="list_area col-03">
+							<div class="tool">
+								<div>
+									<p>전체 포트폴리오 <b class="count">0</b>개</p>
+								</div>
+								<div>
+									<div class="select__wrap">
+							   			<div class="selectBox__ selectFilter">
+									        <div class="box__">
+									            <div class="select__">필터</div>
+									            <ul class="list__">
+									            	<li class="selected">
+									                	<div class="text">쇼핑몰</div>
+									                </li>
+									                <li>
+									                	<div class="text">네이버블로그</div>
+									                </li>
+									                <li>
+									                	<div class="text">인스타그램</div>
+									                </li>
+									                <li>
+									                	<div class="text">네이버카페</div>
+									                </li>
+									                <li>
+									                	<div class="text">유튜브</div>
+									                </li>
+									            </ul>
+									        </div>
+									    </div>
+									</div>
+								</div>
+							</div>
+							<ul>
+								<li>
+									<a href="javascript:details();">
+										<div class="imgBox">
+											<img src="STATIC/img/campaign/신발깔창.png">
+										</div>
+										<div class="details">
+											<div class="col-06">
+												<div class="tag_area">
+													<img src="STATIC/img/icon/asset/tag_blog.svg">
+													<span>네이버카페</span>
+												</div>
+												<div class="price_">
+													<div>공통 <b>3,000P</b></div>
+													<div>상위노출 <b>10,000P</b></div>
+												</div>
+											</div>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:details();">
+										<div class="imgBox">
+											<img src="STATIC/img/campaign/신발깔창.png">
+										</div>
+										<div class="details">
+											<div class="col-06">
+												<div class="tag_area">
+													<img src="STATIC/img/icon/asset/tag_blog.svg">
+													<span>네이버카페</span>
+												</div>
+												<div class="price_">
+													<div>공통 <b>3,000P</b></div>
+												</div>
+											</div>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:details();">
+										<div class="imgBox">
+											<img src="STATIC/img/campaign/신발깔창.png">
+										</div>
+										<div class="details">
+											<div class="col-06">
+												<div class="tag_area">
+													<img src="STATIC/img/icon/asset/tag_blog.svg">
+													<span>네이버카페</span>
+												</div>
+												<div class="price_">
+													<div>공통 <b>3,000P</b></div>
+													<div>상위노출 <b>10,000P</b></div>
+												</div>
+											</div>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:details();">
+										<div class="imgBox">
+											<img src="STATIC/img/campaign/신발깔창.png">
+										</div>
+										<div class="details">
+											<div class="col-06">
+												<div class="tag_area">
+													<img src="STATIC/img/icon/asset/tag_blog.svg">
+													<span>네이버카페</span>
+												</div>
+												<div class="price_">
+													<div>공통 <b>3,000P</b></div>
+													<div>상위노출 <b>10,000P</b></div>
+												</div>
+											</div>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:details();">
+										<div class="imgBox">
+											<img src="STATIC/img/campaign/신발깔창.png">
+										</div>
+										<div class="details">
+											<div class="col-06">
+												<div class="tag_area">
+													<img src="STATIC/img/icon/asset/tag_blog.svg">
+													<span>네이버카페</span>
+												</div>
+												<div class="price_">
+													<div>공통 <b>3,000P</b></div>
+													<div>상위노출 <b>10,000P</b></div>
+												</div>
+											</div>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:details();">
+										<div class="imgBox">
+											<img src="STATIC/img/campaign/신발깔창.png">
+										</div>
+										<div class="details">
+											<div class="col-06">
+												<div class="tag_area">
+													<img src="STATIC/img/icon/asset/tag_blog.svg">
+													<span>네이버카페</span>
+												</div>
+												<div class="price_">
+													<div>공통 <b>3,000P</b></div>
+													<div>상위노출 <b>10,000P</b></div>
+												</div>
+											</div>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:details();">
+										<div class="imgBox">
+											<img src="STATIC/img/campaign/신발깔창.png">
+										</div>
+										<div class="details">
+											<div class="col-06">
+												<div class="tag_area">
+													<img src="STATIC/img/icon/asset/tag_blog.svg">
+													<span>네이버카페</span>
+												</div>
+												<div class="price_">
+													<div>공통 <b>3,000P</b></div>
+													<div>상위노출 <b>10,000P</b></div>
+												</div>
+											</div>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:details();">
+										<div class="imgBox">
+											<img src="STATIC/img/campaign/신발깔창.png">
+										</div>
+										<div class="details">
+											<div class="col-06">
+												<div class="tag_area">
+													<img src="STATIC/img/icon/asset/tag_blog.svg">
+													<span>네이버카페</span>
+												</div>
+												<div class="price_">
+													<div>공통 <b>3,000P</b></div>
+													<div>상위노출 <b>10,000P</b></div>
+												</div>
+											</div>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:details();">
+										<div class="imgBox">
+											<img src="STATIC/img/campaign/신발깔창.png">
+										</div>
+										<div class="details">
+											<div class="col-06">
+												<div class="tag_area">
+													<img src="STATIC/img/icon/asset/tag_blog.svg">
+													<span>네이버카페</span>
+												</div>
+												<div class="price_">
+													<div>공통 <b>3,000P</b></div>
+													<div>상위노출 <b>10,000P</b></div>
+												</div>
+											</div>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:details();">
+										<div class="imgBox">
+											<img src="STATIC/img/campaign/신발깔창.png">
+										</div>
+										<div class="details">
+											<div class="col-06">
+												<div class="tag_area">
+													<img src="STATIC/img/icon/asset/tag_blog.svg">
+													<span>네이버카페</span>
+												</div>
+												<div class="price_">
+													<div>공통 <b>3,000P</b></div>
+													<div>상위노출 <b>10,000P</b></div>
+												</div>
+											</div>
+										</div>
+									</a>
+								</li>
+							</ul>
+							<div class="btn_area">
+								<button class="moreBtn">더보기<img src="STATIC/img/icon/tool/more.svg"></button>
+							</div>
+						</section>
+					</article>
+				</article>
+			</div>
+		</section>
+	</div>
+	<footer id="footer" class="mobile_none">
+		<hr class="mobile_line">
+		<section class="footer_top">
+			<div class="inner">
+				<section class="gnb_">
+					<article>
+						<div class="title">
+							<a href="고객센터.html">고객센터</a>
+						</div>
+						<ul>
+							<li>상담시간 10:00 ~ 18:00</li>
+							<li>점심시간 13:00 ~ 14:00</li>
+							<li>주말, 공휴일 휴무</li>
+						</ul>
+					</article>
+					<article>
+						<div class="title">빠른문의</div>
+						<div>
+							<a href="" class="ch_link"><img src="STATIC/img/icon/asset/ch.svg">광고주 문의</a>
+							<a href="" class="ch_link"><img src="STATIC/img/icon/asset/ch.svg">리뷰어/인플루언서 문의</a>
+						</div>
+					</article>
+					<article>
+						<div class="title">COMPANY</div>
+						<ul>
+							<li><a href="">개인정보처리방침</a></li>
+							<li><a href="">이용약관</a></li>
+						</ul>
+					</article>
+				</section>
+				<section class="socials_">
+					<a href="">
+						<div class="imgBox about"></div>
+						<p>아싸뷰 소개</p>
+					</a>
+					<a href="">
+						<div class="imgBox blog"></div>
+						<p>블로그</p>
+					</a>
+					<a href="">
+						<div class="imgBox instar"></div>
+						<p>인스타그램</p>
+					</a>
+				</section>
+			</div>
+		</section>
+		<section class="company_">
+			<div class="inner">
+				<div class="info">
+					<h1>주식회사 아미고</h1>
+					<span>주소: 서울특별시 마포구 월드컵북로 41, 302</span>
+					<span>대표: 전준완</span>
+					<span>개인정보관리책임자: 심도언</span>
+					<span>사업자등록번호: 882-86-02118</span>
+					<span>통신판매업신고: 2021-서울마포-2229</span>
+					<span>대표번호: 070-4196-7100</span>
+					<span>E-mail: assaview.official@gmail.com</span>
+				</div>
+				<div class="copy_">Copyright © 2022 assaview Inc. All rights reserved.</div>
+			</div>
+		</section>
+	</footer>
+	<section class="modal-dialog">
+		<div class="dim"></div>
+        <div class="modal-content" id="detailsModal">
+           <article class="modal-layer">
+           		<div class="closer"></div>
+           		<div class="head"><h1>포트폴리오 상세</h1></div>
+           		<div class="content">
+           			<article class="details">
+           				<article class="profile_area">
+							<div class="profile_img"></div>
+							<div class="profile_info">
+								<div class="lv">
+									<img src="STATIC/img/icon/asset/new.svg">
+									새싹
+								</div>
+								<div class="name">홍길동</div>
+							</div>
+							<div class="email">studio_monde@naver.com</div>
+							<article class="item">
+								<h1>전문분야</h1>
+								<div class="check_area">
+									<div class="checkbox_ tab">
+										<input type="checkbox" name="" disabled="">
+										<label><i class="icon camera"></i>기자단</label>
+									</div>
+									<div class="checkbox_ tab">
+										<input type="checkbox" name="" disabled="">
+										<label><i class="icon hood"></i>식품</label>
+									</div>
+									<!-- <div class="checkbox_ tab">
+										<input type="checkbox" name="" disabled>
+										<label><i class="icon back"></i>생활용품</label>
+									</div>
+									<div class="checkbox_ tab">
+										<input type="checkbox" name="" disabled>
+										<label><i class="icon shirt"></i>패션</label>
+									</div>
+									<div class="checkbox_ tab">
+										<input type="checkbox" name="" disabled>
+										<label><i class="icon beauty"></i>뷰티</label>
+									</div>
+									<div class="checkbox_ tab">
+										<input type="checkbox" name="" disabled>
+										<label><i class="icon pacifier"></i>육아</label>
+									</div>
+									<div class="checkbox_ tab">
+										<input type="checkbox" name="" disabled>
+										<label><i class="icon dumbbell"></i>건강/운동</label>
+									</div>
+									<div class="checkbox_ tab">
+										<input type="checkbox" name="" disabled>
+										<label><i class="icon phone"></i>디지털</label>
+									</div>
+									<div class="checkbox_ tab">
+										<input type="checkbox" name="" disabled>
+										<label><i class="icon stamp"></i>반려동물</label>
+									</div> -->
+								</div>
+							</article>
+							<article class="item">
+								<h1>자기소개</h1>
+								<div class="comment">안녕하세요. 홍길동입니다.
+									이 곳에는 자기소개가 오는 공간입니다. 
+								</div>
+							</article>
+						</article>
+           				<article class="list_area">
+           					<div>
+								<div class="imgBox">
+									<img src="STATIC/img/campaign/신발깔창.png">
+								</div>
+								<div class="details">
+									<div class="col-06">
+										<div class="tag_area">
+											<img src="STATIC/img/icon/asset/tag_blog.svg">
+											<span>네이버카페</span>
+										</div>
+										<div class="price_">
+											<div>공통 <b>3,000P</b></div>
+											<div>상위노출 <b>10,000P</b></div>
+										</div>
+									</div>
+								</div>
+								<div class="desc">내용이 들어오는 공간입니다.
+									내용을 입력해주세요.
+								</div>
+								<a href="" class="btn">자세히 보기</a>
+							</div>
+           				</article>
+           			</article>
+           		</div>
+           </article>
+        </div>
+    </section>
+
+	<script type="text/javascript">
+
+		function details(){
+    		ModalConfirm('#detailsModal', function(){
+
+    		});
+    	}
+
+		$( function(){
+			var select1 = new CustomSelectBox('.selectFilter');
+    	})
+	</script>
+</body>
+</html>

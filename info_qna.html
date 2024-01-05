@@ -1,0 +1,202 @@
+<?php 
+
+if(!isset($_COOKIE['login_id'])){
+	echo "<script> alert('로그인이 필요한 페이지입니다.'); </script>";
+	echo "<script> location.href = './login.html';</script>";
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="code" charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0,maximum-scale=10,user-scalable=yes"/>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="STATIC/js/common.js"></script>
+	<script type="text/javascript" src="STATIC/js/modal.js"></script>
+	<script type="text/javascript" src="STATIC/js/swiper-bundle.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/swiper-bundle.min.css"/>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/style.css"/>
+</head>
+<body>
+	<?php include './header.html'; ?>
+	<div id="container">
+		<section class="aside_section">
+			<div class="inner">
+				<aside class="side_menu">
+					<div class="sticky">
+						<article class="profile_area">
+							<div class="profile_info">
+								<div class="name"><?=$_COOKIE['login_name']?></div>
+							</div>
+							<div class="email"><?=$_COOKIE['login_email']?></div>
+						</article>
+						<article class="menu">
+							<ul>
+								<li><a href="info.html">정보 변경</a></li>
+								<li><a href="info_reserve.html">예약 내역</a></li>
+								<li class="active"><a href="info_qna.html">문의 내역</a></li>
+							</ul>
+						</article>
+					</div>
+				</aside>
+				<style type="text/css">
+					.reserve-row{
+						display: flex;
+						justify-content: space-between;
+					    align-items: center;
+					    min-height: 90px;
+					    letter-spacing: -0.3px;
+					    padding: 0 40px;
+					}
+					.full-text{
+						padding: 0 40px;
+						display: none;
+
+					}
+					.full-text .bar{
+						border-bottom: 1px solid #e7e7e7;
+					}
+					.data-row{
+						margin: 10px 0 5px 0;
+						color: #888;
+					}
+					.data-row .title{
+						margin-right: 10px;
+					}
+					.data-row p{
+						padding: 15px 0;
+					}
+					.blank_div{
+						display: none;
+						height: 300px;
+						text-align: center;
+    					line-height: 130px;
+					}
+				</style>
+				<article class="content">
+					<section class="withdraw_history">
+						<div class="tool">
+						<div>
+							<h1>나의 문의 내역</h1>
+						</div>
+					</div>
+						<ul class="qna_list">
+							<div class="blank_div">
+								<div>문의 내역이 없습니다.</div>
+							</div>
+							<!-- <li class="booking">
+								<div class="reserve-row">
+									<div class="details_">
+										<span>예약대기</span>
+										<p>2023.11.30 ~ 2023.12.01</p>
+										<div>어여와 2호</div>
+									</div>
+									<div class="point_">
+										<div class="drop_btn">전체보기</div>
+									</div>	
+								</div>
+								<div class="full-text">
+									<div class="bar"></div>
+									<div class="data-row">
+										<span class="title">문의내용 : </span>
+										<span>한장호</span>
+									</div>
+									<div class="bar"></div>
+									<div class="data-row">
+										<span class="title">답변내용 : </span>
+										<span>한장호</span>
+									</div>
+								</div>
+							</li>
+							<li class="booked">
+								<div class="reserve-row">
+									<div class="details_">
+										<span>예약완료</span>
+										<p>2023.11.30 ~ 2023.12.01</p>
+										<div>어여와 2호</div>
+									</div>
+									<div class="point_">
+										<div class="drop_btn">전체보기</div>
+									</div>	
+								</div>
+								<div class="full-text">
+									<div class="bar"></div>
+									<div class="data-row">
+										<span class="title">예약자 이름 : </span>
+										<span>한장호</span>
+									</div>
+									<div class="data-row">
+										<span class="title">예약자 연락처 : </span>
+										<span>010-5613-5430</span>
+									</div>
+									<div class="data-row">
+										<span class="title">결제방법 : </span>
+										<span>카드결제</span>
+									</div>
+									<div class="data-row">
+										<span class="title">결제일 : </span>
+										<span>2023-11-27 15:33:27</span>
+									</div>
+								</div>
+							</li> -->
+						</ul>
+					</section>
+					<section class="btn_area">
+						<a class="moreBtn">더보기</a>
+					</section>
+				</article>
+			</div>
+		</section>
+	</div>
+	<?php include './footer.html'; ?>
+	
+    <script type="text/javascript">
+
+    	var pageNum = 1;
+    	getMyReserveList(pageNum);
+
+    	$(document).on("click", ".drop_btn", function() {
+    		var $this = $(this);
+			var $parent = $this.parents('li');
+			$this.toggleClass('active');
+			if($this.hasClass('active')){
+				$parent.find('.full-text').slideDown(300);
+			} else {
+				$parent.find('.full-text').slideUp(300);
+			}
+    	})
+
+    	$(".moreBtn").click(function(){
+    		pageNum ++;
+    		getMyReserveList(pageNum);
+    	});
+
+		function getMyReserveList(page){
+			$.ajax({
+	          	type: 'POST',
+	          	url: 'get_myqnaList.php', // 서버 측의 파일 경로 또는 URL
+	          	dataType: 'json',
+	          	data: { page: page },
+	          	success: function (response) {
+	            // 서버로부터의 응답 처리
+	            	console.log(response);
+	            	$(".qna_list").append(response.data);
+	            	if(response.data==""){
+	            		$(".blank_div").css('display','block');
+	            	}
+	            	if(response.nextNum>0){
+	            		$(".moreBtn").css('display','flex');
+	            	}else{
+	            		$(".moreBtn").css('display','none');
+	            	}
+	          	},
+	          	error: function () {
+	            // 오류 처리
+	            	$('#result').text('Error occurred.');
+	          	}
+	        });
+		}
+
+    </script>
+</body>
+</html>

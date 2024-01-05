@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="code" charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0,maximum-scale=10,user-scalable=yes"/>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="STATIC/js/common.js"></script>
+	<script type="text/javascript" src="STATIC/js/swiper-bundle.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/swiper-bundle.min.css"/>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/style.css"/>
+</head>
+<body>
+	<?php include './header.html'; ?>
+
+	<style type="text/css">
+		.container{
+			padding-top: 80px;
+		}
+		.signin_area .induce_ {
+			margin-top: 15px;
+		}
+		.form_area .btn_area .submit{
+			background-color: #767676;
+		}
+		.signin_area .induce_ .btn{
+			color: #a9c52f;
+			border-color: #a9c52f;
+		}
+		.log_wrap h1{
+			font-size: 28px;
+			text-align: center;
+			margin-bottom: 30px;
+		}
+	</style>
+	<div id="container">
+		<section class="log_wrap">
+			<h1>로그인</h1>
+			<article class="form_area signin_area">
+				<article class="field_wrap">
+					<form id="login_form">
+						<div class="field_area">
+							<div class="field">
+								<label>아이디</label>
+								<input type="text" name="user_id" placeholder="아이디를 입력하세요">
+							</div>
+						</div>
+						<div class="field_area">
+							<div class="field">
+								<label>비밀번호</label>
+								<input type="password" name="user_password" placeholder="비밀번호를 입력하세요">
+							</div>
+						</div>
+					</form>
+				</article>
+				<article class="auto_">
+					<div class="checkbox_">
+						<input type="checkbox" name="">
+						<!-- <label>자동로그인</label> -->
+					</div>
+					<a href="./find_id.html">아이디/비밀번호 찾기</a>
+				</article>
+				<article class="btn_area">
+					<button class="submit">로그인</button>
+				</article>
+				<!-- <article class="quick_signup">
+					<ul>
+						<li>
+							<a href=""><img src="STATIC/img/sign/naver.svg">네이버 간편로그인</a>
+						</li>
+						<li>
+							<a href=""><img src="STATIC/img/sign/kakao.svg">카카오톡 간편로그인</a>
+						</li>
+					</ul>
+				</article> -->
+				<article class="induce_">
+					<!-- <h5>아직 아싸뷰 회원이 아니신가요?</h5> -->
+					<article class="btn_area">
+						<a class="btn" href="signup.html">회원가입</a>
+					</article>
+				</article>
+			</article>
+		</section>
+	</div>
+	<script type="text/javascript">
+		$(".submit").click(function (){
+			var formData = $("#login_form").serialize();
+			$.ajax({
+				type: "POST",
+	          	url: "./API/login_api.php", // 실제 서버 엔드포인트로 교체
+	          	data: formData,
+	          	success: function (response) {
+	            // 성공적으로 응답을 받았을 때의 처리;
+	            	if(response!=200){
+	            		alert(response);
+	            	}else{
+	            		location.href = './';
+	            	}
+	            	// $('#singup_form :input').val('');
+	          	},
+	          	error: function (error) {
+	            // 오류 발생 시의 처리
+	            	console.error("Error:", error);
+	          	}
+
+			});
+		})
+
+	</script>
+
+	<? include './footer.html'?>
+</body>
+</html>

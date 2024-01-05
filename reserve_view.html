@@ -1,0 +1,206 @@
+<?php 
+include './dbConnect.php';
+
+$bookingNumber = isset($_GET['bookingNumber']) ? $_GET['bookingNumber'] : '';
+
+$isBooked = false;
+$bookedType = '';
+
+
+$bookedSql = "SELECT * FROM booked_list JOIN service_list ON booked_list.booking_number ='$bookingNumber' AND booked_list.service_id = service_list.service_id";
+$bookedResult = $conn->query($bookedSql);
+
+if($bookedResult->num_rows > 0){
+	$isBooked = true;
+	$bookedType = 'date';
+	$bookedRow = $bookedResult->fetch_assoc();
+
+	
+}else{
+
+	$hourSql = "SELECT * FROM hourbooked_list JOIN service_list ON hourbooked_list.booking_number ='$bookingNumber' AND hourbooked_list.service_id = service_list.service_id";
+	$hourResult = $conn->query($hourSql);
+	if($hourResult->num_rows >0){
+		$bookedType = 'hour';
+		$isBooked = true;
+		$hourRow = $hourResult->fetch_assoc();
+	}
+
+}
+
+ ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="code" charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0,maximum-scale=10,user-scalable=yes"/>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="STATIC/js/swiper-bundle.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/swiper-bundle.min.css"/>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/style.css"/>
+</head>
+<body>
+	<?php include './header.html'; ?>
+
+	<style type="text/css">
+		.container{
+			padding-top: 80px;
+		}
+		.signin_area .induce_ {
+			margin-top: 15px;
+		}
+		.form_area .btn_area .submit{
+			background-color: #eb5d3e;
+		}
+		.signin_area .induce_ .btn{
+			color: #eb5d3e;
+			border-color: #eb5d3e;
+		}
+		.log_wrap{
+			padding: 150px 0;
+		}
+		.log_wrap h1{
+			font-size: 28px;
+			text-align: center;
+			margin-bottom: 30px;
+		}
+		.signin_area .field_area .field{
+			height: 40px;
+		}
+		input:disabled{
+			color: #eb5d3e;
+		}
+	</style>
+	<div id="container">
+		<section class="log_wrap">
+			<?php 
+			if(!$isBooked){
+			 ?>
+			<h1>일치하는 예약번호가 없습니다.</h1>
+			<?php }else{ ?>
+			<h1>예약 번호 : <?=$bookingNumber?></h1>
+			<?php } ?>
+			
+			<?php 
+
+			if($bookedType=='date'){
+			 ?>
+			<article class="form_area signin_area">
+				<article class="field_wrap">
+					<form id="login_form">
+						<div class="field_area">
+							<div class="field">
+								<label>예약 서비스</label>
+								<input type="text" name="booking_number" value="<?=$bookedRow['service_name']?>" disabled>
+							</div>
+						</div>
+						<div class="field_area">
+							<div class="field">
+								<label>예약날짜</label>
+								<input type="text" name="booking_number" value="<?=$bookedRow['start_date']." ~ ".$bookedRow['end_date']?>" disabled>
+							</div>
+						</div>
+						<div class="field_area">
+							<div class="field">
+								<label>예약인원</label>
+								<input type="text" name="booking_number" value="총 <?=$bookedRow['booked_num']?>명" disabled>
+							</div>
+						</div>
+						<div class="field_area">
+							<div class="field">
+								<label>예약금액</label>
+								<input type="text" name="booking_number" value="<?=number_format($bookedRow['booked_fee'])?>원" disabled>
+							</div>
+						</div>
+						<div class="field_area">
+							<div class="field">
+								<label>결제방식</label>
+								<?php 
+								if($bookedRow['booked_ok']==1){
+								 ?>								
+								<input type="text" name="booking_number" value="<?=$bookedRow['payment_method']?> / 예약완료" disabled>
+								<?php }else{ ?>
+								<input type="text" name="booking_number" value="<?=$bookedRow['payment_method']?> / 입금대기" disabled>
+								<?php } ?>
+							</div>
+						</div>
+						<div class="field_area">
+							<div class="field">
+								<label>예약자</label>
+								<input type="text" name="booking_number" value="<?=$bookedRow['booked_name']?>" disabled>
+							</div>
+						</div>
+						<div class="field_area">
+							<div class="field">
+								<label>예약자 연락처</label>
+								<input type="text" name="booking_number"  value="<?=$bookedRow['booked_contact']?>" disabled>
+							</div>
+						</div>
+					</form>
+				</article>
+			</article>
+			<?php }else if($bookedType=='hour'){ ?>
+			<article class="form_area signin_area">
+				<article class="field_wrap">
+					<form id="login_form">
+						<div class="field_area">
+							<div class="field">
+								<label>예약 서비스</label>
+								<input type="text" name="booking_number" value="<?=$hourRow['service_name']?>" disabled>
+							</div>
+						</div>
+						<div class="field_area">
+							<div class="field">
+								<label>예약날짜</label>
+								<input type="text" name="booking_number" value="<?=$hourRow['booked_date']." / ".$hourRow['start_time']."부터 ".$hourRow['end_time']."까지"?>" disabled>
+							</div>
+						</div>
+						<div class="field_area">
+							<div class="field">
+								<label>예약금액</label>
+								<input type="text" name="booking_number" value="<?=number_format($hourRow['booked_fee'])?>원" disabled>
+							</div>
+						</div>
+						<div class="field_area">
+							<div class="field">
+								<label>결제방식</label>
+								<?php 
+								if($hourRow['booked_ok']==1){
+								 ?>								
+								<input type="text" name="booking_number" value="<?=$hourRow['payment_method']?> / 예약완료" disabled>
+								<?php }else{ ?>
+								<input type="text" name="booking_number" value="<?=$hourRow['payment_method']?> / 입금대기" disabled>
+								<?php } ?>
+							</div>
+						</div>
+						<div class="field_area">
+							<div class="field">
+								<label>예약자</label>
+								<input type="text" name="booking_number" value="<?=$hourRow['booked_name']?>" disabled>
+							</div>
+						</div>
+						<div class="field_area">
+							<div class="field">
+								<label>예약자 연락처</label>
+								<input type="text" name="booking_number"  value="<?=$hourRow['booked_contact']?>" disabled>
+							</div>
+						</div>
+					</form>
+				</article>
+			</article>
+			<?php } ?>
+		</section>
+	</div>
+
+	<script type="text/javascript">
+
+		$(".submit").click(function (){
+			location.href='./reserve_view.html?bookingNumber='+$("input[name='booking_number']").val();
+		});
+
+	</script>
+
+	<? include './footer.html'?>
+</body>
+</html>

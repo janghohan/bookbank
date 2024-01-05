@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="code" charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0,maximum-scale=10,user-scalable=yes"/>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="STATIC/js/common.js"></script>
+	<script type="text/javascript" src="STATIC/js/swiper-bundle.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/swiper-bundle.min.css"/>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/style.css"/>
+</head>
+<body>
+	<header id="header">
+		<section class="tool_area">
+			<div class="inner">
+				<a href="index.html" class="logo">
+					<img src="STATIC/img/logo/Logo.png">
+				</a>
+				<div class="search_area">
+					<input type="" name="" placeholder="캠페인을 검색하세요.">
+					<button></button>
+				</div>
+				<div class="gnb">
+					<ul>
+						<li><a href="회원가입.html">회원가입</a></li>
+						<li><a href="로그인.html">로그인</a></li>
+						<li><a href="고객센터.html">고객센터</a></li>
+						<li><a href="광고주센터.html">광고주센터</a></li>
+					</ul>
+				</div>
+			</div>
+		</section>
+		<section class="catagory_area">
+			<div class="inner">
+				<div>
+					<div class="menu_all">전체 카테고리</div>
+				</div>
+				<div class="menu">
+					<ul>
+						<li><a href="">선착순</a></li>
+						<li><a href="">제품</a></li>
+						<li><a href="">지역</a></li>
+						<li><a href="">기자단</a></li>
+					</ul>
+				</div>
+				<section class="menu_all_area">
+					<div class="wrap">
+						<article>
+							<div class="title"><img src="STATIC/img/icon/fe/menu_cp.svg">캠페인</div>
+							<ul>
+								<li><a href="카테고리.html">전체 캠페인</a></li>
+								<li><a href="카테고리.html">제품 캠페인</a></li>
+								<li><a href="카테고리.html">지역 캠페인</a></li>
+								<li><a href="카테고리.html">선착순 캠페인</a></li>
+								<li><a href="카테고리.html">기자단</a></li>
+							</ul>
+						</article>
+						<article>
+							<div class="title"><img src="STATIC/img/icon/fe/menu_ct.svg">고객센터</div>
+							<ul>
+								<li><a href="공지사항.html">공지사항</a></li>
+								<li><a href="">이용방법</a></li>
+								<li><a href="FAQ.html">자주묻는질문</a></li>
+								<li><a href="문의하기.html">1:1문의/a></li>
+							</ul>
+						</article>
+						<article>
+							<div class="title"><img src="STATIC/img/icon/fe/menu_ad.svg">광고주센터</div>
+							<ul>
+								<li><a href="">아싸뷰 소개</a></li>
+								<li><a href="">상품 안내</a></li>
+								<li><a href="">가격 안내</a></li>
+							</ul>
+						</article>
+					</div>
+				</section>
+			</div>
+		</section>
+		<section class="mobile_area">
+			<article class="head">
+				<a class="his_back" href="javascript:window.history.back();"></a>
+				<div class="title">회원가입</div>
+				<div class="searchBtn"></div>
+			</article>
+			<article class="search_area">
+				<input type="" name="" placeholder="캠페인을 검색하세요.">
+				<div class="close"></div>
+			</article>
+			<article class="side_area">
+				<div class="wrap">
+					<div class="close"></div>
+					<section class="use_area">
+						<a href="" class="user signout"><b>로그인</b>해주세요.</a>
+					</section>
+					<section class="menu_area">
+						<article>
+							<div class="title"><img src="STATIC/img/icon/fe/menu_cp.svg">캠페인</div>
+							<div class="depth">
+								<ul>
+									<li><a href="">전체 캠페인</a></li>
+									<li><a href="">제품 캠페인</a></li>
+									<li><a href="">지역 캠페인</a></li>
+									<li><a href="">선착순 캠페인</a></li>
+									<li><a href="">기자단</a></li>
+								</ul>
+							</div>
+						</article>
+						<article>
+							<div class="title"><img src="STATIC/img/icon/fe/menu_ct.svg">고객센터</div>
+							<div class="depth">
+								<ul>
+									<li><a href="">공지사항</a></li>
+									<li><a href="">이용방법</a></li>
+									<li><a href="">자주묻는 질문</a></li>
+									<li><a href="">1:1문의</a></li>
+								</ul>
+							</div>
+						</article>
+						<article>
+							<div class="title"><img src="STATIC/img/icon/fe/menu_ad.svg">광고주센터</div>
+							<div class="depth">
+								<ul>
+									<li><a href="">아싸뷰 소개</a></li>
+									<li><a href="">상품 안내</a></li>
+									<li><a href="">가격 안내</a></li>
+								</ul>
+							</div>
+						</article>
+					</section>
+				</div>
+			</article>
+		</section>
+	</header>
+	<div id="container">
+		<section class="log_wrap">
+			<div class="title"><img src="STATIC/img/sign/JOINUS.png"></div>
+			<article class="form_area signup_area">
+				<article class="useType_">
+					<h5>회원유형선택</h5>
+					<div class="check_wrap">
+						<div class="check_">
+							<input type="radio" name="usetype" checked>
+							<label><img src="STATIC/img/icon/tool/checker.svg">리뷰어/인플루언서</label>
+						</div>
+						<div class="check_">
+							<input type="radio" name="usetype">
+							<label><img src="STATIC/img/icon/tool/checker.svg">광고주</label>
+						</div>
+					</div>
+					<div class="sng_sign">
+						<div class="tit"><span>SNS 간편가입</span></div>
+						<ul>
+							<li><a href=""><img src="STATIC/img/icon/asset/naver.svg"></a></li>
+							<li><a href=""><img src="STATIC/img/icon/asset/kakao.svg"></a></li>
+							<li><a href=""><img src="STATIC/img/icon/asset/direct.svg"></a></li>
+						</ul>
+					</div>
+				</article>
+				<article class="field_wrap">
+					<h5>회원정보 입력</h5>
+					<div class="field_area">
+						<div class="field">
+							<label>아이디</label>
+							<input type="" name="userID" placeholder="영문,숫자 조합 6자리 이상">
+						</div>
+						<div class="field_alert">사용가능한 아이디입니다.</div>
+					</div>
+					<div class="field_area">
+						<div class="field">
+							<label>비밀번호</label>
+							<input type="password" name="" placeholder="비밀번호(최소 8자 이상)">
+						</div>
+					</div>
+					<div class="field_area">
+						<div class="field">
+							<label>비밀번호 확인</label>
+							<input type="password" name="" placeholder="비밀번호 확인">
+						</div>
+					</div>
+					<div class="field_area">
+						<div class="field">
+							<label>이름</label>
+							<input type="" name="" placeholder="이름">
+						</div>
+					</div>
+					<div class="field_area">
+						<div class="field">
+							<label>닉네임</label>
+							<input type="" name="" placeholder="닉네임">
+						</div>
+					</div>
+					<div class="field_area">
+						<div class="field">
+							<label>이메일</label>
+							<input type="" name="" placeholder="이메일">
+						</div>
+					</div>
+					<div class="field_area">
+						<div class="verify_">
+							<div class="field">
+								<label>휴대전화번호</label>
+								<input type="" name="" placeholder="">
+							</div>
+							<button class="btn">인증하기</button>
+						</div>
+					</div>
+				</article>
+				<article class="field_wrap">
+					<h5>약관동의</h5>
+					<article class="term_wrap">
+						<ul>
+							<li>
+								<div class="term allCehck">
+									<div class="checkbox_">
+										<input type="checkbox" name="checkTrem">
+										<label>전체 약관에 모두 동의합니다.</label>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="term">
+									<div class="checkbox_">
+										<input type="checkbox" name="checkTrem">
+										<label>아싸뷰 서비스 이용약관(필수)</label>
+									</div>
+									<div class="drop_btn">전체보기</div>
+								</div>
+								<div class="dorp_wrap">
+									<div class="text"></div>
+								</div>
+							</li>
+							<li>
+								<div class="term">
+									<div class="checkbox_">
+										<input type="checkbox" name="checkTrem">
+										<label>개인정보 수집·이용 약관(필수)</label>
+									</div>
+									<div class="drop_btn">전체보기</div>
+								</div>
+								<div class="dorp_wrap">
+									<div class="text"></div>
+								</div>
+							</li>
+							<li>
+								<div class="term">
+									<div class="checkbox_">
+										<input type="checkbox" name="checkTrem">
+										<label>개인정보 수집·이용 약관(선택)</label>
+									</div>
+									<div class="drop_btn">전체보기</div>
+								</div>
+								<div class="dorp_wrap">
+									<div class="text">제 1 조(목적)
+
+										이 약관은 (주)코팬글로벌(이하 ‘회사’)이 운영하는 위드뮤 온라인 몰(이하 ‘판매채널’이라 합니다)를 통하여 제공하는 전자상거래 서비스(이하 ‘서비스’라 함)와 관련하여 ‘회사’와 ‘이용자’(제2조에 정합니다)의 권리와 의무, 책임사항 및 ‘이용자’의 ‘서비스’ 이용절차에 관한 사항을 규정함을 목적으로 합니다.
+
+										제 2 조(정의)
+
+										이 약관은 (주)코팬글로벌(이하 ‘회사’)이 운영하는 위드뮤 온라인 몰(이하 ‘판매채널’이라 합니다)를 통하여 제공하는 전자상거래 서비스(이하 ‘서비스’라 함)와 관련하여 ‘회사’와 ‘이용자’(제2조에 정합니다)의 권리와 의무, 책임사항 및 ‘이용자’의 ‘서비스’ 이용절차에 관한 사항을 규정함을 목적으로 합니다.
+
+										이 약관은 (주)코팬글로벌(이하 ‘회사’)이 운영하는 위드뮤 온라인 몰(이하 ‘판매채널’이라 합니다)를 통하여 제공하는 전자상거래 서비스(이하 ‘서비스’라 함)와 관련하여 ‘회사’와 ‘이용자’(제2조에 정합니다)의 권리와 의무, 책임사항 및 ‘이용자’의 ‘서비스’ 이용절차에 관한 사항을 규정함을 목적으로 합니다.
+									</div>
+								</div>
+							</li>
+						</ul>
+					</article>
+				</article>
+				<article class="btn_area">
+					<button class="submit">회원가입</button>
+				</article>
+			</article>
+		</section>
+	</div>
+	<footer id="footer" class="mobile_none">
+		<hr class="mobile_line">
+		<section class="footer_top">
+			<div class="inner">
+				<section class="gnb_">
+					<article>
+						<div class="title">
+							<a href="고객센터.html">고객센터</a>
+						</div>
+						<ul>
+							<li>상담시간 10:00 ~ 18:00</li>
+							<li>점심시간 13:00 ~ 14:00</li>
+							<li>주말, 공휴일 휴무</li>
+						</ul>
+					</article>
+					<article>
+						<div class="title">빠른문의</div>
+						<div>
+							<a href="" class="ch_link"><img src="STATIC/img/icon/asset/ch.svg">광고주 문의</a>
+							<a href="" class="ch_link"><img src="STATIC/img/icon/asset/ch.svg">리뷰어/인플루언서 문의</a>
+						</div>
+					</article>
+					<article>
+						<div class="title">COMPANY</div>
+						<ul>
+							<li><a href="">개인정보처리방침</a></li>
+							<li><a href="">이용약관</a></li>
+						</ul>
+					</article>
+				</section>
+				<section class="socials_">
+					<a href="">
+						<div class="imgBox about"></div>
+						<p>아싸뷰 소개</p>
+					</a>
+					<a href="">
+						<div class="imgBox blog"></div>
+						<p>블로그</p>
+					</a>
+					<a href="">
+						<div class="imgBox instar"></div>
+						<p>인스타그램</p>
+					</a>
+				</section>
+			</div>
+		</section>
+		<section class="company_">
+			<div class="inner">
+				<div class="info">
+					<h1>주식회사 아미고</h1>
+					<span>주소: 서울특별시 마포구 월드컵북로 41, 302</span>
+					<span>대표: 전준완</span>
+					<span>개인정보관리책임자: 심도언</span>
+					<span>사업자등록번호: 882-86-02118</span>
+					<span>통신판매업신고: 2021-서울마포-2229</span>
+					<span>대표번호: 070-4196-7100</span>
+					<span>E-mail: assaview.official@gmail.com</span>
+				</div>
+				<div class="copy_">Copyright © 2022 assaview Inc. All rights reserved.</div>
+			</div>
+		</section>
+	</footer>
+	<section id="mobile_bottom" class="mobile_none">
+		<ul class="menu">
+			<li class="active">
+				<a href="index.html">
+					<i class="icon home"></i>
+					<p>홈</p>
+				</a>
+			</li>
+			<li>
+				<a href="캠페인.html">
+					<i class="icon campaign"></i>
+					<p>캠페인</p>
+				</a>
+			</li>
+			<li>
+				<a href="광고주센터.html">
+					<i class="icon advert"></i>
+					<p>광고주센터</p>
+				</a>
+			</li>
+			<li>
+				<a href="고객센터.html">
+					<i class="icon customer"></i>
+					<p>고객센터</p>
+				</a>
+			</li>
+			<li>
+				<a href="마이페이지.html">
+					<i class="icon mypage"></i>
+					<p>마이페이지</p>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<script type="text/javascript">
+		
+		$('.drop_btn').click( function(){
+			var $this = $(this);
+			var $parent = $this.parents('li');
+			$this.toggleClass('active');
+			if($this.hasClass('active')){
+				$parent.find('.dorp_wrap').slideDown(300);
+			} else {
+				$parent.find('.dorp_wrap').slideUp(300);
+			}
+		})
+
+
+		$('.allCehck input').change( function(){
+			var check = $(this).is(':checked');
+			if(check){
+				$('input[name="checkTrem"]').prop("checked", true);
+			}
+		});
+
+		$('input[name="checkTrem"]').change( function(){
+			var check = $(this).is(':checked');
+			if(!check){
+				$('.allCehck input').prop("checked", false);
+			}
+		});
+	</script>
+</body>
+</html>

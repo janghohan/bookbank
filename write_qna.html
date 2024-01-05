@@ -1,0 +1,146 @@
+<?php 
+include './dbConnect.php';
+if(!isset($_COOKIE['login_id'])){
+	echo "<script> alert('로그인이 필요한 페이지입니다.'); </script>";
+	echo "<script> location.href = './qna.html';</script>";
+}
+ ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="code" charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0,maximum-scale=10,user-scalable=yes"/>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="STATIC/js/common.js"></script>
+	<script type="text/javascript" src="STATIC/js/uploader.js"></script>
+	<script type="text/javascript" src="STATIC/js/swiper-bundle.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/swiper-bundle.min.css"/>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/style.css"/>
+</head>
+<body>
+	<?php include './header.html'; ?>
+	<style type="text/css">
+		input[name='qna_pwd']{
+			max-width: 256px;
+		}
+		.checkbox{
+			min-height: 20px !important;
+    		flex-grow: 0.05 !important;
+		}
+		.mofidy_area .field_area .field > input:disabled{
+			background-color: #eee
+		}
+	</style>
+	<div id="container">
+		<section class="aside_section">
+			<div class="inner">
+				<aside class="side_menu">
+					<div class="sticky">
+						<article class="menu">
+							<ul>
+								<li><a href="">공지사항</a></li>
+								<li class="active"><a href="qna.html">문의사항</a></li>
+							</ul>
+						</article>
+					</div>
+				</aside>
+				<article class="content">
+					<section class="favorite_area">
+						<h1 class="ct_title">1:1 문의하기</h1>
+						<section class="Inquire_area">
+							<article class="mofidy_area">
+								<div class="field_area">
+									<form id="qna_form">
+										<div class="field">
+											<label>문의유형</label>
+											<div class="select__wrap">
+									   			<div class="selectBox__ bank_">
+											        <div class="box__">
+											            <select class="select__" name="qna_cate">
+										                	<?php 
+										                	$qnacateSql = "SELECT * FROM qna_category";
+										                	$qnacateResult = $conn->query($qnacateSql);
+										                	while($qnacateRow = $qnacateResult->fetch_assoc()){
+										                	 ?>
+										                	 <option value="<?=$qnacateRow['cate_name']?>"><?=$qnacateRow['cate_name']?></option>
+										                	<?php } ?>
+										                </select>
+											        </div>
+											    </div>
+											</div>
+										</div>
+										<div class="field">
+											<label>비밀번호</label>
+											<input type="password" name="qna_pwd" disabled="true">
+											<input type="checkbox" name="" class="checkbox">
+											<label> 잠금 설정</label>
+										</div>
+										<div class="field">
+											<label>제목</label>
+											<input type="text" name="qna_title" placeholder="제목을 입력해주세요">
+										</div>
+										<div class="field editor_">
+											<label>내용</label>
+											<textarea name="qna_content"></textarea>	
+										</div>
+										<!-- <div class="field top_">
+											<label>첨부자료</label>
+											<div class="item">
+												<div class="uploader">
+													<div class="inp_">
+														<input type="file" name="" multiple id="upload">
+													</div>
+													<label for="upload" class="uploadBtn">찾기</label>
+												</div>
+												<div class="files"></div>
+											</div>
+										</div> -->
+									</form>
+								</div>
+								<div class="btn_area">
+									<button class="submitBtn">문의하기</button>
+									<!-- <a href="qna.html" class="btn">리스트 보기</a> -->
+								</div>
+							</article>
+						</section>
+					</section>
+				</article>
+			</div>
+		</section>
+	</div>
+	<?php include './footer.html'; ?>
+	<script type="text/javascript">
+		
+		$(".submitBtn").click(function(){
+			var formData = $("#qna_form").serialize();
+			$.ajax({
+				type: "POST",
+				url: "./API/qna_write_api.php",
+				data : formData,
+				cache: false,
+				success: function(response){
+				    alert(response);
+				    location.reload();
+				},
+				
+				error: function(xhr, status,error) {
+					console.log(error);
+				}
+			});
+		});
+
+		$(document).ready(function() {
+            // checkbox의 변경 이벤트 감지
+            $('.checkbox').change(function() {
+                // checkbox 상태 확인
+                if ($(this).is(':checked')) {
+                	$("input[name='qna_pwd']").prop("disabled",false);
+                } else {
+                    $("input[name='qna_pwd']").prop("disabled",true);
+                }
+            });
+        });
+	</script>
+</body>
+</html>

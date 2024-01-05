@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="code" charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0,maximum-scale=10,user-scalable=yes"/>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="STATIC/js/common.js"></script>
+	<script type="text/javascript" src="STATIC/js/swiper-bundle.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/swiper-bundle.min.css"/>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/style.css"/>
+</head>
+<body>
+	<?php include './header.html'; ?>
+	<style type="text/css">
+		.log_wrap{
+			padding-top: 125px;
+		}
+		.log_wrap h1{
+			font-size: 22px;
+			text-align: center;
+			margin-bottom: 30px;
+		}
+		input[type="number"]::-webkit-outer-spin-button,
+		input[type="number"]::-webkit-inner-spin-button {
+		    -webkit-appearance: none;
+		    margin: 0;
+		}
+		.field_alert{
+			/*display: none;*/
+		}
+		.blue{
+			color: #0000ff;
+		}
+		.tap-box{
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		.tap-box span{
+			display: inline;
+			width: 289px;
+			text-align: center;
+			height: 50px;
+			line-height: 50px;
+			border-top: 1px solid #e7e7e7;
+			cursor: pointer;
+		}
+		.tap-box span:first-child{
+			border-left: 1px solid #e7e7e7;
+		}
+		.tap-box span.active{
+			background-color: #778899;
+			color: #fff;
+		}
+		.tap-box span:last-child{
+			border-right: 1px solid #e7e7e7;
+		}
+
+	</style>
+	<div id="container">
+		<section class="log_wrap">
+			<h1>비밀번호 재설정</h1>
+			<article class="form_area signup_area">
+				<article >
+					<form id="find_form">
+						<div class="field_area id_class">
+							<div class="field">
+								<label>비밀번호</label>
+								<input type="password" name="password1" >
+							</div>
+						</div>
+						<div class="field_area">
+							<div class="field">
+								<label>비밀번호 재확인</label>
+								<input type="password" name="password2" >
+							</div>
+						</div>
+					</form>
+				</article>
+			
+				<article class="btn_area">
+					<button class="submit">확인</button>
+				</article>
+			</article>
+		</section>
+	</div>
+	<?php include './footer.html'; ?>
+
+	<script type="text/javascript">
+		//각각의 동의 체크박스
+
+		$(".submit").click(function (){
+			var password = $("input[name='password1']").val();
+		    var confirmPassword = $("input[name='password2']").val();
+
+		    if (password != confirmPassword) {
+	        	alert('비밀번호가 일치하지 않습니다.');
+	        	return false;
+	        }
+
+	        var formData = $("#find_form").serialize();
+
+	        $.ajax({
+	          	type: "POST",
+	          	url: "./API/reset_pwd_api.php", // 실제 서버 엔드포인트로 교체
+	          	data: formData,
+	          	success: function (response) {
+	            // 성공적으로 응답을 받았을 때의 처리;
+	            	console.log(response);
+	            	if(response==200){
+	            		alert('비밀번호가 변경되었습니다.');
+	            	}else{
+	            		alert('문제가 발생하였습니다. 관리자에게 문의해주세요.');
+	            	}
+	          	},
+	          	error: function (error) {
+	            // 오류 발생 시의 처리
+	            	console.error("Error:", error);
+	          	}
+	        });
+		})
+
+	</script>
+</body>
+</html>

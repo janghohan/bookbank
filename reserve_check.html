@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="code" charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0,maximum-scale=10,user-scalable=yes"/>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="STATIC/js/swiper-bundle.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/swiper-bundle.min.css"/>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/style.css"/>
+</head>
+<body>
+	<?php include './header.html'; ?>
+
+	<style type="text/css">
+		.container{
+			padding-top: 80px;
+		}
+		.signin_area .induce_ {
+			margin-top: 15px;
+		}
+		.form_area .btn_area .submit{
+			background-color: #eb5d3e;
+		}
+		.signin_area .induce_ .btn{
+			color: #eb5d3e;
+			border-color: #eb5d3e;
+		}
+		.log_wrap h1{
+			font-size: 28px;
+			text-align: center;
+			margin-bottom: 30px;
+		}
+	</style>
+	<div id="container">
+		<section class="log_wrap">
+			<h1>예약 조회</h1>
+			<article class="form_area signin_area">
+				<article class="field_wrap">
+					<form id="login_form">
+						<div class="field_area">
+							<div class="field">
+								<label>예약번호</label>
+								<input type="text" name="booking_number" placeholder="예약번호를 입력하세요.">
+							</div>
+						</div>
+					</form>
+				</article>
+				<article class="auto_">
+					<div class="checkbox_">
+						<input type="checkbox" name="">
+						<!-- <label>자동로그인</label> -->
+					</div>
+				</article>
+				<article class="btn_area">
+					<button class="submit">예약조회</button>
+				</article>
+				
+			</article>
+		</section>
+	</div>
+
+	<script type="text/javascript">
+
+		$(".submit").click(function (){
+			location.href='./reserve_view.html?bookingNumber='+$("input[name='booking_number']").val();
+		});
+
+	</script>
+
+	<? include './footer.html'?>
+</body>
+</html>

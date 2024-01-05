@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="code" charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0,maximum-scale=10,user-scalable=yes"/>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="STATIC/js/common.js"></script>
+	<script type="text/javascript" src="STATIC/js/modal.js"></script>
+	<script type="text/javascript" src="STATIC/js/uploader.js"></script>
+	<script type="text/javascript" src="STATIC/js/swiper-bundle.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/swiper-bundle.min.css"/>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/style.css"/>
+</head>
+<body>
+	<header id="header">
+		<section class="tool_area">
+			<div class="inner">
+				<a href="index.html" class="logo">
+					<img src="STATIC/img/logo/Logo.png">
+				</a>
+				<div class="search_area">
+					<input type="" name="" placeholder="캠페인을 검색하세요.">
+					<button></button>
+				</div>
+				<div class="gnb">
+					<ul>
+						<li><a href="회원가입.html">회원가입</a></li>
+						<li><a href="로그인.html">로그인</a></li>
+						<li><a href="고객센터.html">고객센터</a></li>
+						<li><a href="광고주센터.html">광고주센터</a></li>
+					</ul>
+				</div>
+			</div>
+		</section>
+		<section class="catagory_area">
+			<div class="inner">
+				<div>
+					<div class="menu_all">전체 카테고리</div>
+				</div>
+				<div class="menu">
+					<ul>
+						<li><a href="">선착순</a></li>
+						<li><a href="">제품</a></li>
+						<li><a href="">지역</a></li>
+						<li><a href="">기자단</a></li>
+					</ul>
+				</div>
+				<section class="menu_all_area">
+					<div class="wrap">
+						<article>
+							<div class="title"><img src="STATIC/img/icon/fe/menu_cp.svg">캠페인</div>
+							<ul>
+								<li><a href="캠페인.html">전체 캠페인</a></li>
+								<li><a href="">제품 캠페인</a></li>
+								<li><a href="">지역 캠페인</a></li>
+								<li><a href="">선착순 캠페인</a></li>
+								<li><a href="">기자단</a></li>
+							</ul>
+						</article>
+						<article>
+							<div class="title"><img src="STATIC/img/icon/fe/menu_ct.svg">고객센터</div>
+							<ul>
+								<li><a href="">전체 캠페인</a></li>
+								<li><a href="">제품 캠페인</a></li>
+								<li><a href="">지역 캠페인</a></li>
+								<li><a href="">선착순 캠페인</a></li>
+								<li><a href="">기자단</a></li>
+							</ul>
+						</article>
+						<article>
+							<div class="title"><img src="STATIC/img/icon/fe/menu_ad.svg">광고주센터</div>
+							<ul>
+								<li><a href="">전체 캠페인</a></li>
+								<li><a href="">제품 캠페인</a></li>
+								<li><a href="">지역 캠페인</a></li>
+								<li><a href="">선착순 캠페인</a></li>
+								<li><a href="">기자단</a></li>
+							</ul>
+						</article>
+					</div>
+				</section>
+			</div>
+		</section>
+		<section class="mobile_area">
+			<article class="head">
+				<a class="his_back" href="javascript:window.history.back();"></a>
+				<div class="title">나의 캠페인</div>
+				<div class="searchBtn"></div>
+			</article>
+			<article class="search_area">
+				<input type="" name="" placeholder="캠페인을 검색하세요.">
+				<div class="close"></div>
+			</article>
+			<article class="side_area">
+				<div class="wrap">
+					<div class="close"></div>
+					<section class="use_area">
+						<a href="" class="user signout"><b>로그인</b>해주세요.</a>
+					</section>
+					<section class="menu_area">
+						<article>
+							<div class="title"><img src="STATIC/img/icon/fe/menu_cp.svg">캠페인</div>
+							<div class="depth">
+								<ul>
+									<li><a href="">전체 캠페인</a></li>
+									<li><a href="">제품 캠페인</a></li>
+									<li><a href="">지역 캠페인</a></li>
+									<li><a href="">선착순 캠페인</a></li>
+									<li><a href="">기자단</a></li>
+								</ul>
+							</div>
+						</article>
+						<article>
+							<div class="title"><img src="STATIC/img/icon/fe/menu_ct.svg">고객센터</div>
+							<div class="depth">
+								<ul>
+									<li><a href="">공지사항</a></li>
+									<li><a href="">이용방법</a></li>
+									<li><a href="">자주묻는 질문</a></li>
+									<li><a href="">1:1문의</a></li>
+								</ul>
+							</div>
+						</article>
+						<article>
+							<div class="title"><img src="STATIC/img/icon/fe/menu_ad.svg">광고주센터</div>
+							<div class="depth">
+								<ul>
+									<li><a href="">아싸뷰 소개</a></li>
+									<li><a href="">상품 안내</a></li>
+									<li><a href="">가격 안내</a></li>
+								</ul>
+							</div>
+						</article>
+					</section>
+				</div>
+			</article>
+		</section>
+	</header>
+	<div id="container">
+		<section class="aside_section">
+			<div class="inner">
+				<aside class="side_menu">
+					<div class="sticky">
+						<article class="profile_area">
+							<div class="profile_img"></div>
+							<div class="profile_info">
+								<div class="name">홍길동</div>
+							</div>
+							<div class="email">studio_monde@naver.com</div>
+							<div class="tier">
+								<div>회원등급</div>
+								<div><img src="STATIC/img/icon/asset/v0.svg"></div>
+							</div>
+						</article>
+						<article class="menu">
+							<ul>
+								<li><a href="프로필편집.html">프로필 편집</a></li>
+								<li><a href="포인트.html">아싸뷰 포인트</a></li>
+								<li><a href="알림함.html">알림함</a></li>
+								<li class="active"><a href="나의캠페인.html">나의캠페인</a></li>
+								<li><a href="찜리스트.html">찜리스트</a></li>
+								<li><a href="포트폴리오.html">포트폴리오</a></li>
+								<li><a href="계정.html">계정 설정</a></li>
+							</ul>
+						</article>
+					</div>
+				</aside>
+				<article class="content">
+					<h1 class="ct_title">나의 캠페인</h1>
+					<article class="cmpState_">
+						<ul>
+							<li>
+								<p>선정 대기</p>
+								<b class="active">1</b>
+							</li>
+							<li><img src="STATIC/img/icon/tool/arrow_right_e.svg"></li>
+							<li>
+								<p>미션 진행 중</p>
+								<b>0</b>
+							</li>
+							<li><img src="STATIC/img/icon/tool/arrow_right_e.svg"></li>
+							<li>
+								<p>수정 요청</p>
+								<b>0</b>
+							</li>
+							<li><img src="STATIC/img/icon/tool/arrow_right_e.svg"></li>
+							<li>
+								<p>미션 완료</p>
+								<b>0</b>
+							</li>
+						</ul>
+					</article>
+					<section class="list_area col-03">
+						<ul>
+							<li>
+								<div>
+									<div class="timer">13:05:05</div>
+									<div class="imgBox">
+										<img src="STATIC/img/campaign/신발깔창.png">
+									</div>
+									<div class="details">
+										<div class="tag_area">
+											<img src="STATIC/img/icon/asset/tag_blog.svg">
+											<img src="STATIC/img/icon/asset/tag_instar.svg">
+											<img src="STATIC/img/icon/asset/tag_cafe.svg">
+											<img src="STATIC/img/icon/asset/tag_store.svg">
+											<img src="STATIC/img/icon/asset/tag_ytb.svg">
+											<span>제품</span>
+										</div>
+										<div class="subject">프리미엄 기능성 편안한 신발 아치 깔창 2차</div>
+										<div class="point_tag">
+											<span class="point">공통 3,000P</span>
+											<span class="point bonus">보너스 50,000P</span>
+										</div>
+									</div>
+									<a href="" class="btn compelte"><img src="STATIC/img/icon/tool/mission_check.svg">미션 제출 완료</a>
+								</div>
+							</li>
+							<li>
+								<div>
+									<div class="timer">13:05:05</div>
+									<div class="imgBox">
+										<img src="STATIC/img/campaign/신발깔창.png">
+									</div>
+									<div class="details">
+										<div class="tag_area">
+											<img src="STATIC/img/icon/asset/tag_blog.svg">
+											<img src="STATIC/img/icon/asset/tag_instar.svg">
+											<img src="STATIC/img/icon/asset/tag_cafe.svg">
+											<img src="STATIC/img/icon/asset/tag_store.svg">
+											<img src="STATIC/img/icon/asset/tag_ytb.svg">
+											<span>제품</span>
+										</div>
+										<div class="subject">뜨는 옆머리 간단한 다운펌 제품</div>
+										<div class="point_tag">
+											<span class="point">공통 3,000P</span>
+											<span class="point bonus">보너스 50,000P</span>
+										</div>
+									</div>
+									<a href="javascript:mission()" class="btn">미션 제출하기</a>
+								</div>
+							</li>
+							<li>
+								<div>
+									<div class="timer">D-4</div>
+									<div class="imgBox">
+										<img src="STATIC/img/campaign/신발깔창.png">
+									</div>
+									<div class="details">
+										<div class="tag_area">
+											<img src="STATIC/img/icon/asset/tag_blog.svg">
+											<img src="STATIC/img/icon/asset/tag_instar.svg">
+											<img src="STATIC/img/icon/asset/tag_cafe.svg">
+											<img src="STATIC/img/icon/asset/tag_store.svg">
+											<img src="STATIC/img/icon/asset/tag_ytb.svg">
+											<span>제품</span>
+										</div>
+										<div class="subject">뜨는 옆머리 간단한 다운펌 제품</div>
+										<div class="point_tag">
+											<span class="point">공통 3,000P</span>
+											<span class="point bonus">보너스 50,000P</span>
+										</div>
+									</div>
+									<a href="javascript:mission()" class="btn">미션 제출하기</a>
+								</div>
+							</li>
+							<li>
+								<div>
+									<div class="timer">D-4</div>
+									<div class="imgBox">
+										<img src="STATIC/img/campaign/신발깔창.png">
+									</div>
+									<div class="details">
+										<div class="tag_area">
+											<img src="STATIC/img/icon/asset/tag_blog.svg">
+											<img src="STATIC/img/icon/asset/tag_instar.svg">
+											<img src="STATIC/img/icon/asset/tag_cafe.svg">
+											<img src="STATIC/img/icon/asset/tag_store.svg">
+											<img src="STATIC/img/icon/asset/tag_ytb.svg">
+											<span>제품</span>
+										</div>
+										<div class="subject">뜨는 옆머리 간단한 다운펌 제품</div>
+										<div class="point_tag">
+											<span class="point">공통 3,000P</span>
+											<span class="point bonus">보너스 50,000P</span>
+										</div>
+									</div>
+									<a href="javascript:mission()" class="btn">미션 제출하기</a>
+								</div>
+							</li>
+							<li>
+								<div>
+									<div class="timer">D-4</div>
+									<div class="imgBox">
+										<img src="STATIC/img/campaign/신발깔창.png">
+									</div>
+									<div class="details">
+										<div class="tag_area">
+											<img src="STATIC/img/icon/asset/tag_blog.svg">
+											<img src="STATIC/img/icon/asset/tag_instar.svg">
+											<img src="STATIC/img/icon/asset/tag_cafe.svg">
+											<img src="STATIC/img/icon/asset/tag_store.svg">
+											<img src="STATIC/img/icon/asset/tag_ytb.svg">
+											<span>제품</span>
+										</div>
+										<div class="subject">뜨는 옆머리 간단한 다운펌 제품</div>
+										<div class="point_tag">
+											<span class="point">공통 3,000P</span>
+											<span class="point bonus">보너스 50,000P</span>
+										</div>
+									</div>
+									<a href="javascript:mission()" class="btn">미션 제출하기</a>
+								</div>
+							</li>
+							<li>
+								<div>
+									<div class="timer">D-4</div>
+									<div class="imgBox">
+										<img src="STATIC/img/campaign/신발깔창.png">
+									</div>
+									<div class="details">
+										<div class="tag_area">
+											<img src="STATIC/img/icon/asset/tag_blog.svg">
+											<img src="STATIC/img/icon/asset/tag_instar.svg">
+											<img src="STATIC/img/icon/asset/tag_cafe.svg">
+											<img src="STATIC/img/icon/asset/tag_store.svg">
+											<img src="STATIC/img/icon/asset/tag_ytb.svg">
+											<span>제품</span>
+										</div>
+										<div class="subject">뜨는 옆머리 간단한 다운펌 제품</div>
+										<div class="point_tag">
+											<span class="point">공통 3,000P</span>
+											<span class="point bonus">보너스 50,000P</span>
+										</div>
+									</div>
+									<a href="javascript:mission()" class="btn">미션 제출하기</a>
+								</div>
+							</li>
+
+						</ul>
+					</section>
+				</article>
+			</div>
+		</section>
+	</div>
+	<footer id="footer" class="mobile_none">
+		<hr class="mobile_line">
+		<section class="footer_top">
+			<div class="inner">
+				<section class="gnb_">
+					<article>
+						<div class="title">
+							<a href="고객센터.html">고객센터</a>
+						</div>
+						<ul>
+							<li>상담시간 10:00 ~ 18:00</li>
+							<li>점심시간 13:00 ~ 14:00</li>
+							<li>주말, 공휴일 휴무</li>
+						</ul>
+					</article>
+					<article>
+						<div class="title">빠른문의</div>
+						<div>
+							<a href="" class="ch_link"><img src="STATIC/img/icon/asset/ch.svg">광고주 문의</a>
+							<a href="" class="ch_link"><img src="STATIC/img/icon/asset/ch.svg">리뷰어/인플루언서 문의</a>
+						</div>
+					</article>
+					<article>
+						<div class="title">COMPANY</div>
+						<ul>
+							<li><a href="">개인정보처리방침</a></li>
+							<li><a href="">이용약관</a></li>
+						</ul>
+					</article>
+				</section>
+				<section class="socials_">
+					<a href="">
+						<div class="imgBox about"></div>
+						<p>아싸뷰 소개</p>
+					</a>
+					<a href="">
+						<div class="imgBox blog"></div>
+						<p>블로그</p>
+					</a>
+					<a href="">
+						<div class="imgBox instar"></div>
+						<p>인스타그램</p>
+					</a>
+				</section>
+			</div>
+		</section>
+		<section class="company_">
+			<div class="inner">
+				<div class="info">
+					<h1>주식회사 아미고</h1>
+					<span>주소: 서울특별시 마포구 월드컵북로 41, 302</span>
+					<span>대표: 전준완</span>
+					<span>개인정보관리책임자: 심도언</span>
+					<span>사업자등록번호: 882-86-02118</span>
+					<span>통신판매업신고: 2021-서울마포-2229</span>
+					<span>대표번호: 070-4196-7100</span>
+					<span>E-mail: assaview.official@gmail.com</span>
+				</div>
+				<div class="copy_">Copyright © 2022 assaview Inc. All rights reserved.</div>
+			</div>
+		</section>
+	</footer>
+	<section class="modal-dialog">
+		<div class="dim"></div>
+        <div class="modal-content" id="missionModal">
+           <article class="modal-layer">
+           		<div class="closer"></div>
+           		<div class="head"><h1>미션 제출하기</h1></div>
+           		<div class="content">
+           			<article class="missionBlock">
+           				<div class="imgBox"><img src="STATIC/img/campaign/신발깔창.png"></div>
+           				<div class="details">
+           					<div class="tag_area">
+								<img src="STATIC/img/icon/asset/tag_blog.svg">
+								<img src="STATIC/img/icon/asset/tag_instar.svg">
+								<span>선착순</span>
+							</div>
+							<div class="company_">큐어풋</div>
+							<div class="subject">뜨는 옆머리 간단한 다운펌 제품</div>
+							<div class="option">선택옵션 : 반팔 M-화이트</div>
+							<div class="point_tag">
+								<span class="point">공통 3,000P</span>
+								<span class="point bonus">보너스 50,000P</span>
+							</div>
+							<a href="" class="btn">구매 바로가기</a>
+           				</div>
+           			</article>
+           			<article class="BuyMission">
+           				<div class="title">
+           					<h1>구매미션</h1>
+           					<div>
+           						<div class="state"><img src="STATIC/img/icon/tool/mission_check.svg"> 미션완료</div>
+           					</div>
+           				</div>
+           				<div class="mission_guide">
+           					<div class="head">미션가이드</div>
+           					<div class="body">
+           						<ul>
+           							<li>가이드 내용이 들어옵니다.</li>
+           							<li>가이드 내용이 들어옵니다.</li>
+           							<li>가이드 내용이 들어옵니다.</li>
+           							<li>가이드 내용이 들어옵니다.</li>
+           						</ul>
+           					</div>
+           				</div>
+           				<div class="mission_detial">
+           					<div class="uploader_area">
+           						<div class="uploadList upload1"></div>
+           						<div class="uploader">
+	           						<input type="file" name="" id="upload1" multiple maxlength="2">
+	           						<label for="upload1"></label>
+	           					</div>
+	   						</div>
+
+           					<div class="field">
+           						<dl>
+           							<dd>구매자명의</dd>
+           							<dd>
+           								<input type="" name="">
+           							</dd>
+           						</dl>
+           						<dl>
+           							<dd>수취인명의</dd>
+           							<dd>
+           								<input type="" name="">
+           							</dd>
+           						</dl>
+           						<dl>
+           							<dd>주문번호</dd>
+           							<dd>
+           								<input type="" name="">
+           							</dd>
+           						</dl>
+           						<dl>
+           							<dd>최종결제금액</dd>
+           							<dd>
+           								<input type="" name="">
+           								<label>원</label>
+           							</dd>
+           						</dl>
+           					</div>
+           				</div>
+           			</article>
+       				<article class="mission_item">
+       					<div class="title">
+       						<h1><img src="STATIC/img/icon/asset/tag_store.svg">쇼핑몰 미션</h1>
+       						<div class="timer"><img src="STATIC/img/icon/tool/clock_r.svg"><span>13:05:05</span></div>
+       					</div>
+   						<select>
+   							<option selected>미션가이드</option>
+   							<option>옵션2</option>
+   						</select>
+   						<div class="uploader_area">
+   							<div class="uploadList upload2">
+   							</div>
+							<div class="uploader">
+	       						<input type="file" name="" id="upload2" multiple maxlength="1">
+	       						<label for="upload2"></label>
+	       					</div>
+   						</div>
+       				</article>
+       				<article class="mission_item">
+       					<div class="title">
+       						<h1><img src="STATIC/img/icon/asset/tag_blog.svg">네이버 블로그 미션</h1>
+       						<div class="dday"><img src="STATIC/img/icon/tool/clock_b.svg"><span>D-4</span></div>
+       					</div>
+   						<select>
+   							<option selected>미션가이드</option>
+   							<option>옵션2</option>
+   						</select>
+   						<input type="" name="" placeholder="전체 링크 주소를 입력하세요">
+       				</article>
+       				<article class="mission_item">
+       					<div class="title">
+       						<h1><img src="STATIC/img/icon/asset/tag_instar.svg">인스타그램 미션</h1>
+       						<div class="dday"><img src="STATIC/img/icon/tool/clock_b.svg"><span>D-4</span></div>
+       					</div>
+   						<select>
+   							<option selected>미션가이드</option>
+   							<option>옵션2</option>
+   						</select>
+   						<input type="" name="" placeholder="전체 링크 주소를 입력하세요">
+       				</article>
+           			<article class="btn_area">
+           				<button class="submitBtn submit">미션 제출</button>
+           			</article>
+           		</div>
+           </article>
+        </div>
+    </section>
+    <script type="text/javascript">
+    	function mission(){
+    		ModalConfirm('#missionModal', function(){
+
+    		});
+    	}
+
+    	$( function(){
+    		var select = new CustomSelectBox('.bank_');
+    		var select2 = new CustomSelectBox('.selectSort2');
+
+    		var uploader = new ImageMultipleUploader('#upload1');
+    		var uploader2 = new ImageMultipleUploader('#upload2');
+    	})
+
+    	// 미션 가이드 드롭
+    	$('.mission_guide .head').on('click', function(){
+    		$(this).toggleClass('active');
+    		if($(this).hasClass('active')){
+    			$(this).next().slideDown(300);
+    		} else {
+    			$(this).next().slideUp(300);
+    		}
+    	})
+    </script>
+</body>
+</html>
