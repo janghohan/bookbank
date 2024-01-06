@@ -157,7 +157,16 @@
     .pr20{padding-right: 20px !important;}
     .pr25{padding-right: 25px !important;}
     .pr30{padding-right: 30px !important;}
-    /*padding 패팅*/
+
+    .pd1{padding: 1px !important;}
+    .pd2{padding: 2px !important;}
+    .pd3{padding: 3px !important;}
+    .pd4{padding: 4px !important;}
+    .pd5{padding: 5px !important;}
+    .pd6{padding: 6px !important;}
+    .pd7{padding: 7px !important;}
+    .pd8{padding: 8px !important;}
+    /*padding 패딩*/
 
     /* button */
 
@@ -183,6 +192,11 @@
         color: #4dac27;
         background-color: #fff;
         border: 1px solid #4dac27;
+    }
+    .btn_light_gray{
+        color: #fff;
+        background: #767676;
+        border: 1px solid #767676;
     }
 
     .btn {
@@ -221,7 +235,7 @@
         align-items: center;
         width: 250px;
         height: 50px;
-        background-color: #767676;
+        background-color: #cacaca;
         border-radius: 10px;
         color: #fff;
         font-size: 16px;
@@ -275,16 +289,32 @@
     .mt70 {margin-top: 70px !important;}
     .mt50 {margin-top: 50px !important;}
     .mt30 {margin-top: 30px !important;}
+    .mt20 {margin-top: 30px !important;}
     .mt15 {margin-top: 15px !important;}
+    .mt10 {margin-top: 10px !important;}
+    .mt5 {margin-top: 5px !important;}
     .mt0 {margin-top: 0px !important;}
 
     .mb70 {margin-bottom: 70px !important;}
     .mb50 {margin-bottom: 50px !important;}
     .mb30 {margin-bottom: 30px !important;}
     .mb15 {margin-bottom: 15px !important;}
+    .mb10 {margin-bottom: 10px !important;}
+    .mb5 {margin-bottom: 5px !important;}
     .mb0 {margin-bottom: 0px !important;}
 
-    
+    /*min-height*/
+    .mh300{min-height: 300px !important;}
+    .mh350{min-height: 350px !important;}
+    .mh400{min-height: 400px !important;}
+    .mh450{min-height: 450px !important;}
+    .mh500{min-height: 500px !important;}
+    .mh550{min-height: 550px !important;}
+    .mh600{min-height: 600px !important;}
+    .mh650{min-height: 650px !important;}
+    .mh700{min-height: 700px !important;}
+    .mh750{min-height: 750px !important;}
+    /*min-height*/
 
 
     /*common*/
@@ -295,6 +325,12 @@
         font-weight: 700;
     }
 
+    /*display*/
+    .dpflex-center-center{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
 /* tool */
     /* 셀럭터 */
