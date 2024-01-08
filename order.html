@@ -591,12 +591,12 @@
 			padding-top: 20px;
 			border-top: 1px solid #eaeaea;
 		}
-		#addSearchBtn{
+		#addSearchBtn, #editAddSearchBtn{
 			height: 35px;
 			width: 100%;
 			margin-top: 5px;
 		}
-		#addSaveBtn{
+		#addSaveBtn, #addEditBtn{
 			width: 120px;
 			margin-top: 40px;
 			height: 40px;
@@ -656,7 +656,7 @@
 	  	<div class="modal-content">
 	    	<div class="modal-title">
 	    		<h3>배송지 추가</h3>
-	    		<span class="close" id="deliveryClose">&times;</span>
+	    		<span class="close modalCloseBtn" id="deliveryClose">&times;</span>
 	    	</div>
 	    	<button class="btn_line_green fwb" id="newBtn">배송지 추가</button>
 	    	<div class="list">
@@ -682,6 +682,7 @@
 				                <span class="phone_number">010-5613-5430</span>
 				            </div>
 				            <div class="address mt5">[57997] 전라남도 순천시 우석로 56 (덕월동, 낚시타운) 낚시타운</div>
+				            <input type="hidden" class="address_detail" value="낚시타운">
 				        </div>
 				        <div class="btn_wrap">
 				            <button type="button" class="btn_xs btn_line_green pd5 bdr7" data-pop-delivery-list-item="modify" data-key="1" data-dvsn-code="100"><span class="text">수정</span></button>
@@ -698,7 +699,7 @@
 				        </div>
 				        <div class="address_info_box">
 				            <div class="address_name">
-				                <span class="name fc_spot fwb">집</span>
+				                <span class="delivery_name fc_spot fwb">집</span>
 				                
 				                
 				                
@@ -708,11 +709,12 @@
 				                <span class="phone_number">010-5613-5430</span>
 				            </div>
 				            <div class="address mt5">[57997] 전라남도 순천시 덕월3길 35 (덕월동, 신보아파트) 가동 907호</div>
+				            <input type="hidden" class="address_detail" value="가동 907호">
 				        </div>
 				        <div class="btn_wrap">
-				            <button type="button" class="btn_xs btn_line_green pd5 bdr7" data-pop-delivery-list-item="modify" data-key="2" data-dvsn-code="100"><span class="text">수정</span></button>
+				            <button type="button" class="btn_xs btn_line_green pd5 bdr7" id="editBtn" data-id="2" data-dvsn-code="100"><span class="text">수정</span></button>
 				            
-				            <button type="button" class="btn_xs btn_light_gray pd5 bdr7" data-pop-delivery-list-item="delete" data-key="2"><span class="text">삭제</span></button>
+				            <button type="button" class="btn_xs btn_light_gray pd5 bdr7" id="deleteBtn" data-id="2"><span class="text">삭제</span></button>
 				            
 				        </div>
 				    </li>
@@ -737,7 +739,7 @@
 	  	<div class="modal-content mh550">
 	    	<div class="modal-title mb5">
 	    		<h3>배송지 추가</h3>
-	    		<span class="close" id="addClose">&times;</span>
+	    		<span class="close modalCloseBtn" id="addClose">&times;</span>
 	    	</div>
 	    	<div class="delivery-content">
 	    		<form id="newAddForm">
@@ -763,11 +765,12 @@
 	  	<div class="modal-content mh550">
 	    	<div class="modal-title mb5">
 	    		<h3>배송지 수정</h3>
-	    		<span class="close" id="addClose">&times;</span>
+	    		<span class="close modalCloseBtn" id="addClose">&times;</span>
 	    	</div>
 	    	<div class="delivery-content">
 	    		<form id="editAddForm">
 	    			<h3>배송지이름</h3>
+	    			<input type="hidden" name="deliver_edit_ix" value="">
 		    		<input type="text" name="delivery_edit_name" class="bdr7 mt15">
 		    		<h3 class="mt20">받는분</h3>
 		    		<input type="text" name="receiver_edit_name" class="bdr7 mt10" placeholder="이름을 입력해주세요.">
@@ -834,6 +837,7 @@
 
 		// });
 
+		// 대여하기 버튼
 		function rental(){
 			$.ajax({
 	          	type: "POST",
@@ -871,21 +875,9 @@
 			}
 		})
 
-		$("#newDeliveryBtn").click(function(){
-			document.getElementById('deliveryListModal').style.display = 'block';
-		});
-		// document.getElementById('deliveryCloseEmpty').addEventListener('click', function() {
-		//   document.getElementById('deliveryListModalEmpty').style.display = 'none';
-		// });
+		
 
-		$("#newBtn").click(function(){
-			document.getElementById('deliveryAddModal').style.display = 'block';
-		});
-
-		document.getElementById('addClose').addEventListener('click', function() {
-		  document.getElementById('deliveryAddModal').style.display = 'none';
-		});
-
+		// 주소검색
 		$("#addSearchBtn").click(function(){
 			new daum.Postcode({
 		        oncomplete: function(data) {
@@ -932,6 +924,131 @@
 	        });
 		});
 
+
+		//배송지 삭제
+		$("#deleteBtn").click(function(){
+			var deliveryIx = $(this).attr('data-id');
+			Swal.fire({
+		      	text: "배송지를 삭제하시겠습니까?",
+		      	showCancelButton: true,
+		      	confirmButtonColor: '#4dac27',
+		      	cancelButtonColor: '#767676',
+		      	confirmButtonText: '확인',
+		      	cancelButtonText: '취소',
+		    }).then((result) => {
+		      	if (result.isConfirmed) {
+		       		deleteAddress();
+		      	} else if (result.dismiss === Swal.DismissReason.cancel) {
+
+		      	}
+		    });
+		});
+		function deleteDelivery(deliveryIx){
+			$.ajax({
+	          	type: "POST",
+	          	dataType: 'json',
+	          	url: "./API/delivery_delete_api.php", // 실제 서버 엔드포인트로 교체
+	          	data: {delivery_ix : deliveryIx},
+	          	success: function (response) {
+	            // 성공적으로 응답을 받았을 때의 처리;
+	            	console.log(response);
+	            	// if(response.result_code==1){
+	            	// 	alert('인증번호가 전송되었습니다.');
+	            	// 	authNumber = response.authNumber;
+	            	// }else{
+	            	// 	alert('문제가 발생했습니다. 관리자에게 문의해주세요.');
+	            	// }
+	            	
+	            	// $('#singup_form :input').val('');
+	          	},
+	          	error: function (error) {
+	            // 오류 발생 시의 처리
+	            	console.error("Error:", error);
+	          	}
+	        });
+		}
+		//배송지 삭제
+
+
+		//배송지 편집
+		$("#editBtn").click(function(){
+			var deliveryIx = $(this).attr('data-id');
+
+			var address = $(this).closest('li').find('.address').text();
+			var address_detail = $(this).closest('li').find('.address_detail').val();
+			address = address.replace(address_detail, "");
+
+			var delivery = $(this).closest('li').find('.delivery_name').text();
+			var name = $(this).closest('li').find('.name').text().replace("/","");
+			var phone_number = $(this).closest('li').find('.phone_number').text();
+
+			$("input[name='deliver_edit_ix']").val(deliveryIx);
+			$("input[name='delivery_edit_name']").val(delivery);
+			$("input[name='receiver_edit_name']").val(name);
+			$("input[name='receiver_edit_contact']").val(phone_number);
+			$("input[name='edit_address']").val(address);
+			$("input[name='edit_address_detail']").val(address_detail);
+			document.getElementById('deliveryEditModal').style.display = 'block';
+		});
+
+		$("#addEditBtn").click(function(){
+			Swal.fire({
+		      	text: "배송지를 수정하시겠습니까?",
+		      	showCancelButton: true,
+		      	confirmButtonColor: '#4dac27',
+		      	cancelButtonColor: '#767676',
+		      	confirmButtonText: '확인',
+		      	cancelButtonText: '취소',
+		    }).then((result) => {
+		      	if (result.isConfirmed) {
+		       		deleteAddress();
+		      	} else if (result.dismiss === Swal.DismissReason.cancel) {
+
+		      	}
+		    });
+		});
+
+		function editDelivery(){
+			$.ajax({
+	          	type: "POST",
+	          	dataType: 'json',
+	          	url: "./API/delivery_delete_api.php", // 실제 서버 엔드포인트로 교체
+	          	data: {delivery_ix : deliveryIx},
+	          	success: function (response) {
+	            // 성공적으로 응답을 받았을 때의 처리;
+	            	console.log(response);
+	            	// if(response.result_code==1){
+	            	// 	alert('인증번호가 전송되었습니다.');
+	            	// 	authNumber = response.authNumber;
+	            	// }else{
+	            	// 	alert('문제가 발생했습니다. 관리자에게 문의해주세요.');
+	            	// }
+	            	
+	            	// $('#singup_form :input').val('');
+	          	},
+	          	error: function (error) {
+	            // 오류 발생 시의 처리
+	            	console.error("Error:", error);
+	          	}
+	        });
+		}
+
+
+
+		// 모달 열기
+		$("#newDeliveryBtn").click(function(){
+			document.getElementById('deliveryListModal').style.display = 'block';
+		});
+
+		$("#newBtn").click(function(){
+			document.getElementById('deliveryAddModal').style.display = 'block';
+		});
+
+
+		// 모달 닫기
+		$(".modalCloseBtn").click(function(){
+			$(this).closest('.modal').css('display','none');
+		});
 
 	</script>
 </body>

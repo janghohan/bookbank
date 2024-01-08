@@ -15,12 +15,49 @@ $receiver_address = $new_address." ".$new_address_detail;
 
 $sql = "INSERT INTO delivery(user_ix,delivery_name,receiver_name,receiver_contact,receiver_address) VALUES('$user_ix','$delivery_name','$receiver_name','$formattedPhoneNumber','$receiver_address')";
 
+
 if($conn->query($sql)){
-	echo 1;
+    $delivery_ix = $conn->delivery_ix;
+
+    $dataCode = '<li class="address_item">';
+    $dataCode .= 'div class="address_chk_box">';
+    $dataCode .= '<span class="form_rdo no_label">';
+    $dataCode .= '<input id="chkAddressList01-2" type="radio" name="pop_delivery_list_item">';
+    $dataCode .= '<label for="chkAddressList01-2">배송지 선택</label></span></div>';
+    $dataCode .= '<div class="address_info_box">';
+    $dataCode .= '<div class="address_name">';
+    $dataCode .= '<span class="delivery_name fc_spot fwb">'.$delivery_name.'</span>';
+    $dataCode .= '</div>';
+    $dataCode .= '<div class="address_person mt5">';
+    $dataCode .= '<span class="name">'.$receiver_name.' /</span>';
+    $dataCode .= 'span class="phone_number">'.$receiver_contact.'</span>';
+    $dataCode .= '</div>';
+    $dataCode .= '<div class="address mt5">'.$new_address." ".$new_address_detail.'</div>';
+    $dataCode .= '<input type="hidden" class="address_detail" value="'.$new_address_detail.'">';
+    $dataCode .= '</div>';
+    $dataCode .= '<div class="btn_wrap">';
+    $dataCode .= '<button type="button" class="btn_xs btn_line_green pd5 bdr7" id="editBtn" data-id="'.$delivery_ix.'" data-dvsn-code="100">';
+    $dataCode .= '<span class="text">수정</span></button>';
+    $dataCode .= '<button type="button" class="btn_xs btn_light_gray pd5 bdr7" id="deleteBtn" data-id="'.$delivery_ix.'"><span class="text">삭제</span></button>'
+    $dataCode .= '</div>';
+    $dataCode .= '</li>';
+
+
+	$data = json_encode(array(
+        'resultCode' => 1,
+        'data' => $dataCode
+
+    ));
 }else{
-	echo 0;
+	$data = json_encode(array(
+        'resultCode' => 0
+
+    ));
 }
 
+
+
+echo $data;
 
 
 $conn->close();
