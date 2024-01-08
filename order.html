@@ -165,40 +165,40 @@
 
 
 	/*배송정보*/
-	.ship_section{
+	.delivery_section{
 		border: 1px solid #eaeaea;
 	    border-radius: 25px;
 	    padding: 25px;
 	    width: 850px;
 	
 	}
-	.ship_row{
+	.delivery_row{
 		display: flex;
 	    justify-content: flex-start;
 	    align-items: baseline;
 	}
-	.ship_row .title{
+	.delivery_row .title{
 		width: 120px;
     	font-weight: 700;
 	}
-	.ship_row .cnt{
+	.delivery_row .cnt{
 		width: 678px;
 		margin-bottom: 30px;
 	}
-	.ship_row .cnt p{
+	.delivery_row .cnt p{
 		margin-bottom: 8px;
 	}
-	.ship_row .cnt .edit{
+	.delivery_row .cnt .edit{
 		line-height: 5px;
     	padding-right: 7px;
 	}
-	.ship_row .cnt p{
+	.delivery_row .cnt p{
 		font-weight: 700;
 	}
-	.ship_row .cnt img{
+	.delivery_row .cnt img{
 		width: 15px;
 	}
-	.ship_row .cnt button{
+	.delivery_row .cnt button{
 		width: 100%;
 		height: 40px;
 		font-weight: 700;
@@ -207,7 +207,7 @@
 		justify-content: center;
 		align-items: center;
 	}
-	.ship_row textarea{
+	.delivery_row textarea{
 		height: 60px;
 	}
 
@@ -221,8 +221,8 @@
 					<h1 class="mb30">주문/결제</h1>
 					<section class="cart_details">
 
-						<article class="ship_section">
-							<div class="ship_row">
+						<article class="delivery_section">
+							<div class="delivery_row">
 								<div class="title">
 									배송지 정보
 								</div>
@@ -232,14 +232,14 @@
 											<img src="./STATIC/img/icon/map2.png">
 										</span>
 									기본배송지를 등록해주세요</p>
-									<button class="btn_line_gray bdr7" id="newShipBtn">
+									<button class="btn_line_gray bdr7" id="newDeliveryBtn">
 										<span class="edit">
 											<img src="./STATIC/img/icon/edit.png">
 										</span>
 									배송지 입력</button>
 								</div>
 							</div>
-							<div class="ship_row">
+							<div class="delivery_row">
 								<div class="title">
 									배송메모
 								</div>
@@ -587,7 +587,7 @@
 		    transform: translateX(-50%);
 		}
 
-		.ship-content{
+		.delivery-content{
 			padding-top: 20px;
 			border-top: 1px solid #eaeaea;
 		}
@@ -607,6 +607,7 @@
 			margin-top: 24px;
 			overflow-y: auto;
 			max-height: 400px;
+			min-height: 400px;
 		}
 		.address_info_box{
 			flex: 1;
@@ -631,27 +632,31 @@
 		.form_rdo label{
 			display: none;
 		}
+		#choiceDeliveryBtn{
+			width: 150px;
+		}
+		.
 	</style>
 	<!-- 배송지없음 -->
-	<div id="shipListModalEmpty" class="modal">
+	<!-- <div id="deliveryListModalEmpty" class="modal">
 	  	<div class="modal-content">
 	    	<div class="modal-title">
 	    		<h3>배송지 추가</h3>
-	    		<span class="close" id="shipCloseEmpty">&times;</span>
+	    		<span class="close" id="deliveryCloseEmpty">&times;</span>
 	    	</div>
 	    	<button class="btn_line_green fwb" id="newBtn">배송지 추가</button>
 	    	<div class="empty">
 	    		<span>등록된 배송지가 없습니다.</span>
 	    	</div>
 	  	</div>
-	</div>
+	</div> -->
 
 	<!-- 배송지있음 -->
-	<div id="shipListModal" class="modal">
+	<div id="deliveryListModal" class="modal">
 	  	<div class="modal-content">
 	    	<div class="modal-title">
 	    		<h3>배송지 추가</h3>
-	    		<span class="close" id="shipClose">&times;</span>
+	    		<span class="close" id="deliveryClose">&times;</span>
 	    	</div>
 	    	<button class="btn_line_green fwb" id="newBtn">배송지 추가</button>
 	    	<div class="list">
@@ -713,32 +718,68 @@
 				    </li>
 				</ul>
 	    	</div>
+	    	<div class="basicDelivery-area">
+	    		<div class="address_chk_box">
+		            <span class="no_label dpflex-center-center">
+		                <input id="basicDelivery" type="radio" name="pop_delivery_list_item" data-pop-delivery-list-item="check" data-key="2">
+		                <label for="basicDelivery" class="pl5">기본 배송지 선택</label>
+		            </span>
+		        </div>
+	    	</div>
 	    	<div class="dpflex-center-center">
-	    		<button class="submitBtn" id="basicShipBtn">기본 배송지로 등록</button>
+	    		<button class="submitBtn" id="choiceDeliveryBtn">선택</button>
 	    	</div>
 	  	</div>
 	</div>
 
 	<!-- 배송지추가 화면 -->
-	<div id="shipAddModal" class="modal">
+	<div id="deliveryAddModal" class="modal">
 	  	<div class="modal-content mh550">
 	    	<div class="modal-title mb5">
 	    		<h3>배송지 추가</h3>
 	    		<span class="close" id="addClose">&times;</span>
 	    	</div>
-	    	<div class="ship-content">
-	    		<h3>배송지이름</h3>
-	    		<input type="text" name="" class="bdr7 mt15">
-	    		<h3 class="mt20">받는분</h3>
-	    		<input type="text" name="" class="bdr7 mt10" placeholder="이름을 입력해주세요.">
-	    		<input type="text" name="" class="bdr7 mt10" placeholder="휴대폰번호를 -없이 입력해주세요.">
-	    		<h3 class="mt20">주소</h3>
-	    		<input type="text" name="new_address" class="bdr7 mt15">
-	    		<input type="text" name="new_address_detail" class="bdr7 mt10" placeholder="상세주소를 입력해주세요.">
+	    	<div class="delivery-content">
+	    		<form id="newAddForm">
+	    			<h3>배송지이름</h3>
+		    		<input type="text" name="delivery_name" class="bdr7 mt15">
+		    		<h3 class="mt20">받는분</h3>
+		    		<input type="text" name="receiver_name" class="bdr7 mt10" placeholder="이름을 입력해주세요.">
+		    		<input type="text" name="receiver_contact" class="bdr7 mt10" placeholder="휴대폰번호를 -없이 입력해주세요.">
+		    		<h3 class="mt20">주소</h3>
+		    		<input type="text" name="new_address" class="bdr7 mt15">
+		    		<input type="text" name="new_address_detail" class="bdr7 mt10" placeholder="상세주소를 입력해주세요.">
+	    		</form>
 	    		<button id="addSearchBtn" class="subBtn">주소검색</button>
 	    	</div>
 	    	<div class="dpflex-center-center">
 	    		<button class="submitBtn" id="addSaveBtn">저장</button>
+	    	</div>
+	  	</div>
+	</div>
+
+	<!-- 배송지수정 화면 -->
+	<div id="deliveryEditModal" class="modal">
+	  	<div class="modal-content mh550">
+	    	<div class="modal-title mb5">
+	    		<h3>배송지 수정</h3>
+	    		<span class="close" id="addClose">&times;</span>
+	    	</div>
+	    	<div class="delivery-content">
+	    		<form id="editAddForm">
+	    			<h3>배송지이름</h3>
+		    		<input type="text" name="delivery_edit_name" class="bdr7 mt15">
+		    		<h3 class="mt20">받는분</h3>
+		    		<input type="text" name="receiver_edit_name" class="bdr7 mt10" placeholder="이름을 입력해주세요.">
+		    		<input type="text" name="receiver_edit_contact" class="bdr7 mt10" placeholder="휴대폰번호를 -없이 입력해주세요.">
+		    		<h3 class="mt20">주소</h3>
+		    		<input type="text" name="edit_address" class="bdr7 mt15">
+		    		<input type="text" name="edit_address_detail" class="bdr7 mt10" placeholder="상세주소를 입력해주세요.">
+	    		</form>
+	    		<button id="editAddSearchBtn" class="subBtn">주소검색</button>
+	    	</div>
+	    	<div class="dpflex-center-center">
+	    		<button class="submitBtn" id="addEditBtn">저장</button>
 	    	</div>
 	  	</div>
 	</div>
@@ -773,25 +814,25 @@
 			});
 		});
 		
-		$(".submitBtn").click(function(){
+		// $(".submitBtn").click(function(){
 
-			Swal.fire({
-		      	text: "도서를 대여하시겠습니까?",
-		      	showCancelButton: true,
-		      	confirmButtonColor: '#4dac27',
-		      	cancelButtonColor: '#767676',
-		      	confirmButtonText: '확인',
-		      	cancelButtonText: '취소',
-		    }).then((result) => {
-		      	if (result.isConfirmed) {
-		       		booking();
-		      	} else if (result.dismiss === Swal.DismissReason.cancel) {
-		        // Swal.fire('취소', '작업이 취소되었습니다.', 'error');
-		        // 여기에 취소 버튼을 눌렀을 때의 동작을 추가할 수 있습니다.
-		      	}
-		    });
+		// 	Swal.fire({
+		//       	text: "도서를 대여하시겠습니까?",
+		//       	showCancelButton: true,
+		//       	confirmButtonColor: '#4dac27',
+		//       	cancelButtonColor: '#767676',
+		//       	confirmButtonText: '확인',
+		//       	cancelButtonText: '취소',
+		//     }).then((result) => {
+		//       	if (result.isConfirmed) {
+		//        		booking();
+		//       	} else if (result.dismiss === Swal.DismissReason.cancel) {
+		//         // Swal.fire('취소', '작업이 취소되었습니다.', 'error');
+		//         // 여기에 취소 버튼을 눌렀을 때의 동작을 추가할 수 있습니다.
+		//       	}
+		//     });
 
-		});
+		// });
 
 		function rental(){
 			$.ajax({
@@ -830,29 +871,68 @@
 			}
 		})
 
-		$("#newShipBtn").click(function(){
-			document.getElementById('shipListModal').style.display = 'block';
+		$("#newDeliveryBtn").click(function(){
+			document.getElementById('deliveryListModal').style.display = 'block';
 		});
-		document.getElementById('shipCloseEmpty').addEventListener('click', function() {
-		  document.getElementById('shipListModalEmpty').style.display = 'none';
-		});
+		// document.getElementById('deliveryCloseEmpty').addEventListener('click', function() {
+		//   document.getElementById('deliveryListModalEmpty').style.display = 'none';
+		// });
 
 		$("#newBtn").click(function(){
-			document.getElementById('shipAddModal').style.display = 'block';
+			document.getElementById('deliveryAddModal').style.display = 'block';
 		});
 
 		document.getElementById('addClose').addEventListener('click', function() {
-		  document.getElementById('shipAddModal').style.display = 'none';
+		  document.getElementById('deliveryAddModal').style.display = 'none';
 		});
 
 		$("#addSearchBtn").click(function(){
 			new daum.Postcode({
 		        oncomplete: function(data) {
-		            $("input[name='new_address']").val(data.address);
+		        	console.log(data);
+		            $("input[name='new_address']").val("["+data.zonecode+"] "+data.address);
 		            $("input[name='new_address_detail").focus();
 		        }
 		    }).open();
 		});
+		$("#editAddSearchBtn").click(function(){
+			new daum.Postcode({
+		        oncomplete: function(data) {
+		        	console.log(data);
+		            $("input[name='edit_address']").val("["+data.zonecode+"] "+data.address);
+		            $("input[name='edit_address_detail").focus();
+		        }
+		    }).open();
+		});
+
+		$("#addSaveBtn").click(function(){
+			var dataForm = $("#newAddForm").serialize();
+
+			$.ajax({
+	          	type: "POST",
+	          	dataType: 'json',
+	          	url: "./API/delivery_create_api.php", // 실제 서버 엔드포인트로 교체
+	          	data: dataForm,
+	          	success: function (response) {
+	            // 성공적으로 응답을 받았을 때의 처리;
+	            	console.log(response);
+	            	// if(response.result_code==1){
+	            	// 	alert('인증번호가 전송되었습니다.');
+	            	// 	authNumber = response.authNumber;
+	            	// }else{
+	            	// 	alert('문제가 발생했습니다. 관리자에게 문의해주세요.');
+	            	// }
+	            	
+	            	// $('#singup_form :input').val('');
+	          	},
+	          	error: function (error) {
+	            // 오류 발생 시의 처리
+	            	console.error("Error:", error);
+	          	}
+	        });
+		});
+
+
 	</script>
 </body>
 </html>

@@ -93,18 +93,6 @@
 							</div>
 						</div>
 						<div class="field_area">
-							<div class="field">
-								<label>생년월일</label>
-								<input type="number" name="user_birth" placeholder="생년월일 (예. 20231218)">
-							</div>
-						</div>
-						<div class="field_area">
-							<div class="field">
-								<label>이메일</label>
-								<input type="text" name="user_email" placeholder="이메일">
-							</div>
-						</div>
-						<div class="field_area">
 							<div class="verify_">
 								<div class="field">
 									<label>휴대전화번호</label>
@@ -191,7 +179,7 @@
 					</article>
 				</article>
 				<article class="btn_area">
-					<button class="submit">회원가입</button>
+					<button class="submitBtn">회원가입</button>
 				</article>
 			</article>
 		</section>
@@ -258,7 +246,7 @@
 	        // 서버로 아이디 중복 여부 확인 요청
 	        $.ajax({
 	          	type: 'POST',
-	          	url: 'check_duplicate.php', // 서버 측의 파일 경로 또는 URL
+	          	url: './API/signup_check_duplicate.php', // 서버 측의 파일 경로 또는 URL
 	          	data: { userid: userid },
 	          	success: function (response) {
 	            // 서버로부터의 응답 처리
@@ -306,7 +294,7 @@
 	    });
 
 
-		$(".submit").click(function (){
+		$(".submitBtn").click(function (){
 			var formData = $("#singup_form").serialize();
 
 			var essentialCheck1 = $('input[name="checkTrem"]:lt(1)');
@@ -340,7 +328,7 @@
         // Ajax 요청
 	        $.ajax({
 	          	type: "POST",
-	          	url: "./API/signup_api.php", // 실제 서버 엔드포인트로 교체
+	          	url: "./API/signup_create_api.php", // 실제 서버 엔드포인트로 교체
 	          	data: formData,
 	          	success: function (response) {
 	            // 성공적으로 응답을 받았을 때의 처리;

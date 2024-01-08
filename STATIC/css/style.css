@@ -641,7 +641,7 @@
         font-size: 16px;
         font-weight: 500;
         margin-bottom: 25px;
-        color: #eb5d3e;
+        color: #4dac27 ;
     }
     .field_area {}
     .field_area + .field_area {
@@ -689,7 +689,7 @@
     }
     .field_area .field_alert {
         font-size: 13px;
-        color: #eb5d3e;
+        color: #4dac27 ;
         margin-top: 10px;
     }
     .field_area .verify_ {
@@ -709,7 +709,7 @@
         text-align: center;
         width: 115px;
         height: 60px;
-        color: #eb5d3e;
+        color: #4dac27 ;
         background-color: transparent;
         border-color: currentColor;
         border-radius: 5px;
@@ -718,8 +718,8 @@
         margin-left: 10px;
     }
     .field_area .verify_ .btn:focus {
-        background-color: #eb5d3e;
-        border-color: #eb5d3e;
+        background-color: #4dac27 ;
+        border-color: #4dac27 ;
         color: #fff;
         box-shadow: none;
     }
@@ -2231,10 +2231,6 @@
         font-size: 18px;
         font-weight: 700;
      }
-     .form_area .btn_area .submit {
-        background-color: #eb5d3e;
-        color: #fff;
-     }
 
 
     .signup_area {
@@ -2368,7 +2364,7 @@
         border-radius: 5px;
         background-repeat: no-repeat;
         background-position: right 14px center;
-        color: #eb5d3e;
+        color: #4dac27;
     }
     .term_wrap .term .drop_btn img{
         width: 12px;
