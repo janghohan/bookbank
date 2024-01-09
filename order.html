@@ -908,6 +908,11 @@
 	          	success: function (response) {
 	            // 성공적으로 응답을 받았을 때의 처리;
 	            	console.log(response);
+	            	if(response.resultCode==1){
+	            		$(".address_list").append(response.data);
+	            	}else{
+	            		showAlert('문제가 발생하였습니다. 고객센터에 문의해주세요.');
+	            	}
 	            	// if(response.result_code==1){
 	            	// 	alert('인증번호가 전송되었습니다.');
 	            	// 	authNumber = response.authNumber;
@@ -1001,7 +1006,7 @@
 		      	cancelButtonText: '취소',
 		    }).then((result) => {
 		      	if (result.isConfirmed) {
-		       		deleteAddress();
+		       		editDelivery();
 		      	} else if (result.dismiss === Swal.DismissReason.cancel) {
 
 		      	}
@@ -1012,8 +1017,8 @@
 			$.ajax({
 	          	type: "POST",
 	          	dataType: 'json',
-	          	url: "./API/delivery_delete_api.php", // 실제 서버 엔드포인트로 교체
-	          	data: {delivery_ix : deliveryIx},
+	          	url: "./API/delivery_update_api.php", // 실제 서버 엔드포인트로 교체
+	          	data: $("#editAddForm").serialize(),
 	          	success: function (response) {
 	            // 성공적으로 응답을 받았을 때의 처리;
 	            	console.log(response);
@@ -1033,7 +1038,13 @@
 	        });
 		}
 
-
+		function showAlert(txt) {
+    // 추가적인 옵션을 사용한 알림 창
+		    Swal.fire({
+		      title: txt,
+		      confirmButtonText: '확인',
+		    });
+		  }
 
 		// 모달 열기
 		$("#newDeliveryBtn").click(function(){

@@ -10,17 +10,17 @@ $new_address = isset($_POST['new_address']) ? $_POST['new_address'] : '';
 $new_address_detail = isset($_POST['new_address_detail']) ? $_POST['new_address_detail'] : '';
 
 $formattedPhoneNumber = formatPhoneNumber($receiver_contact);
-$receiver_address = $new_address." ".$new_address_detail;
+// $receiver_address = $new_address." ".$new_address_detail;
 
 
-$sql = "INSERT INTO delivery(user_ix,delivery_name,receiver_name,receiver_contact,receiver_address) VALUES('$user_ix','$delivery_name','$receiver_name','$formattedPhoneNumber','$receiver_address')";
+$sql = "INSERT INTO delivery(user_ix,delivery_name,receiver_name,receiver_contact,receiver_address,receiver_address2) VALUES('$user_ix','$delivery_name','$receiver_name','$formattedPhoneNumber','$new_address','$new_address_detail')";
 
 
 if($conn->query($sql)){
-    $delivery_ix = $conn->delivery_ix;
+    $delivery_ix = $conn->insert_id;
 
     $dataCode = '<li class="address_item">';
-    $dataCode .= 'div class="address_chk_box">';
+    $dataCode .= '<div class="address_chk_box">';
     $dataCode .= '<span class="form_rdo no_label">';
     $dataCode .= '<input id="chkAddressList01-2" type="radio" name="pop_delivery_list_item">';
     $dataCode .= '<label for="chkAddressList01-2">배송지 선택</label></span></div>';
@@ -30,7 +30,7 @@ if($conn->query($sql)){
     $dataCode .= '</div>';
     $dataCode .= '<div class="address_person mt5">';
     $dataCode .= '<span class="name">'.$receiver_name.' /</span>';
-    $dataCode .= 'span class="phone_number">'.$receiver_contact.'</span>';
+    $dataCode .= '<span class="phone_number">'.$formattedPhoneNumber.'</span>';
     $dataCode .= '</div>';
     $dataCode .= '<div class="address mt5">'.$new_address." ".$new_address_detail.'</div>';
     $dataCode .= '<input type="hidden" class="address_detail" value="'.$new_address_detail.'">';
@@ -38,7 +38,7 @@ if($conn->query($sql)){
     $dataCode .= '<div class="btn_wrap">';
     $dataCode .= '<button type="button" class="btn_xs btn_line_green pd5 bdr7" id="editBtn" data-id="'.$delivery_ix.'" data-dvsn-code="100">';
     $dataCode .= '<span class="text">수정</span></button>';
-    $dataCode .= '<button type="button" class="btn_xs btn_light_gray pd5 bdr7" id="deleteBtn" data-id="'.$delivery_ix.'"><span class="text">삭제</span></button>'
+    $dataCode .= '<button type="button" class="btn_xs btn_light_gray pd5 bdr7" id="deleteBtn" data-id="'.$delivery_ix.'"><span class="text">삭제</span></button>';
     $dataCode .= '</div>';
     $dataCode .= '</li>';
 
