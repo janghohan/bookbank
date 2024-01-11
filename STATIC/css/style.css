@@ -303,6 +303,24 @@
     .mb5 {margin-bottom: 5px !important;}
     .mb0 {margin-bottom: 0px !important;}
 
+    .mr70 {margin-right: 70px !important;}
+    .mr50 {margin-right: 50px !important;}
+    .mr30 {margin-right: 30px !important;}
+    .mr20 {margin-right: 30px !important;}
+    .mr15 {margin-right: 15px !important;}
+    .mr10 {margin-right: 10px !important;}
+    .mr5 {margin-right: 5px !important;}
+    .mr0 {margin-right: 0px !important;}
+
+    .ml70 {margin-left: 70px !important;}
+    .ml50 {margin-left: 50px !important;}
+    .ml30 {margin-left: 30px !important;}
+    .ml20 {margin-left: 20px !important;}
+    .ml15 {margin-left: 15px !important;}
+    .ml10 {margin-left: 10px !important;}
+    .ml5 {margin-left: 5px !important;}
+    .ml0 {margin-left: 0px !important;}
+
     /*min-height*/
     .mh300{min-height: 300px !important;}
     .mh350{min-height: 350px !important;}
@@ -321,14 +339,17 @@
     .bt-bar{
         border-bottom: 1px solid #eaeaea;
     }
-    .fw700{
-        font-weight: 700;
-    }
+
 
     /*display*/
     .dpflex-center-center{
         display: flex;
         justify-content: center;
+        align-items: center;
+    }
+    .dpflex-start-center{
+        display: flex;
+        justify-content: flex-start;
         align-items: center;
     }
 

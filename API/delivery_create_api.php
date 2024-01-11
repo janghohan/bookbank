@@ -36,9 +36,9 @@ if($conn->query($sql)){
     $dataCode .= '<input type="hidden" class="address_detail" value="'.$new_address_detail.'">';
     $dataCode .= '</div>';
     $dataCode .= '<div class="btn_wrap">';
-    $dataCode .= '<button type="button" class="btn_xs btn_line_green pd5 bdr7" id="editBtn" data-id="'.$delivery_ix.'" data-dvsn-code="100">';
+    $dataCode .= '<button type="button" class="btn_xs btn_line_green pd5 bdr7 editBtn" data-id="'.$delivery_ix.'" data-dvsn-code="100">';
     $dataCode .= '<span class="text">수정</span></button>';
-    $dataCode .= '<button type="button" class="btn_xs btn_light_gray pd5 bdr7" id="deleteBtn" data-id="'.$delivery_ix.'"><span class="text">삭제</span></button>';
+    $dataCode .= '<button type="button" class="btn_xs btn_light_gray pd5 bdr7 deleteBtn" data-id="'.$delivery_ix.'"><span class="text">삭제</span></button>';
     $dataCode .= '</div>';
     $dataCode .= '</li>';
 

@@ -1,3 +1,11 @@
+<?php 
+include './dbConnect.php';
+
+$delivery_sql = "SELECT * FROM delivery WHERE user_ix='0' ORDER BY is_basic DESC, create_time DESC";
+$delivery_result = $conn->query($delivery_sql);
+
+ ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -185,16 +193,12 @@
 		width: 678px;
 		margin-bottom: 30px;
 	}
-	.delivery_row .cnt p{
-		margin-bottom: 8px;
-	}
+
 	.delivery_row .cnt .edit{
 		line-height: 5px;
     	padding-right: 7px;
 	}
-	.delivery_row .cnt p{
-		font-weight: 700;
-	}
+
 	.delivery_row .cnt img{
 		width: 15px;
 	}
@@ -226,18 +230,43 @@
 								<div class="title">
 									배송지 정보
 								</div>
+								<?php 
+								if($delivery_result->num_rows <= 0){
+
+								 ?>
 								<div class="cnt">
-									<p class="fs13 cmain">
+									<p class="fs13 cmain fw700 mb10">
 										<span>
 											<img src="./STATIC/img/icon/map2.png">
 										</span>
 									기본배송지를 등록해주세요</p>
-									<button class="btn_line_gray bdr7" id="newDeliveryBtn">
+									<button class="btn_line_gray bdr7 newDeliveryBtn">
 										<span class="edit">
 											<img src="./STATIC/img/icon/edit.png">
 										</span>
 									배송지 입력</button>
 								</div>
+								<?php }else{ 
+
+								$basic_sql = "SELECT * FROM delivery WHERE user_ix='0' AND is_basic='1'";
+								$basic_result = $conn->query($basic_sql);
+								$basic_row = $basic_result -> fetch_assoc();
+
+								?>
+								<div class="cnt">
+									<div class="dpflex-start-center">
+										<h3 class="basic_title mr10 cmain"><?=$basic_row['delivery_name']?></h3>
+										<span class="btn_line_green bdr7 fs13 pd3 mr5">기본배송지</span>
+										<button class="subBtn newDeliveryBtn" style="width: 50px; height: 25px;">변경</button>
+									</div>
+									<div class="mt5">
+										<p class="basic_person"><?=$basic_row['receiver_name']." / ".$basic_row['receiver_contact']?></p>
+									</div>
+									<div class="mt10">
+										<p class="basic_add"><?=$basic_row['receiver_address']." ".$basic_row['receiver_address2']?></p>
+									</div>
+								</div>
+								<?php } ?>
 							</div>
 							<div class="delivery_row">
 								<div class="title">
@@ -661,69 +690,61 @@
 	    	<button class="btn_line_green fwb" id="newBtn">배송지 추가</button>
 	    	<div class="list">
 	    		<ul class="address_list" style="" data-pop-delivery-list="list">
-				    <li class="address_item">
-				        <div class="address_chk_box">
-				            <span class="form_rdo no_label">
-				                <input id="chkAddressList01-1" type="radio" name="pop_delivery_list_item" data-pop-delivery-list-item="check" data-key="1">
-				                <label for="chkAddressList01-1">배송지 선택</label>
-				            </span>
-				        </div>
-				        <div class="address_info_box">
-				            <div class="address_name">
-				                <span class="name fwb">낚시타운</span>
-				                
-				                <span class="badge_sm badge_pill badge_line_primary"><span class="btn_line_green bdr7 fs12 pd3">기본배송지</span></span>
-				                
-				                
-				                
-				            </div>
-				            <div class="address_person mt5">
-				                <span class="name">한장호 /</span>
-				                <span class="phone_number">010-5613-5430</span>
-				            </div>
-				            <div class="address mt5">[57997] 전라남도 순천시 우석로 56 (덕월동, 낚시타운) 낚시타운</div>
-				            <input type="hidden" class="address_detail" value="낚시타운">
-				        </div>
-				        <div class="btn_wrap">
-				            <button type="button" class="btn_xs btn_line_green pd5 bdr7" data-pop-delivery-list-item="modify" data-key="1" data-dvsn-code="100"><span class="text">수정</span></button>
-				            
-				        </div>
-				    </li>
+
+	    			<?php 
+	    			
+	    			while($delivery_row = $delivery_result->fetch_assoc()){
+	    			 ?>
+	    			
 
 				    <li class="address_item">
 				        <div class="address_chk_box">
 				            <span class="form_rdo no_label">
-				                <input id="chkAddressList01-2" type="radio" name="pop_delivery_list_item" data-pop-delivery-list-item="check" data-key="2">
+				                <?php 
+				                if($delivery_row['is_basic']==1){
+				                 ?>
+				                <input id="chkAddressList01-2" type="radio" name="pop_delivery_list_item" checked="true">
+				                <?php }else{ ?>
+				                <input id="chkAddressList01-2" type="radio" name="pop_delivery_list_item">
+				                <?php } ?>
 				                <label for="chkAddressList01-2">배송지 선택</label>
 				            </span>
 				        </div>
 				        <div class="address_info_box">
 				            <div class="address_name">
-				                <span class="delivery_name fc_spot fwb">집</span>
+				                <span class="delivery_name fc_spot fwb"><?=$delivery_row['delivery_name']?></span>
+				                <?php 
+				                if($delivery_row['is_basic']==1){
+				                 ?>
+				                 <span class="badge_sm badge_pill badge_line_primary"><span class="btn_line_green bdr7 fs12 pd3">기본배송지</span></span>
+				             	<?php } ?>
 				                
 				                
 				                
 				            </div>
 				            <div class="address_person mt5">
-				                <span class="name">한장호 /</span>
-				                <span class="phone_number">010-5613-5430</span>
+				                <span class="name"><?=$delivery_row['receiver_name']?> /</span>
+				                <span class="phone_number"><?=$delivery_row['receiver_contact']?></span>
 				            </div>
-				            <div class="address mt5">[57997] 전라남도 순천시 덕월3길 35 (덕월동, 신보아파트) 가동 907호</div>
-				            <input type="hidden" class="address_detail" value="가동 907호">
+				            <div class="address mt5"><?=$delivery_row['receiver_address']." ".$delivery_row['receiver_address2']?></div>
+				            <input type="hidden" class="address_detail" value="<?=$delivery_row['receiver_address2']?>">
 				        </div>
 				        <div class="btn_wrap">
-				            <button type="button" class="btn_xs btn_line_green pd5 bdr7" id="editBtn" data-id="2" data-dvsn-code="100"><span class="text">수정</span></button>
+				            <button type="button" class="btn_xs btn_line_green pd5 bdr7 editBtn" data-id="<?=$delivery_row['delivery_ix']?>" data-dvsn-code="100"><span class="text">수정</span></button>
 				            
-				            <button type="button" class="btn_xs btn_light_gray pd5 bdr7" id="deleteBtn" data-id="2"><span class="text">삭제</span></button>
+				            <button type="button" class="btn_xs btn_light_gray pd5 bdr7 deleteBtn" data-id="<?=$delivery_row['delivery_ix']?>"><span class="text">삭제</span></button>
 				            
 				        </div>
 				    </li>
+					<?php } ?>
+
+				    
 				</ul>
 	    	</div>
 	    	<div class="basicDelivery-area">
 	    		<div class="address_chk_box">
 		            <span class="no_label dpflex-center-center">
-		                <input id="basicDelivery" type="radio" name="pop_delivery_list_item" data-pop-delivery-list-item="check" data-key="2">
+		                <input id="basicDelivery" type="radio" name="basicDelivery" data-pop-delivery-list-item="check" data-key="2">
 		                <label for="basicDelivery" class="pl5">기본 배송지 선택</label>
 		            </span>
 		        </div>
@@ -897,6 +918,7 @@
 		    }).open();
 		});
 
+		// 배송지추가
 		$("#addSaveBtn").click(function(){
 			var dataForm = $("#newAddForm").serialize();
 
@@ -910,6 +932,7 @@
 	            	console.log(response);
 	            	if(response.resultCode==1){
 	            		$(".address_list").append(response.data);
+	            		document.getElementById('deliveryAddModal').style.display = 'none';
 	            	}else{
 	            		showAlert('문제가 발생하였습니다. 고객센터에 문의해주세요.');
 	            	}
@@ -931,8 +954,9 @@
 
 
 		//배송지 삭제
-		$("#deleteBtn").click(function(){
+		$(".deleteBtn").click(function(){
 			var deliveryIx = $(this).attr('data-id');
+			var li = $(this).closest('li');
 			Swal.fire({
 		      	text: "배송지를 삭제하시겠습니까?",
 		      	showCancelButton: true,
@@ -942,29 +966,26 @@
 		      	cancelButtonText: '취소',
 		    }).then((result) => {
 		      	if (result.isConfirmed) {
-		       		deleteAddress();
+		       		deleteDelivery(deliveryIx,li);
 		      	} else if (result.dismiss === Swal.DismissReason.cancel) {
 
 		      	}
 		    });
 		});
-		function deleteDelivery(deliveryIx){
+
+		function deleteDelivery(deliveryIx,li){
 			$.ajax({
 	          	type: "POST",
 	          	dataType: 'json',
 	          	url: "./API/delivery_delete_api.php", // 실제 서버 엔드포인트로 교체
 	          	data: {delivery_ix : deliveryIx},
 	          	success: function (response) {
-	            // 성공적으로 응답을 받았을 때의 처리;
-	            	console.log(response);
-	            	// if(response.result_code==1){
-	            	// 	alert('인증번호가 전송되었습니다.');
-	            	// 	authNumber = response.authNumber;
-	            	// }else{
-	            	// 	alert('문제가 발생했습니다. 관리자에게 문의해주세요.');
-	            	// }
-	            	
-	            	// $('#singup_form :input').val('');
+	            // 성공적으로 응답을 받았을 때의 처리
+	            	if(response==1){
+	            		li.remove();
+	            	}else{
+
+	            	}
 	          	},
 	          	error: function (error) {
 	            // 오류 발생 시의 처리
@@ -976,7 +997,9 @@
 
 
 		//배송지 편집
-		$("#editBtn").click(function(){
+		var editLi;
+		$(".editBtn").click(function(){
+			editLi = $(this).closest('li');
 			var deliveryIx = $(this).attr('data-id');
 
 			var address = $(this).closest('li').find('.address').text();
@@ -1014,6 +1037,7 @@
 		});
 
 		function editDelivery(){
+			console.log($("#editAddForm").serialize());
 			$.ajax({
 	          	type: "POST",
 	          	dataType: 'json',
@@ -1021,7 +1045,18 @@
 	          	data: $("#editAddForm").serialize(),
 	          	success: function (response) {
 	            // 성공적으로 응답을 받았을 때의 처리;
-	            	console.log(response);
+	            	if(response.resultCode==1){
+	            		document.getElementById('deliveryEditModal').style.display = 'none';
+	            		editLi.find('.delivery_name').text(response.delivery_name);
+	            		editLi.find('.name').text(response.receiver_name);
+	            		editLi.find('.phone_number').text(response.receiver_contact);
+	            		editLi.find('.address ').text(response.receiver_address+" "+response.receiver_address2);
+	            		editLi.find('.address_detail').val(response.receiver_address2);
+
+
+	            	}else{
+
+	            	}
 	            	// if(response.result_code==1){
 	            	// 	alert('인증번호가 전송되었습니다.');
 	            	// 	authNumber = response.authNumber;
@@ -1037,6 +1072,17 @@
 	          	}
 	        });
 		}
+		// 배송지 편집 끝
+
+		// 배송지 선택
+		$("#choiceDeliveryBtn").click(function(){
+			var choiceLi = $("input[name='pop_delivery_list_item']:checked").closest('li');
+
+			$(".basic_title").text(choiceLi.find('.delivery_name').text());
+			$(".basic_person").text(choiceLi.find('.name').text()+" "+choiceLi.find('.phone_number').text());
+			$(".basic_add").text(choiceLi.find('.address').text());
+			document.getElementById('deliveryListModal').style.display = 'none';
+		});
 
 		function showAlert(txt) {
     // 추가적인 옵션을 사용한 알림 창
@@ -1047,7 +1093,7 @@
 		  }
 
 		// 모달 열기
-		$("#newDeliveryBtn").click(function(){
+		$(".newDeliveryBtn").click(function(){
 			document.getElementById('deliveryListModal').style.display = 'block';
 		});
 
