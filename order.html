@@ -251,12 +251,13 @@ $delivery_result = $conn->query($delivery_sql);
 								$basic_sql = "SELECT * FROM delivery WHERE user_ix='0' AND is_basic='1'";
 								$basic_result = $conn->query($basic_sql);
 								$basic_row = $basic_result -> fetch_assoc();
+								$basicDelivery_ix = $basic_row['delivery_ix'];
 
 								?>
 								<div class="cnt">
 									<div class="dpflex-start-center">
 										<h3 class="basic_title mr10 cmain"><?=$basic_row['delivery_name']?></h3>
-										<span class="btn_line_green bdr7 fs13 pd3 mr5">기본배송지</span>
+										<span class="btn_line_green bdr7 fs13 pd3 mr5 basicTxt">기본배송지</span>
 										<button class="subBtn newDeliveryBtn" style="width: 50px; height: 25px;">변경</button>
 									</div>
 									<div class="mt5">
@@ -703,9 +704,9 @@ $delivery_result = $conn->query($delivery_sql);
 				                <?php 
 				                if($delivery_row['is_basic']==1){
 				                 ?>
-				                <input id="chkAddressList01-2" type="radio" name="pop_delivery_list_item" checked="true">
+				                <input type="radio" value="<?=$delivery_row['delivery_ix']?>" name="pop_delivery_list_item" checked="true">
 				                <?php }else{ ?>
-				                <input id="chkAddressList01-2" type="radio" name="pop_delivery_list_item">
+				                <input  type="radio" value="<?=$delivery_row['delivery_ix']?>" name="pop_delivery_list_item">
 				                <?php } ?>
 				                <label for="chkAddressList01-2">배송지 선택</label>
 				            </span>
@@ -744,7 +745,7 @@ $delivery_result = $conn->query($delivery_sql);
 	    	<div class="basicDelivery-area">
 	    		<div class="address_chk_box">
 		            <span class="no_label dpflex-center-center">
-		                <input id="basicDelivery" type="radio" name="basicDelivery" data-pop-delivery-list-item="check" data-key="2">
+		                <input id="basicDelivery" type="checkbox" name="basicDelivery" data-pop-delivery-list-item="check" data-key="2">
 		                <label for="basicDelivery" class="pl5">기본 배송지 선택</label>
 		            </span>
 		        </div>
@@ -1082,7 +1083,43 @@ $delivery_result = $conn->query($delivery_sql);
 			$(".basic_person").text(choiceLi.find('.name').text()+" "+choiceLi.find('.phone_number').text());
 			$(".basic_add").text(choiceLi.find('.address').text());
 			document.getElementById('deliveryListModal').style.display = 'none';
+
+			//기본선택지 체크했으면
+			if($("input[name='basicDelivery']").is(":checked")){
+				setBasic($("input[name='pop_delivery_list_item']:checked").val());
+				$(".basicTxt").css('display','block');
+			}else{
+				if($("input[name='pop_delivery_list_item']:checked").val()!="<?=$basicDelivery_ix?>"){
+					$(".basicTxt").css('display','none');
+				}else{
+					$(".basicTxt").css('display','block');
+				}
+			}
 		});
+
+		//기본 배송지 설정
+		function setBasic(delivery_ix){
+			$.ajax({
+	          	type: "POST",
+	          	dataType: 'json',
+	          	url: "./API/delivery_basic_api.php", // 실제 서버 엔드포인트로 교체
+	          	data: {delivery_ix : delivery_ix},
+	          	success: function (response) {
+	            // 성공적으로 응답을 받았을 때의 처리
+	            	console.log(response.resultCode);
+	            	// if(response==1){
+	            	// 	li.remove();
+	            	// }else{
+
+	            	// }
+	          	},
+	          	error: function (error) {
+	            // 오류 발생 시의 처리
+	            	console.error("Error:", error);
+	          	}
+	        });
+		}
+
 
 		function showAlert(txt) {
     // 추가적인 옵션을 사용한 알림 창
@@ -1093,8 +1130,9 @@ $delivery_result = $conn->query($delivery_sql);
 		  }
 
 		// 모달 열기
-		$(".newDeliveryBtn").click(function(){
+		$(".newDeliveryBtn").click(function(){ //배송지 추가
 			document.getElementById('deliveryListModal').style.display = 'block';
+			$("input[name='basicDelivery']").prop("checked",false);
 		});
 
 		$("#newBtn").click(function(){

@@ -22,7 +22,7 @@ if($conn->query($sql)){
     $dataCode = '<li class="address_item">';
     $dataCode .= '<div class="address_chk_box">';
     $dataCode .= '<span class="form_rdo no_label">';
-    $dataCode .= '<input id="chkAddressList01-2" type="radio" name="pop_delivery_list_item">';
+    $dataCode .= '<input type="radio" value="'.$delivery_ix.'" name="pop_delivery_list_item">';
     $dataCode .= '<label for="chkAddressList01-2">배송지 선택</label></span></div>';
     $dataCode .= '<div class="address_info_box">';
     $dataCode .= '<div class="address_name">';

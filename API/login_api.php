@@ -7,7 +7,7 @@ $userId = isset($_POST['user_id']) ? $_POST['user_id'] : 'wkdgh5430';
 $userPwd = isset($_POST['user_password']) ? $_POST['user_password'] : 'wkdgh4232';
 
 
-$sql = "SELECT * FROM user_list WHERE id='$userId'";
+$sql = "SELECT * FROM user WHERE user_id='$userId'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -17,13 +17,11 @@ if ($result->num_rows > 0) {
    	$hashedPassword = md5($userPwd);
 
     // 비밀번호 일치 여부 확인
-    if ($hashedPassword == $row['pwd']) {
-        setcookie('user_id', $row['user_id'], $expiration_time, "/");
-        setcookie('login_id', $row['id'], $expiration_time, "/");
-        setcookie('login_name', $row['name'], $expiration_time, "/");
-        setcookie('login_email', $row['email'], $expiration_time, "/");
-        setcookie('login_contact', $row['contact'], $expiration_time, "/");
-        setcookie('login_birth', $row['birth'], $expiration_time, "/");
+    if ($hashedPassword == $row['user_pwd']) {
+        setcookie('user_ix', $row['user_ix'], $expiration_time, "/");
+        setcookie('login_id', $row['user_id'], $expiration_time, "/");
+        setcookie('login_name', $row['user_name'], $expiration_time, "/");
+        setcookie('login_contact', $row['user_contact'], $expiration_time, "/");
 
         echo 200;
         // exit;
