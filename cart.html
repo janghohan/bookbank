@@ -1,3 +1,10 @@
+<?php 	
+include './dbConnect.php';
+$myUserIx = $_COOKIE['user_ix'];
+
+
+ ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,6 +59,7 @@
 	    line-height: 33px;
 	    letter-spacing: -0.01em;
 	    vertical-align: bottom;
+	    text-decoration: line-through;
 	}
 
 	.guide_box{
@@ -174,194 +182,59 @@
 							<section class="detailArea">
 								<div class="cart-header">
 									<div class="checkbox_">
-										<input type="checkbox" name="checkTrem">
+										<input type="checkbox" name="allcheckTrem">
 										<label>전체선택</label>
 									</div>
 								</div>
-								<ul>
-									<li class="cart-con">
-										<div class="cart-book-info">
-											<div class="checkbox_">
-												<input type="checkbox" name="checkTrem">
-												<label></label>
+								<form id="cartForm">
+									<ul>
+										<?php 
+										$cartSql = "SELECT * FROM cart JOIN books ON cart.book_ix = books.book_ix AND cart.user_ix='$myUserIx' ORDER BY cart.create_time DESC";
+										$cartResult = $conn->query($cartSql);
+										$totalPrice = 0;
+										$totalPoint = 0;
+
+										while($cartRow = $cartResult->fetch_assoc()){
+											$price = $cartRow['price'];
+											$rentalPrice = $cartRow['rental_price'];
+
+											$discountPercent = round((($price-$rentalPrice)/$price)*100);
+											$totalPrice = $totalPrice + $rentalPrice;
+											$totalPoint = $totalPoint + $cartRow['point'];
+
+										 ?>
+										
+										<li class="cart-con">
+											<input type="hidden" class="unit_point" value="<?=$cartRow['point']?>">
+											<div class="cart-book-info">
+												<div class="checkbox_">
+													<input type="checkbox" name="checkTrem[]" value="<?=$cartRow['cart_ix']?>">
+													<label></label>
+												</div>
+												<img src="<?=$cartRow['image_path']?>">
+												<div class="info-box">
+													<h4 class="title"><?=$cartRow['title']?></h4>
+													<div class="prod_price_box">
+											            <div class="prod_price">
+											                <span class="percent"><?=$discountPercent?>%</span>
+											                <span class="price">
+											                    <span class="val unit_price"><?=number_format($rentalPrice)?></span><span class="unit">원</span>
+											                </span>
+											                <span class="sale_price">
+											                    <span class="val"><?=number_format($price)?></span><span class="unit">원</span>
+											                </span>
+											            </div>
+											        </div>
+												</div>
 											</div>
-											<img src="./STATIC/img/book/9788934942467.jpg">
-											<div class="info-box">
-												<h4 class="title">총균쇠</h4>
-												<div class="prod_price_box">
-										            <div class="prod_price">
-										                <span class="percent">90%</span>
-										                <span class="price">
-										                    <span class="val">1,980<span class="unit">원</span></span>
-										                </span>
-										                <span class="sale_price">
-										                    <s class="val">19,800<span class="unit">원</span></s>
-										                </span>
-										            </div>
-										        </div>
+											<div>
+												<button class="delete-btn" data-id="<?=$cartRow['cart_ix']?>"></button>
 											</div>
-										</div>
-										<div>
-											<button class="delete-btn" data-id=""></button>
-										</div>
-									</li>
-									<li class="cart-con">
-										<div class="cart-book-info">
-											<div class="checkbox_">
-												<input type="checkbox" name="checkTrem">
-												<label></label>
-											</div>
-											<img src="./STATIC/img/book/9788934942467.jpg">
-											<div class="info-box">
-												<h4 class="title">총균쇠</h4>
-												<div class="prod_price_box">
-										            <div class="prod_price">
-										                <span class="percent">90%</span>
-										                <span class="price">
-										                    <span class="val">1,980<span class="unit">원</span></span>
-										                </span>
-										                <span class="sale_price">
-										                    <s class="val">19,800<span class="unit">원</span></s>
-										                </span>
-										            </div>
-										        </div>
-											</div>
-										</div>
-										<div>
-											<button class="delete-btn" data-id=""></button>
-										</div>
-									</li>
-									<li class="cart-con">
-										<div class="cart-book-info">
-											<div class="checkbox_">
-												<input type="checkbox" name="checkTrem">
-												<label></label>
-											</div>
-											<img src="./STATIC/img/book/9788934942467.jpg">
-											<div class="info-box">
-												<h4 class="title">총균쇠</h4>
-												<div class="prod_price_box">
-										            <div class="prod_price">
-										                <span class="percent">90%</span>
-										                <span class="price">
-										                    <span class="val">1,980<span class="unit">원</span></span>
-										                </span>
-										                <span class="sale_price">
-										                    <s class="val">19,800<span class="unit">원</span></s>
-										                </span>
-										            </div>
-										        </div>
-											</div>
-										</div>
-										<div>
-											<button class="delete-btn" data-id=""></button>
-										</div>
-									</li>
-									<li class="cart-con">
-										<div class="cart-book-info">
-											<div class="checkbox_">
-												<input type="checkbox" name="checkTrem">
-												<label></label>
-											</div>
-											<img src="./STATIC/img/book/9788934942467.jpg">
-											<div class="info-box">
-												<h4 class="title">총균쇠</h4>
-												<div class="prod_price_box">
-										            <div class="prod_price">
-										                <span class="percent">90%</span>
-										                <span class="price">
-										                    <span class="val">1,980<span class="unit">원</span></span>
-										                </span>
-										                <span class="sale_price">
-										                    <s class="val">19,800<span class="unit">원</span></s>
-										                </span>
-										            </div>
-										        </div>
-											</div>
-										</div>
-										<div>
-											<button class="delete-btn" data-id=""></button>
-										</div>
-									</li>
-									<li class="cart-con">
-										<div class="cart-book-info">
-											<div class="checkbox_">
-												<input type="checkbox" name="checkTrem">
-												<label></label>
-											</div>
-											<img src="./STATIC/img/book/9788934942467.jpg">
-											<div class="info-box">
-												<h4 class="title">총균쇠</h4>
-												<div class="prod_price_box">
-										            <div class="prod_price">
-										                <span class="percent">90%</span>
-										                <span class="price">
-										                    <span class="val">1,980<span class="unit">원</span></span>
-										                </span>
-										                <span class="sale_price">
-										                    <s class="val">19,800<span class="unit">원</span></s>
-										                </span>
-										            </div>
-										        </div>
-											</div>
-										</div>
-										<div>
-											<button class="delete-btn" data-id=""></button>
-										</div>
-									</li>
-									<li class="cart-con">
-										<div class="cart-book-info">
-											<div class="checkbox_">
-												<input type="checkbox" name="checkTrem">
-												<label></label>
-											</div>
-											<img src="./STATIC/img/book/9788934942467.jpg">
-											<div class="info-box">
-												<h4 class="title">총균쇠</h4>
-												<div class="prod_price_box">
-										            <div class="prod_price">
-										                <span class="percent">90%</span>
-										                <span class="price">
-										                    <span class="val">1,980<span class="unit">원</span></span>
-										                </span>
-										                <span class="sale_price">
-										                    <s class="val">19,800<span class="unit">원</span></s>
-										                </span>
-										            </div>
-										        </div>
-											</div>
-										</div>
-										<div>
-											<button class="delete-btn" data-id=""></button>
-										</div>
-									</li>
-									<li class="cart-con">
-										<div class="cart-book-info">
-											<div class="checkbox_">
-												<input type="checkbox" name="checkTrem">
-												<label></label>
-											</div>
-											<img src="./STATIC/img/book/9788934942467.jpg">
-											<div class="info-box">
-												<h4 class="title">총균쇠</h4>
-												<div class="prod_price_box">
-										            <div class="prod_price">
-										                <span class="percent">90%</span>
-										                <span class="price">
-										                    <span class="val">1,980<span class="unit">원</span></span>
-										                </span>
-										                <span class="sale_price">
-										                    <s class="val">19,800<span class="unit">원</span></s>
-										                </span>
-										            </div>
-										        </div>
-											</div>
-										</div>
-										<div>
-											<button class="delete-btn" data-id=""></button>
-										</div>
-									</li>
-								</ul>
+										</li>
+										<?php } ?>
+										
+									</ul>
+								</form>
 							</section>
 							<style type="text/css">
 								.caution_wrap{
@@ -433,8 +306,8 @@
 								        	<div class="guide_title">
 								        		상품금액
 								        	</div>
-								        	<div class="guide_cont">
-								        		1,980원
+								        	<div class="guide_cont retal_price">
+								        		0원
 								        	</div>
 								        </div>
 								        <div class="guide_box bt-bar">
@@ -450,8 +323,8 @@
 								        		총 결제 금액
 								        	</div>
 								        	<div class="guide_cont">
-								        		<div class="val fs22">
-								        			6,980원
+								        		<div class="val fs22 total_price">
+								        			5,000원
 								        		</div>
 								        	</div>
 								        </div>
@@ -459,8 +332,8 @@
 								        	<div class="guide_title">
 								        		적립예정 포인트
 								        	</div>
-								        	<div class="guide_cont">
-								        		55P
+								        	<div class="guide_cont total_point">
+								        		0P
 								        	</div>
 								        </div>
 									</div>
@@ -507,11 +380,65 @@
 			    }
 			});
 		});
-		
-		$(".submitBtn").click(function(){
 
+
+		// 체크박스
+		//전체 동의 체크박스의 상태가 변경될 때
+		var indiviualCheck = $('input[name="checkTrem[]"]');
+		$("input[name='allcheckTrem']").change( function(){
+			var check = $(this).is(':checked');
+			if(check){
+				$('input[name="checkTrem[]"]').prop("checked", true);
+				totalRentalPrice = parseInt("<?=$totalPrice?>");
+				totalPoint = parseInt("<?=$totalPoint?>");
+				$(".retal_price").text(setPrice(totalRentalPrice)+"원");
+				$(".total_price").text(setPrice(totalRentalPrice+deliveryPrice)+"원");
+				$(".total_point").text(setPrice(totalPoint)+"P");
+			}else{
+				$('input[name="checkTrem[]"]').prop("checked", false);
+				totalRentalPrice = 0;
+				totalPoint = 0;
+				$(".retal_price").text(setPrice(0)+"원");
+				$(".total_price").text(setPrice(deliveryPrice)+"원");
+				$(".total_point").text(setPrice(totalPoint)+"P");
+
+			}
+		});
+
+		// 개별 동의 체크박스 중 하나라도 변경되면
+		$('input[name="checkTrem[]"]').change( function(){
+			var check = $(this).is(':checked');
+			var unitPrice = parseInt($(this).closest('li').find('.unit_price').text().replace(",",""));
+			var unitPoint = parseInt($(this).closest('li').find('.unit_point').val());
+			priceCheck(check,unitPrice,unitPoint);
+
+			//하나가 해제되면 전체 체크박스 해제
+			if(!check){
+				$("input[name='allcheckTrem']").prop("checked", false);
+			}
+
+			var allChecked = true;
+		
+			indiviualCheck.each(function (index, element) {
+        	// 각 요소에 대한 조작 또는 이벤트 처리를 여기에 추가
+		    	if(!$(element).is(':checked')) {
+		    		allChecked = false;
+		    	}
+		    });
+
+		    if(allChecked) {
+		    	$("input[name='allcheckTrem']").prop("checked", true);
+		    }
+		});
+		// 체크박스 끝
+
+
+		// 장바구니 삭제
+		$(".delete-btn").click(function(){
+			var deleteLi = $(this).closest('li');
+			var cart_ix = $(this).attr('data-id');
 			Swal.fire({
-		      	text: "도서를 대여하시겠습니까?",
+		      	text: "도서를 삭제하시겠습니까?",
 		      	showCancelButton: true,
 		      	confirmButtonColor: '#4dac27',
 		      	cancelButtonColor: '#767676',
@@ -519,7 +446,49 @@
 		      	cancelButtonText: '취소',
 		    }).then((result) => {
 		      	if (result.isConfirmed) {
-		       		booking();
+		       		deleteCart(cart_ix,deleteLi);
+		      	} else if (result.dismiss === Swal.DismissReason.cancel) {
+		        // Swal.fire('취소', '작업이 취소되었습니다.', 'error');
+		        // 여기에 취소 버튼을 눌렀을 때의 동작을 추가할 수 있습니다.
+		      	}
+		    });
+		});
+		
+		function deleteCart(cart_ix,deleteLi){
+			$.ajax({
+	          	type: "POST",
+	          	dataType: 'json',
+	          	url: "./API/cart_delete_api.php", // 실제 서버 엔드포인트로 교체
+	          	data: {cart_ix : cart_ix},
+	          	success: function (response) {
+	            // 성공적으로 응답을 받았을 때의 처리
+	            	console.log(response.resultCode);
+	            	if(response.resultCode==1){
+	            		deleteLi.remove();
+	            	}
+	          	},
+	          	error: function (error) {
+	            // 오류 발생 시의 처리
+	            	console.error("Error:", error);
+	          	}
+	        });
+		}
+		// 장바구니 삭제 끝
+
+
+		// 대여버튼
+		$(".submitBtn").click(function(){
+
+			Swal.fire({
+		      	text: "도서를 대여를 진행하시겠습니까?",
+		      	showCancelButton: true,
+		      	confirmButtonColor: '#4dac27',
+		      	cancelButtonColor: '#767676',
+		      	confirmButtonText: '확인',
+		      	cancelButtonText: '취소',
+		    }).then((result) => {
+		      	if (result.isConfirmed) {
+		       		tmpBooking();
 		      	} else if (result.dismiss === Swal.DismissReason.cancel) {
 		        // Swal.fire('취소', '작업이 취소되었습니다.', 'error');
 		        // 여기에 취소 버튼을 눌렀을 때의 동작을 추가할 수 있습니다.
@@ -527,6 +496,57 @@
 		    });
 
 		});
+
+
+		function tmpBooking(){
+			var dataForm = $("#cartForm").serialize();
+			$.ajax({
+	          	type: "POST",
+	          	dataType: 'json',
+	          	url: "./API/cart_tmp_api.php", // 실제 서버 엔드포인트로 교체
+	          	data: dataForm,
+	          	success: function (response) {
+	            // 성공적으로 응답을 받았을 때의 처리
+	            	console.log(response.resultCode);
+	            	if(response.resultCode==1){
+	            		location.href='./order.html';
+	            	}
+	          	},
+	          	error: function (error) {
+	            // 오류 발생 시의 처리
+	            	console.error("Error:", error);
+	          	}
+	        });
+		}
+
+		// 비용산정
+		var totalPoint = 0;
+		var totalRentalPrice = 0;
+		var deliveryPrice = 5000;
+		var totalPrice = totalRentalPrice + deliveryPrice;
+
+		function priceCheck(check,unitPrice,unitPoint){
+			console.log(unitPrice);
+			if(check){
+				totalRentalPrice += unitPrice;
+				totalPoint += unitPoint;
+			}else{
+				totalRentalPrice -= unitPrice;
+				totalPoint -= unitPoint;
+			}
+
+			$(".retal_price").text(setPrice(totalRentalPrice)+"원");
+			$(".total_price").text(setPrice(totalRentalPrice+deliveryPrice)+"원");
+			$(".total_point").text(setPrice(totalPoint)+"P");
+		}
+
+
+		 function setPrice(price) {
+	        // 가격을 3자리마다 쉼표로 구분하여 표시
+	        var formattedPrice = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	        return formattedPrice;
+	    }
+		// 비용산정 끝
 
 	</script>
 </body>

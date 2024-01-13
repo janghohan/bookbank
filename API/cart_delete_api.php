@@ -3,11 +3,10 @@ include '../dbConnect.php';
 
 $user_ix = isset($_COOKIE['user_ix']) ? $_COOKIE['user_ix'] : 0;
 
-$delivery_ix = isset($_POST['delivery_ix']) ? $_POST['delivery_ix'] : '';
+$cart_ix = isset($_POST['cart_ix']) ? $_POST['cart_ix'] : '';
 
 
-
-$sql = "UPDATE delivery SET is_basic = CASE WHEN delivery_ix = '$delivery_ix' THEN 1 ELSE 0 END";
+$sql = "DELETE FROM cart WHERE user_ix='$user_ix' AND cart_ix='$cart_ix'";
 
 if($conn->query($sql)){
 	$data = json_encode(array(
@@ -16,12 +15,10 @@ if($conn->query($sql)){
 }else{
 	$data = json_encode(array(
         'resultCode' => 0
-
     ));
 }
 
 echo $data;
-
 
 $conn->close();
 

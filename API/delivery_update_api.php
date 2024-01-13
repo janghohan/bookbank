@@ -1,7 +1,7 @@
 <?php
 include '../dbConnect.php';
 
-$user_ix = isset($_COOKIE['login_user_ix']) ? $_COOKIE['login_user_ix'] : 0;
+$user_ix = isset($_COOKIE['user_ix']) ? $_COOKIE['user_ix'] : 0;
 
 $delivery_ix = isset($_POST['deliver_edit_ix']) ? $_POST['deliver_edit_ix'] : '';
 $delivery_name = isset($_POST['delivery_edit_name']) ? $_POST['delivery_edit_name'] : '';
