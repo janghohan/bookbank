@@ -1,8 +1,16 @@
 <?php 
 include './dbConnect.php';
 
+$myUserIx = $_COOKIE['user_ix'];
+
 $delivery_sql = "SELECT * FROM delivery WHERE user_ix='0' ORDER BY is_basic DESC, create_time DESC";
 $delivery_result = $conn->query($delivery_sql);
+
+$myInfoSql = "SELECT * FROM user WHERE user_ix='$myUserIx'";
+$myInfoResult = $conn->query($myInfoSql);
+$myInfoRow = $myInfoResult->fetch_assoc();
+
+$myPoint = $myInfoRow['points'];
 
  ?>
 
@@ -273,7 +281,7 @@ $delivery_result = $conn->query($delivery_sql);
 								<div class="title">
 									배송메모
 								</div>
-								<textarea class="cnt bdr7"></textarea>
+								<textarea class="cnt bdr7" id="memo"></textarea>
 							</div>
 						</article>
 						
@@ -292,28 +300,32 @@ $delivery_result = $conn->query($delivery_sql);
 										</tr>
 									</thead>
 									<tbody class="list-body">
+										<?php 
+										$tmpOrderSql = "SELECT * FROM tmp_order JOIN books ON tmp_order.book_ix=books.book_ix AND tmp_order.user_ix='$myUserIx'";
+										$tmpOrderResult = $conn->query($tmpOrderSql);
+										$rentalPrice = 0;
+										$totalPoint = 0;
+
+										while($tmpOrderRow = $tmpOrderResult->fetch_assoc()){
+											$rentalPrice = $rentalPrice + $tmpOrderRow['rental_price'];
+											$totalPoint = $totalPoint + $tmpOrderRow['point'];
+										 ?>
 										<tr>
 											<td class="img">
-												<img src="./STATIC/img/book/9788934942467.jpg">
-												<h4 class="pl15">총균쇠</h4>
+												<img src="<?=$tmpOrderRow['image_path']?>">
+												<div>
+													<h4 class="pl15"><?=$tmpOrderRow['title']?></h4>
+													<p class="pl15 fs13"><?=$tmpOrderRow['author']?></p>
+												</div>
 											</td>
 											<td class="blank"></td>
 											<td class="cnt">1개</td>
 											<td class="price">
-												 <span class="fw700">1,980<span class="unit">원</span></span>
+												 <span class="fw700"><?=number_format($tmpOrderRow['rental_price'])?><span class="unit">원</span></span>
 											</td>
 										</tr>
-										<tr>
-											<td class="img">
-												<img src="./STATIC/img/book/9788934942467.jpg">
-												<h4 class="pl15">나는 나늘 파괴할 권리가 있다</h4>
-											</td>
-											<td class="blank"></td>
-											<td class="cnt">1개</td>
-											<td class="price">
-												 <span class="fw700">1,980<span class="unit">원</span></span>
-											</td>
-										</tr>
+										<?php } ?>
+										
 									</tbody>
 								</table>
 								
@@ -412,15 +424,15 @@ $delivery_result = $conn->query($delivery_sql);
 							<div class="point-title">
 								<div>
 									<span class="fwb">포인트</span>
-									<span class="pl30">보유 <span>0</span>원</span>
+									<span class="pl30">보유 <span class="possiPoint"><?=$myPoint?></span>원</span>
 								</div>
 							</div>
 							<div class="point-box">
 								<div class="point-list">
 									<div class="fwb">통합포인트</div>
-									<div class="myPoint"><span class="cmain">0</span> 원</div>
-									<input type="number" name="" class="bdr7" placeholder="0 원">
-									<button class="btn_line_green">전액사용</button>
+									<div class="myPoint"><span class="cmain usePoint">0</span> 원</div>
+									<input type="number" class="bdr7 pointInput" placeholder="0 원">
+									<button class="btn_line_green" id="allPointBtn">전액사용</button>
 								</div>
 							</div>
 						</article>
@@ -512,7 +524,7 @@ $delivery_result = $conn->query($delivery_sql);
 								        		상품금액
 								        	</div>
 								        	<div class="guide_cont">
-								        		1,980원
+								        		<?=number_format($rentalPrice)?>원
 								        	</div>
 								        </div>
 								        <div class="guide_box">
@@ -528,7 +540,7 @@ $delivery_result = $conn->query($delivery_sql);
 								        		포인트 사용
 								        	</div>
 								        	<div class="guide_cont">
-								        		535원
+								        		<span class="usePoint">0</span>원
 								        	</div>
 								        </div>
 								        <div class="guide_box ">
@@ -537,7 +549,7 @@ $delivery_result = $conn->query($delivery_sql);
 								        	</div>
 								        	<div class="guide_cont">
 								        		<div class="fs20">
-								        			<span class="val fs22">6,980</span>원
+								        			<span class="val fs22 totalPayPrice"><?=number_format($rentalPrice+5000)?></span>원
 								        		</div>
 								        	</div>
 								        </div>
@@ -546,14 +558,14 @@ $delivery_result = $conn->query($delivery_sql);
 								        		적립예정 포인트
 								        	</div>
 								        	<div class="guide_cont">
-								        		55P
+								        		<?=$totalPoint?>P
 								        	</div>
 								        </div>
 									</div>
 								</article>
 								<article class="apply_area mt30">
 									<div class="btn_area mt0">
-										<button class="submitBtn">주문하기</button>
+										<button class="submitBtn" id="orderBtn">주문하기</button>
 									</div>
 								</article>
 							</section>
@@ -812,6 +824,8 @@ $delivery_result = $conn->query($delivery_sql);
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script type="text/javascript">
+		var deliveryIx = "<?=$basicDelivery_ix?>";
+
 		$(window).on('load', function() {
 		  	var fixedDiv = $(".side_area");
 		  	var initialOffset = fixedDiv.offset().top;
@@ -839,39 +853,45 @@ $delivery_result = $conn->query($delivery_sql);
 			});
 		});
 		
-		// $(".submitBtn").click(function(){
+		$("#orderBtn").click(function(){
 
-		// 	Swal.fire({
-		//       	text: "도서를 대여하시겠습니까?",
-		//       	showCancelButton: true,
-		//       	confirmButtonColor: '#4dac27',
-		//       	cancelButtonColor: '#767676',
-		//       	confirmButtonText: '확인',
-		//       	cancelButtonText: '취소',
-		//     }).then((result) => {
-		//       	if (result.isConfirmed) {
-		//        		booking();
-		//       	} else if (result.dismiss === Swal.DismissReason.cancel) {
-		//         // Swal.fire('취소', '작업이 취소되었습니다.', 'error');
-		//         // 여기에 취소 버튼을 눌렀을 때의 동작을 추가할 수 있습니다.
-		//       	}
-		//     });
+			Swal.fire({
+		      	text: "도서를 대여하시겠습니까?",
+		      	showCancelButton: true,
+		      	confirmButtonColor: '#4dac27',
+		      	cancelButtonColor: '#767676',
+		      	confirmButtonText: '확인',
+		      	cancelButtonText: '취소',
+		    }).then((result) => {
+		      	if (result.isConfirmed) {
+		       		order();
+		      	} else if (result.dismiss === Swal.DismissReason.cancel) {
+		        // Swal.fire('취소', '작업이 취소되었습니다.', 'error');
+		        // 여기에 취소 버튼을 눌렀을 때의 동작을 추가할 수 있습니다.
+		      	}
+		    });
 
-		// });
+		});
 
 		// 대여하기 버튼
-		function rental(){
+		function order(){
 			$.ajax({
 	          	type: "POST",
 	          	dataType: 'json',
-	          	url: "./API/sms_send_api.php", // 실제 서버 엔드포인트로 교체
-	          	data: {receiverNumber : phoneNumber},
+	          	url: "./API/order_create_api.php", // 실제 서버 엔드포인트로 교체
+	          	data: {usePoint : $(".pointInput").val(), totalPrice : $(".totalPayPrice").text() , deliveryIx:deliveryIx, memo:$("#memo").val()},
 	          	success: function (response) {
 	            // 성공적으로 응답을 받았을 때의 처리;
 	            	console.log(response);
-	            	if(response.result_code==1){
-	            		alert('인증번호가 전송되었습니다.');
-	            		authNumber = response.authNumber;
+	            	if(response.resultCode==1){
+	            		Swal.fire({
+					      	text: txt,
+					      	confirmButtonColor: '#4dac27',
+					      	confirmButtonText: '확인',
+					    }).then((result) => {
+					    	
+					    });
+	            		// location.href='./order-complete.html';
 	            	}else{
 	            		alert('문제가 발생했습니다. 관리자에게 문의해주세요.');
 	            	}
@@ -1077,6 +1097,7 @@ $delivery_result = $conn->query($delivery_sql);
 
 		// 배송지 선택
 		$("#choiceDeliveryBtn").click(function(){
+			deliveryIx = $("input[name='pop_delivery_list_item']:checked").val();
 			var choiceLi = $("input[name='pop_delivery_list_item']:checked").closest('li');
 
 			$(".basic_title").text(choiceLi.find('.delivery_name').text());
@@ -1120,12 +1141,52 @@ $delivery_result = $conn->query($delivery_sql);
 	        });
 		}
 
+		// 포인트 사용
+		$(document).ready(function() {
+    // 입력 필드의 값이 변할 때마다 이벤트가 발생하도록 리스너를 등록합니다.
+		    $('.pointInput').on('input', function() {
+		        // 입력 필드의 현재 값을 가져와서 변수에 저장합니다.
+		        var inputValue = $(this).val();
+		       	calPoint(inputValue);
+		    });
+		});
+
+		$("#allPointBtn").click(function(){
+			calPoint(parseInt("<?=$myPoint?>"));			
+		});
+
+		function calPoint(point){
+			var limit = parseInt("<?=$myPoint?>");
+
+		 	if (point > limit) {
+	            // 입력 값이 특정 값 이상이면 값을 특정 값으로 설정합니다.
+	            $(".pointInput").val(limit);
+	            $(".usePoint").text(limit);
+	        }else if(point < 0){
+	        	$(".pointInput").val(0);
+	            $(".usePoint").text(0);
+	        }else{
+	        	$(".usePoint").text(point);
+	        	$(".pointInput").val(point);
+	        }
+
+	        var total = parseInt("<?=$rentalPrice?>")+5000-point;
+	        var formattedValue = total.toLocaleString('en-US', {
+	            style: 'decimal',
+	        });
+	        $(".totalPayPrice").text(formattedValue);
+
+		}
+
 
 		function showAlert(txt) {
     // 추가적인 옵션을 사용한 알림 창
 		    Swal.fire({
-		      title: txt,
-		      confirmButtonText: '확인',
+		      	text: txt,
+		      	confirmButtonColor: '#4dac27',
+		      	confirmButtonText: '확인',
+		    }).then((result) => {
+		    	
 		    });
 		  }
 

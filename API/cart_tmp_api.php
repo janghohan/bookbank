@@ -8,7 +8,7 @@ if (isset($_POST['checkTrem']) && is_array($_POST['checkTrem'])) {
 	$is_ok = true;
 
     foreach ($_POST['checkTrem'] as $selectedOption) {
-        $sql = "INSERT INTO tmp_order (user_ix,book_ix,quantity) SELECT user_ix,book_ix,quantity FROM cart WHERE cart.cart_ix='$selectedOption'";
+        $sql = "INSERT INTO tmp_order (user_ix,book_ix,quantity,price) SELECT user_ix,book_ix,quantity,rental_price FROM cart WHERE cart.cart_ix='$selectedOption'";
         if($conn->query($sql)){
 
         }else{
