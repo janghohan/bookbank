@@ -160,14 +160,7 @@ $myUserIx = $_COOKIE['user_ix'];
 	.cart-book-info .info-box{
 		padding-left: 30px;
 	}
-	#swal2-content{
-		font-size: 14px !important;
-		font-weight: 700 !important;
-	}
-	.swal2-popup{
-		width: 300px !important;
-		height: 190px;
-	}
+	
 </style>
 <body>
 	<?php include 'header.html'; ?>	
@@ -228,7 +221,7 @@ $myUserIx = $_COOKIE['user_ix'];
 												</div>
 											</div>
 											<div>
-												<button class="delete-btn" data-id="<?=$cartRow['cart_ix']?>"></button>
+												<span class="delete-btn" style="padding: 10px; cursor: pointer;" data-id="<?=$cartRow['cart_ix']?>"></span>
 											</div>
 										</li>
 										<?php } ?>
@@ -510,6 +503,13 @@ $myUserIx = $_COOKIE['user_ix'];
 	            	console.log(response.resultCode);
 	            	if(response.resultCode==1){
 	            		location.href='./order.html';
+	            	}else if(response.resultCode==-1){
+	            		Swal.fire({
+					      	text: "도서를 선택해주세요.",
+					      	confirmButtonColor: '#4dac27',
+					      	confirmButtonText: '확인',
+					    }).then((result) => {
+					    });
 	            	}
 	          	},
 	          	error: function (error) {

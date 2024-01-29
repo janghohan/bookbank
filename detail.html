@@ -402,8 +402,8 @@ $discountPercent = round((($price-$rentalPrice)/$price)*100);
 					      	showCancelButton: true,
 					      	confirmButtonColor: '#4dac27',
 					      	cancelButtonColor: '#767676',
-					      	confirmButtonText: '확인',
-					      	cancelButtonText: '취소',
+					      	confirmButtonText: '예',
+					      	cancelButtonText: '아니오',
 					    }).then((result) => {
 					      	if (result.isConfirmed) {
 					       		location.href='./cart.html';
@@ -429,22 +429,35 @@ $discountPercent = round((($price-$rentalPrice)/$price)*100);
 		}
 
 		$("#bookedBtn").click(function(){
+			Swal.fire({
+		      	text: "도서를 대여합니다. 대여페이지로 이동하시겠습니까?",
+		      	showCancelButton: true,
+		      	confirmButtonColor: '#4dac27',
+		      	cancelButtonColor: '#767676',
+		      	confirmButtonText: '확인',
+		      	cancelButtonText: '취소',
+		    }).then((result) => {
+		      	if (result.isConfirmed) {
+		       		tmpBooking()
+		      	} else if (result.dismiss === Swal.DismissReason.cancel) {
+		        // Swal.fire('취소', '작업이 취소되었습니다.', 'error');
+		        // 여기에 취소 버튼을 눌렀을 때의 동작을 추가할 수 있습니다.
+		      	}
+		    });
+
+		});
+
+		function tmpBooking(){
 			$.ajax({
 	          	type: "POST",
 	          	dataType: 'json',
-	          	url: "./API/cart_create.php", // 실제 서버 엔드포인트로 교체
-	          	data: {usePoint : $(".pointInput").val(), totalPrice : $(".totalPayPrice").text() , deliveryIx:deliveryIx, memo:$("#memo").val()},
+	          	url: "./API/order_tmp_api.php", // 실제 서버 엔드포인트로 교체
+	          	data: {bookIx : "<?=$bookIx?>"},
 	          	success: function (response) {
 	            // 성공적으로 응답을 받았을 때의 처리;
 	            	console.log(response);
 	            	if(response.resultCode==1){
-	            		Swal.fire({
-					      	text: txt,
-					      	confirmButtonColor: '#4dac27',
-					      	confirmButtonText: '확인',
-					    }).then((result) => {
-					    	
-					    });
+	            		location.href='./order.html';
 	            		// location.href='./order-complete.html';
 	            	}else{
 	            		alert('문제가 발생했습니다. 관리자에게 문의해주세요.');
@@ -457,7 +470,7 @@ $discountPercent = round((($price-$rentalPrice)/$price)*100);
 	            	console.error("Error:", error);
 	          	}
 	        });
-		});
+		}
 	</script>
 </body>
 </html>

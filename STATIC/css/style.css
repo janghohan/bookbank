@@ -168,6 +168,16 @@
     .pd8{padding: 8px !important;}
     /*padding 패딩*/
 
+    /*swal*/
+    #swal2-content{
+        font-size: 14px !important;
+        font-weight: 700 !important;
+    }
+    .swal2-popup{
+        width: 320px !important;
+        height: 190px;
+    }
+
     /* button */
 
     .delete-btn{

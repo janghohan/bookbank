@@ -11,7 +11,7 @@ $chkResult = $conn->query($chkSql);
 $chkCount = $chkResult->num_rows;
 
 if($chkCount <= 0){
-	$sql = "INSERT INTO cart(user_ix,book_ix,quantity,rental_price) SELECT $user_ix, $bookIx, 1, price FROM books WHERE book_ix='$bookIx'";
+	$sql = "INSERT INTO cart(user_ix,book_ix,quantity,rental_price) SELECT $user_ix, $bookIx, 1, rental_price FROM books WHERE book_ix='$bookIx'";
 
 	if($conn->query($sql)){
 		$data = json_encode(array(

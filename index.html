@@ -129,15 +129,46 @@ include './API/visit_chk_api.php';
 					</div>
 				</div>
 				<section class="list_area scroll">
-					<ul>
-						<li>
+					<?php 
+					$bookSql = "SELECT * FROM books WHERE stock_quantity > 0";
+					$bookResult = $conn->query($bookSql);
+
+					$bookCount = 0;
+					while($bookRow = $bookResult->fetch_assoc()){
+						$bookCount ++;
+
+						if($bookCount%4==1) echo "<ul>";
+					 ?>
+
+					 <li>
+						<a href="./detail.html?bookIx=<?=$bookRow['book_ix']?>">
+							<div class="imgBox">
+								<img src="<?=$bookRow['image_path']?>">
+							</div>
+							<div class="details">
+								<h3><?=$bookRow['title']?></h3>
+							</div>
+						</a>
+					</li>
+
+					<?php 
+					if($bookCount%4==0) echo "</ul>";
+					} 
+
+					if($bookCount%4!=0) echo "</ul>";
+					?>
+
+					<!-- 
+					<ul> 
+						
+						 <li>
 							<a href="detail.html">
 								<div class="imgBox">
 									<img src="STATIC/img/book/9788934942467.jpg">
 								</div>
 								<div class="details">
 									<h3>총균쇠</h3>
-									<!-- <div class="tag_area">
+									 <div class="tag_area">
 										<img src="STATIC/img/icon/asset/tag_blog.svg">
 										<img src="STATIC/img/icon/asset/tag_instar.svg">
 										<img src="STATIC/img/icon/asset/tag_cafe.svg">
@@ -161,295 +192,15 @@ include './API/visit_chk_api.php';
 									<div class="point_tag">
 										<span class="point">공통 3,000P</span>
 										<span class="point bonus">보너스 50,000P</span>
-									</div> -->
-								</div>
-							</a>
-						</li>
-						<li>
-							<a href="캠페인상세.html">
-								<div class="imgBox">
-									<img src="STATIC/img/book/9791197021633.jpg">
-								</div>
-								<div class="details">
-									<h3>검은꽃</h3>
-								</div>
-							</a>
-						</li>
-						<li>
-							<a href="캠페인상세.html">
-								<div class="imgBox">
-									<img src="STATIC/img/book/9791191114225.jpg">
-								</div>
-								<div class="details">
-									<h3>작별인사</h3>
-								</div>
-							</a>
-						</li>
-						<li>
-							<a href="캠페인상세.html">
-								<div class="imgBox">
-									<img src="STATIC/img/book/9791191114072.jpg">
-								</div>
-								<div class="details">
-									<h3>나는 나늘 파괴할 권리가 있다</h3>
-								</div>
-							</a>
-						</li>
-					</ul>
-					<ul>
-						<li>
-							<a href="캠페인상세.html">
-								<div class="imgBox">
-									<img src="STATIC/img/book/9788965964223.jpg">
-								</div>
-								<div class="details">
-									<h3>타인을 읽는 말</h3>
-									<!-- <div class="tag_area">
-										<img src="STATIC/img/icon/asset/tag_blog.svg">
-										<img src="STATIC/img/icon/asset/tag_instar.svg">
-										<img src="STATIC/img/icon/asset/tag_cafe.svg">
-										<img src="STATIC/img/icon/asset/tag_store.svg">
-										<img src="STATIC/img/icon/asset/tag_ytb.svg">
-										<span>제품</span>
 									</div>
-									<div class="appli_area">
-										<div>
-											<span>신청</span>
-											<b>3</b>
-											<span>/</span>
-											<span>5명</span>
-										</div>
-										<div>
-											<div class="dday">D-13</div>
-										</div>
-									</div>
-									<div class="subject">프리미엄 기능성 편안한 신발 아치 깔창 2차</div>
-									<div class="desc">신발 아치깔창 1개</div>
-									<div class="point_tag">
-										<span class="point">공통 3,000P</span>
-										<span class="point bonus">보너스 50,000P</span>
-									</div> -->
-								</div>
+						 		</div>
 							</a>
-						</li>
-						<li>
-							<a href="캠페인상세.html">
-								<div class="imgBox">
-									<img src="STATIC/img/book/9791186993095.jpg">
-								</div>
-								<div class="details">
-									<h3>성격의 탄생</h3>
-								</div>
-							</a>
-						</li>
-						<li>
-							<a href="캠페인상세.html">
-								<div class="imgBox">
-									<img src="STATIC/img/book/9791170400523.jpg">
-								</div>
-								<div class="details">
-									<h3>마지막 수업</h3>
-								</div>
-							</a>
-						</li>
-						<li>
-							<a href="캠페인상세.html">
-								<div class="imgBox">
-									<img src="STATIC/img/book/9791191071030.jpg">
-								</div>
-								<div class="details">
-									<h3>프리즘</h3>
-								</div>
-							</a>
-						</li>
-					</ul>
+						</li> 
+						
+					</ul>  -->
 				</section>
 			</div>
 		</section>
-		<!-- <section class="campaign__">
-			<div class="inner">
-				<div class="title NEW">
-					<h1>신규 캠페인</h1>
-					<div class="tool">
-						<a href="" class="more">더보기</a>
-					</div>
-				</div>
-				<section class="list_area scroll">
-					<ul>
-						<li>
-							<a href="캠페인상세.html">
-								<div class="imgBox">
-									<img src="STATIC/img/campaign/신발깔창.png">
-								</div>
-								<div class="details">
-									<div class="tag_area">
-										<img src="STATIC/img/icon/asset/tag_blog.svg">
-										<img src="STATIC/img/icon/asset/tag_instar.svg">
-										<img src="STATIC/img/icon/asset/tag_cafe.svg">
-										<img src="STATIC/img/icon/asset/tag_store.svg">
-										<img src="STATIC/img/icon/asset/tag_ytb.svg">
-										<span>제품</span>
-									</div>
-									<div class="appli_area">
-										<div>
-											<span>신청</span>
-											<b>3</b>
-											<span>/</span>
-											<span>5명</span>
-										</div>
-										<div>
-											<div class="timer">13:05:05</div>
-										</div>
-									</div>
-									<div class="subject">프리미엄 기능성 편안한 신발 아치 깔창 2차</div>
-									<div class="desc">신발 아치깔창 1개</div>
-									<div class="point_tag">
-										<span class="point">공통 3,000P</span>
-										<span class="point bonus">보너스 50,000P</span>
-									</div>
-								</div>
-							</a>
-						</li>
-						<li>
-							<a href="캠페인상세.html">
-								<div class="imgBox">
-									<img src="STATIC/img/campaign/신발깔창.png">
-								</div>
-								<div class="details">
-									<div class="tag_area">
-										<img src="STATIC/img/icon/asset/tag_blog.svg">
-										<img src="STATIC/img/icon/asset/tag_instar.svg">
-										<img src="STATIC/img/icon/asset/tag_cafe.svg">
-										<img src="STATIC/img/icon/asset/tag_store.svg">
-										<img src="STATIC/img/icon/asset/tag_ytb.svg">
-										<span>제품</span>
-									</div>
-									<div class="appli_area">
-										<div>
-											<span>신청</span>
-											<b>3</b>
-											<span>/</span>
-											<span>5명</span>
-										</div>
-										<div>
-											<div class="timer">13:05:05</div>
-										</div>
-									</div>
-									<div class="subject">프리미엄 기능성 편안한 신발 아치 깔창 2차</div>
-									<div class="desc">신발 아치깔창 1개</div>
-									<div class="point_tag">
-										<span class="point">공통 3,000P</span>
-										<span class="point bonus">보너스 50,000P</span>
-									</div>
-								</div>
-							</a>
-						</li>
-						<li>
-							<a href="캠페인상세.html">
-								<div class="imgBox">
-									<img src="STATIC/img/campaign/신발깔창.png">
-								</div>
-								<div class="details">
-									<div class="tag_area">
-										<img src="STATIC/img/icon/asset/tag_blog.svg">
-										<img src="STATIC/img/icon/asset/tag_instar.svg">
-										<img src="STATIC/img/icon/asset/tag_cafe.svg">
-										<img src="STATIC/img/icon/asset/tag_store.svg">
-										<img src="STATIC/img/icon/asset/tag_ytb.svg">
-										<span>제품</span>
-									</div>
-									<div class="appli_area">
-										<div>
-											<span>신청</span>
-											<b>3</b>
-											<span>/</span>
-											<span>5명</span>
-										</div>
-										<div>
-											<div class="timer">13:05:05</div>
-										</div>
-									</div>
-									<div class="subject">프리미엄 기능성 편안한 신발 아치 깔창 2차</div>
-									<div class="desc">신발 아치깔창 1개</div>
-									<div class="point_tag">
-										<span class="point">공통 3,000P</span>
-										<span class="point bonus">보너스 50,000P</span>
-									</div>
-								</div>
-							</a>
-						</li>
-						<li>
-							<a href="캠페인상세.html">
-								<div class="imgBox">
-									<img src="STATIC/img/campaign/신발깔창.png">
-								</div>
-								<div class="details">
-									<div class="tag_area">
-										<img src="STATIC/img/icon/asset/tag_blog.svg">
-										<img src="STATIC/img/icon/asset/tag_instar.svg">
-										<img src="STATIC/img/icon/asset/tag_cafe.svg">
-										<img src="STATIC/img/icon/asset/tag_store.svg">
-										<img src="STATIC/img/icon/asset/tag_ytb.svg">
-										<span>제품</span>
-									</div>
-									<div class="appli_area">
-										<div>
-											<span>신청</span>
-											<b>3</b>
-											<span>/</span>
-											<span>5명</span>
-										</div>
-										<div>
-											<div class="timer">13:05:05</div>
-										</div>
-									</div>
-									<div class="subject">프리미엄 기능성 편안한 신발 아치 깔창 2차</div>
-									<div class="desc">신발 아치깔창 1개</div>
-									<div class="point_tag">
-										<span class="point">공통 3,000P</span>
-										<span class="point bonus">보너스 50,000P</span>
-									</div>
-								</div>
-							</a>
-						</li>
-						<li>
-							<a href="캠페인상세.html">
-								<div class="imgBox">
-									<img src="STATIC/img/campaign/신발깔창.png">
-								</div>
-								<div class="details">
-									<div class="tag_area">
-										<img src="STATIC/img/icon/asset/tag_blog.svg">
-										<img src="STATIC/img/icon/asset/tag_instar.svg">
-										<img src="STATIC/img/icon/asset/tag_cafe.svg">
-										<img src="STATIC/img/icon/asset/tag_store.svg">
-										<img src="STATIC/img/icon/asset/tag_ytb.svg">
-										<span>제품</span>
-									</div>
-									<div class="appli_area">
-										<div>
-											<span>신청</span>
-											<b>3</b>
-											<span>/</span>
-											<span>5명</span>
-										</div>
-										<div>
-											<div class="timer">13:05:05</div>
-										</div>
-									</div>
-									<div class="subject">프리미엄 기능성 편안한 신발 아치 깔창 2차</div>
-									<div class="desc">신발 아치깔창 1개</div>
-									<div class="point_tag">
-										<span class="point">공통 3,000P</span>
-										<span class="point bonus">보너스 50,000P</span>
-									</div>
-								</div>
-							</a>
-						</li>
-					</ul>
-				</section>
-			</div>
-		</section> -->
 	</div>
 		<!-- <hr class="mobile_line">
 		<section class="footer_top">

@@ -306,6 +306,9 @@ $myPoint = $myInfoRow['points'];
 										$rentalPrice = 0;
 										$totalPoint = 0;
 
+										$retalCount = $tmpOrderResult->num_rows;
+										$basicRetalDay = $retalCount * 7;
+
 										while($tmpOrderRow = $tmpOrderResult->fetch_assoc()){
 											$rentalPrice = $rentalPrice + $tmpOrderRow['rental_price'];
 											$totalPoint = $totalPoint + $tmpOrderRow['point'];
@@ -513,6 +516,19 @@ $myPoint = $myInfoRow['points'];
 							.list_area .details{
 								padding: 15px;
 							}
+							.quantity-btn {
+							    cursor: pointer;
+							    font-size: 16px;
+							    background-color: #fff;
+							    height: 30px;
+							    width: 35px;
+							    vertical-align: bottom;
+							}
+							#dayInput{
+								width: 50px;
+								height: 30px;
+								border: 1px solid #eee;
+							}
 						</style>
 
 						<article class="side_area">
@@ -561,6 +577,19 @@ $myPoint = $myInfoRow['points'];
 								        		<?=$totalPoint?>P
 								        	</div>
 								        </div>
+								        <div class="guide_box">
+								        	<div class="guide_title">
+								        		대여기간
+								        	</div>
+								        	<div class="guide_cont">
+								        		<div class="rental-day">
+												  	<button class="quantity-btn" onclick="dayDecrement()">-</button>
+												  	<input type="text" class="day-input" value="<?=$basicRetalDay?>" id="dayInput" readonly="">
+												  	<button class="quantity-btn" onclick="dayIncrement()">+</button>
+												</div>
+								        	</div>
+								        </div>
+								        <p class="fs13">* 기본대여일은 한권당 7일이며, 하루 연장시 권마다 500원씩 부과됩니다.</p>
 									</div>
 								</article>
 								<article class="apply_area mt30">
@@ -825,6 +854,10 @@ $myPoint = $myInfoRow['points'];
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script type="text/javascript">
 		var deliveryIx = "<?=$basicDelivery_ix?>";
+		var rentalDayFee = 0;
+		var deliveryFee = 5000;
+		var basicRentalFee = parseInt("<?=$rentalPrice?>");
+		var usePoint = 0;
 
 		$(window).on('load', function() {
 		  	var fixedDiv = $(".side_area");
@@ -879,13 +912,13 @@ $myPoint = $myInfoRow['points'];
 	          	type: "POST",
 	          	dataType: 'json',
 	          	url: "./API/order_create_api.php", // 실제 서버 엔드포인트로 교체
-	          	data: {usePoint : $(".pointInput").val(), totalPrice : $(".totalPayPrice").text() , deliveryIx:deliveryIx, memo:$("#memo").val()},
+	          	data: {usePoint : $(".pointInput").val(), totalPrice : $(".totalPayPrice").text() , deliveryIx:deliveryIx, memo:$("#memo").val(), rentalDay:$("#dayInput").val()},
 	          	success: function (response) {
 	            // 성공적으로 응답을 받았을 때의 처리;
 	            	console.log(response);
 	            	if(response.resultCode==1){
 	            		Swal.fire({
-					      	text: txt,
+					      	text: "대여가 완료되었습니다.",
 					      	confirmButtonColor: '#4dac27',
 					      	confirmButtonText: '확인',
 					    }).then((result) => {
@@ -1170,14 +1203,48 @@ $myPoint = $myInfoRow['points'];
 	        	$(".pointInput").val(point);
 	        }
 
-	        var total = parseInt("<?=$rentalPrice?>")+5000-point;
-	        var formattedValue = total.toLocaleString('en-US', {
-	            style: 'decimal',
-	        });
-	        $(".totalPayPrice").text(formattedValue);
+	        usePoint = point;
+	        totalFeeCal();
+
 
 		}
 
+
+		// 대여기간 변경
+		function dayDecrement(){
+			var rentalDay = $("#dayInput").val();
+			if(rentalDay<=1){
+				alert('대여기간을 1일보다 적게 설정할 수 없습니다.');
+				return false;
+			}
+			$("#dayInput").val(parseInt(rentalDay)-1);
+			rentalDayFeeCal(parseInt(rentalDay)-1);
+		}
+
+		function dayIncrement(){
+			var rentalDay = $("#dayInput").val();
+			$("#dayInput").val(parseInt(rentalDay)+1);
+			rentalDayFeeCal(parseInt(rentalDay)+1);
+		}
+
+		function rentalDayFeeCal(choiceDay){
+			var rentalCount = parseInt("<?=$retalCount?>");
+			var basicCount = parseInt("<?=$basicRetalDay?>");
+			if(choiceDay > basicCount){
+				rentalDayFee = parseInt((choiceDay - basicCount) * 500 * rentalCount);
+			}else if(choiceDay == basicCount) {
+				rentalDayFee  = 0;
+			}
+			totalFeeCal();
+		}
+
+		function totalFeeCal(){
+			var totalFee = basicRentalFee+deliveryFee-usePoint+rentalDayFee;
+	        var formattedValue = totalFee.toLocaleString('en-US', {
+	            style: 'decimal',
+	        });
+	        $(".totalPayPrice").text(formattedValue );
+		}
 
 		function showAlert(txt) {
     // 추가적인 옵션을 사용한 알림 창
