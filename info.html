@@ -1,3 +1,9 @@
+<?php
+
+$login_contact = str_replace("-", "", $_COOKIE['login_contact']);
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +15,13 @@
 	<link rel="stylesheet" type="text/css" href="STATIC/css/swiper-bundle.min.css"/>
 	<link rel="stylesheet" type="text/css" href="STATIC/css/style.css"/>
 </head>
+<style type="text/css">
+	.info_menu{
+		border: 1px solid #ebebeb;
+		border-radius: 12px;
+	}
+
+</style>
 <body>
 	<?php include './header.html'; ?>
 	<div id="container">
@@ -16,37 +29,21 @@
 			<div class="inner">
 				<aside class="side_menu">
 					<div class="sticky">
-						<article class="profile_area">
-							<!-- <div class="profile_img"></div> -->
-							<div class="profile_info">
-								<div class="name"><?=$_COOKIE['login_name']?></div>
-							</div>
-							<div class="email"><?=$_COOKIE['login_email']?></div>
-						<!-- 	<div class="tier">
-								<div>회원등급</div>
-								<div><img src="STATIC/img/icon/asset/v0.svg"></div>
-							</div> -->
-						</article>
-						<article class="menu">
+						<article class="info_menu">
 							<ul>
-								<li class="active"><a href="info.html">정보 변경</a></li>
-								<li><a href="info_reserve.html">예약 내역</a></li>
+								<li><a href="info_reserve.html">주문 내역</a></li>
+								<li><a href="info_point.html">포인트</a></li>
 								<li><a href="info_qna.html">문의 내역</a></li>
-							<!-- 	<li><a href="프로필편집.html">프로필 편집</a></li>
-								<li><a href="포인트.html">아싸뷰 포인트</a></li>
-								<li><a href="알림함.html">알림함</a></li>
-								<li><a href="나의캠페인.html">나의캠페인</a></li>
-								<li><a href="찜리스트.html">찜리스트</a></li>
-								<li><a href="포트폴리오.html">포트폴리오</a></li> -->
+								<li class="active"><a href="info.html">내 정보 관리</a></li>
 							</ul>
 						</article>
 					</div>
 				</aside>
 				<article class="content">
-					<h1 class="ct_title">정보 변경</h1>
+					<h1 class="ct_title">내 정보 관리</h1>
 					<section class="account_modify">
 						<article class="mofidy_area">
-							<h5 class="title">계정 정보 설정</h5>
+							<h5 class="title">회원 정보</h5>
 							<div class="field_area max700">
 								<form id="info_form">
 									<div class="field">
@@ -54,20 +51,20 @@
 										<input type="text" name="edit_id" value="<?=$_COOKIE['login_id']?>" disabled>
 									</div>
 									<div class="field">
-										<label>이메일</label>
-										<input type="text" name="edit_email" value="<?=$_COOKIE['login_email']?>">
+										<label>이름</label>
+										<input type="text" name="edit_email" value="<?=$_COOKIE['login_name']?>">
 									</div>
 									<div class="field">
 										<label>휴대전화</label>
 										<div class="verify_">
-											<input type="number" name="edit_contact" value="<?=$_COOKIE['login_contact']?>">
+											<input type="text" name="edit_contact" value="<?=$login_contact?>">
 										</div>				
 									</div>
 								</form>
 								
 							</div>
 							<div class="btn_area mt50">
-								<button id="infoEditBtn" class="submitBtn">계정 정보 저장</button>
+								<button id="infoEditBtn" class="editBtn">계정 정보 저장</button>
 							</div>
 						</article>
 			
@@ -92,8 +89,8 @@
 								</form>
 							</div>
 							<div class="btn_area between mt50">
-								<button id="pwdEditBtn" class="submitBtn">비밀번호 변경</button>
-								<button id="logoutBtn" class="subBtn">로그아웃</button>
+								<button id="pwdEditBtn" class="editBtn">비밀번호 변경</button>
+								<a id="logoutBtn" class="cmain fwb">로그아웃</a>
 							</div>
 						</article>
 					</section>
