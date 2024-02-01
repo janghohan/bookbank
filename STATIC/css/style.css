@@ -168,6 +168,13 @@
     .pd8{padding: 8px !important;}
     /*padding 패딩*/
 
+    .align_left{
+        text-align: left !important;
+    }
+    .align_right{
+        text-align: right !important;
+    }
+
     /*swal*/
     #swal2-content{
         font-size: 14px !important;
@@ -281,6 +288,10 @@
         font-size: 16px;
         font-weight: 700;
         border: 1px solid #ebebeb;
+    }
+
+    .spacing{
+        margin-bottom: 20px;
     }
 
     .ellipsis { overflow: hidden; text-overflow: ellipsis; white-space: nowrap;  }
@@ -855,7 +866,7 @@
 
 /* 페이징 */
     .pagenate {
-        margin: 70px 0;
+        margin: 45px 0;
     }
     .pagenate ul {
         display: flex;
@@ -872,13 +883,13 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 44px;
-        height: 44px;
+        width: 32px;
+        height: 32px;
         border-radius: 50%;
         cursor: pointer;
     }
     .pagenate .active a {
-        background-color: #eb5d3e;
+        background-color: #cecece;
         color: #fff;
     }
 
@@ -2620,8 +2631,9 @@
     }
     .ct_title {
         font-size: 24px;
-        font-weight: 500;
+        font-weight: 700;
         margin-bottom: 40px;
+        color: #333333;
     }
     .ct_title .name {
         position: relative;
@@ -2675,7 +2687,8 @@
         align-items: center;
         height: 55px;
         padding: 0 20px;
-        color: #666;
+        color: #333;
+        font-weight: 600;
         background-image: url(../img/icon/tool/aside_right.svg);
         background-repeat: no-repeat;
         background-position: right 20px center;

@@ -1,0 +1,245 @@
+<?php
+
+include '../dbConnect.php';
+$userIx = $_COOKIE['user_ix'];
+$login_contact = str_replace("-", "", $_COOKIE['login_contact']);
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="code" charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0,maximum-scale=10,user-scalable=yes"/>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="../STATIC/js/common.js"></script>
+	<script type="text/javascript" src="../STATIC/js/swiper-bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+	<link rel="stylesheet" type="text/css" href="../STATIC/css/swiper-bundle.min.css"/>
+	<link rel="stylesheet" type="text/css" href="../STATIC/css/style.css"/>
+	<link rel="stylesheet" type="text/css" href="../STATIC/css/points.css"/>
+</head>
+<style type="text/css">
+	.info_menu{
+		border: 1px solid #ebebeb;
+		border-radius: 12px;
+	}
+
+</style>
+<body>
+	<?php include '../header.html'; ?>
+	<div id="container">
+		<section class="aside_section">
+			<div class="inner">
+				<aside class="side_menu">
+					<div class="sticky">
+						<article class="info_menu">
+							<ul>
+								<li><a href="info_reserve.html">주문 내역</a></li>
+								<li class="active"><a href="./points.html">포인트</a></li>
+								<li><a href="info_qna.html">문의 내역</a></li>
+								<li><a href="info.html">내 정보 관리</a></li>
+							</ul>
+						</article>
+					</div>
+				</aside>
+				<article class="content">
+					<h1 class="ct_title">포인트</h1>
+					<section class="point-container">
+						<div class="my-points">
+							<h2>내 포인트</h2>
+							<span>0</span><span> P</span>
+						</div>
+					</section>
+					<div class="spacing"></div>
+					<nav class="points-filter">
+						<div class="points-tab selected" data-v='all'>
+							<div class="content">전체</div>
+						</div>
+						<div class="points-tab" data-v='in'>
+							<div class="content">적립</div>
+						</div>
+						<div class="points-tab" data-v='out'>
+							<div class="content">출금</div>
+						</div>
+					</nav>
+					<div class="spacing"></div>
+					<?php 
+					$pointChkSql = "SELECT * FROM points_history WHERE user_ix='$userIx'";
+					$pointChkResult = $conn->query($pointChkSql);
+
+					if($pointChkResult->num_rows <= 0){
+					 ?>
+					
+					<div class="list-empty">
+						<div class="empty-state">
+							<h1>포인트 내역이 없습니다.</h1>
+						</div>
+					</div>
+					<?php }else{ ?>
+					<div class="list-points">
+						<table class="p-table">
+							<thead>
+								<tr>
+									<th scope="col">상세내용</th>
+									<th scope="col">등록일</th>
+									<th scope="col">구분</th>
+									<th scope="col">금액</th>
+								</tr>
+							</thead>
+							<tbody id="pointData">
+								<tr>
+									<td class="align_left">
+										<span class="point_history">구매적립</span>
+										<span class="ord_num">
+											<span class="label">주문번호 :</span>
+											<a >
+												<span class="text">16161616</span>
+											</a>
+										</span>
+									</td>
+									<td>
+										<span>2024.01.01</span>
+									</td>
+									<td>
+										<span>적립</span>
+									</td>
+									<td>
+										<span class="my-point cmain">
+											<span class="sign">+</span>
+											<span class="val">55</span>
+											<span class="unit">P</span>
+										</span>
+									</td>
+								</tr>
+								<tr>
+									<td class="align_left">
+										<span class="point_history">구매적립</span>
+										<span class="ord_num">
+											<span class="label">주문번호 :</span>
+											<a >
+												<span class="text">16161616</span>
+											</a>
+										</span>
+									</td>
+									<td>
+										<span>2024.01.01</span>
+									</td>
+									<td>
+										<span>적립</span>
+									</td>
+									<td>
+										<span class="my-point cmain">
+											<span class="sign">+</span>
+											<span class="val">55</span>
+											<span class="unit">P</span>
+										</span>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="pagenate"></div>
+					<?php } ?>
+				</article>
+			</div>
+		</section>
+	</div>
+	<?php include '../footer.html'; ?>
+	<script type="text/javascript">
+	var currentPage = 1;
+	var dataType = 'all';
+
+	getPointsList(currentPage,dataType);
+	setPageButton(currentPage);
+
+
+	function getPointsList(page,type){
+		$.ajax({
+          	type: 'POST',
+          	url: 'http://localhost/bk/API/points_list_api.php', // 서버 측의 파일 경로 또는 URL
+          	dataType: 'json',
+          	data: { page: page, type:type },
+          	success: function (response) {
+            // 서버로부터의 응답 처리
+            	// console.log(response);
+            	$('#pointData').html("");
+            	$.each(response.data, function(index, item){
+	                $('#pointData').append('<tr><td class="align_left"><span class="point_history">'+item.txt+'</span><span class="ord_num"><span class="label">주문번호 : '+item.ord_txt+'</span><a><span class="text">'+item.order_num+'</span></a></span></td><td><span>'+item.create_date+'</span></td><td><span>'+item.type+'</span></td><td><span class="my-point cmain"><span class="sign">'+item.sign+'</span><span class="val">'+item.val+'</span><span class="unit">P</span></span></td></tr>');
+	            });
+
+            	if ((page - 1) % 5 === 0) {
+                  loadPagination(response.startPage,response.endPage,response.totalPages);
+                  setPageButton(page);
+                }
+
+          	},
+          	error: function () {
+            // 오류 처리
+            	$('#result').text('Error occurred.');
+          	}
+        });
+	}
+
+	function loadPagination(startPage,endPage,totalPages){
+		var paginationHtml = '<ul>';
+
+		if(startPage!=1){
+			paginationHtml += '<li id="prev_btn" class="first_">';
+			paginationHtml += '<a><img src="STATICE/img/icon/tool/first_.svg"></a>';
+			paginationHtml += '</li>';
+		}
+
+		for(var i = startPage; i <= endPage; i++){
+			paginationHtml += '<li id="page-'+i+'" class="paginate_button_num" data-page="'+i+'">';
+			paginationHtml += '<a>'+i+'</a></li>';
+		}
+
+		if(endPage!=totalPages){
+			paginationHtml += '<li id="next-btn" class="last_">';
+			paginationHtml += '<a><img src="STATIC/img/icon/tool/last_.svg"></a>';
+			paginationHtml += '</li>';
+		}
+
+		paginationHtml += '</ul>';
+
+		$('.pagenate').html(paginationHtml);
+	}
+
+	// 페이지 클릭 이벤트 처리
+    $(document).on('click', '.paginate_button_num', function(){
+        var page = $(this).attr('data-page');
+        getPointsList(page,dataType);
+        currentPage = page;
+        setPageButton(currentPage);
+    });
+	
+	function setPageButton(currentPage) {
+        $(".paginate_button_num").removeClass('active');
+        $("#page-"+currentPage).addClass('active');
+    }
+
+    $(document).on("click", "#prev-btn", function() {
+        jumpPage -= 10;
+        loadTableData(jumpPage);
+        setPageButton(jumpPage);
+    });
+
+    $(document).on("click", "#next-btn", function() {
+        jumpPage += 10;
+        console.log(jumpPage);
+        loadTableData(jumpPage);
+        setPageButton(jumpPage);
+    });
+
+    $(".points-tab").click(function(){
+    	$(".points-tab").removeClass('selected');
+    	$(this).addClass('selected');
+
+    	dataType = $(this).attr('data-v');
+    	getPointsList(1,dataType);
+    });
+
+	</script>
+</body>
+</html>
