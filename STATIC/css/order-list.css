@@ -1,0 +1,160 @@
+.ct_title{
+	margin-bottom: 20px;
+}
+
+.category-btn-list{
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    position: relative;
+}
+
+
+.category-btn-list a{
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    color: #707070;
+    cursor: pointer;
+    display: flex;
+    height: 52px;
+    justify-content: center;
+    line-height: 19px;
+    padding: 0 16px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+
+.category-btn-list a.active-category-btn{
+    color: #4dac27;
+    font-weight: 700;
+    position: relative;
+}
+
+.category-btn-list a.active-category-btn:after {
+    background-color: #4dac27;
+    bottom: 0;
+    content: "";
+    height: 2px;
+    left: 0;
+    position: absolute;
+    right: 0;
+    z-index: 5;
+}
+
+
+.list-empty{
+	align-items: flex-end;
+    display: flex;
+    height: 128px;
+    justify-content: center;
+}
+
+.empty-state{
+	align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.empty-state h1{
+	color: #999;
+    margin: 0 0 8px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.list-order{
+	border-top: 1px solid #000;
+    border-bottom: 1px solid #eaeaea;
+    box-sizing: border-box;
+}
+
+.list-table{
+	width: 100%;
+	table-layout: fixed;
+	color: #333333;
+}
+
+.list-table thead th{
+	border-bottom: 1px solid #eaeaea;
+}
+.list-table tr th{
+	padding: 16px 24px 14px;
+}
+
+.list-table tr th{
+	text-align: center;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: -0.01em;
+    color: #767676;
+    font-weight: 600;
+    vertical-align: middle;
+}
+.list-table tr th:first-child{
+    width: 40%;
+}
+
+.list-table tbody tr:last-child td{
+	border-bottom: 0;
+}
+
+.list-table tbody td{
+	border-bottom: 1px solid #eaeaea;
+}
+
+.list-table tr td:first-child div{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    /*width: 270px;*/
+}
+
+.list-table tr td{
+	padding: 20px 12px;
+	text-align: center;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: -0.01em;
+    font-weight: 400;
+    vertical-align: middle;
+}
+.list-table tbody td img{
+    width: 80px;
+}
+
+.list-table .point_history{
+	display: -webkit-box;
+    overflow: hidden;
+    max-height: 44px;
+    line-height: 22px;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-overflow: -o-ellipsis-lastline;
+    white-space: normal;
+    word-break: break-all;
+}
+
+.list-table .ord_num{
+	display: block;
+    margin-top: 8px;
+    color: #595959;
+    margin-left: 8px;
+}
+.list-table .ord_num p{
+    font-weight: 600;
+}
+
+.order-sub-btn{
+    width: 120px;
+    height: 40px;
+    background-color: #fff;
+    border-radius: 10px;
+    color: #4dac27;
+    font-size: 14px;
+    font-weight: 400;
+    border: 1px solid #ebebeb;
+}
+

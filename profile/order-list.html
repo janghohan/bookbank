@@ -1,0 +1,335 @@
+<?php
+
+include '../dbConnect.php';
+$userIx = $_COOKIE['user_ix'];
+$login_contact = str_replace("-", "", $_COOKIE['login_contact']);
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="code" charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0,maximum-scale=10,user-scalable=yes"/>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="../STATIC/js/common.js"></script>
+	<script type="text/javascript" src="../STATIC/js/swiper-bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+	<link rel="stylesheet" type="text/css" href="../STATIC/css/swiper-bundle.min.css"/>
+	<link rel="stylesheet" type="text/css" href="../STATIC/css/style.css"/>
+	<link rel="stylesheet" type="text/css" href="../STATIC/css/order-list.css"/>
+</head>
+<style type="text/css">
+	.info_menu{
+		border: 1px solid #ebebeb;
+		border-radius: 12px;
+	}
+
+</style>
+<body>
+	<?php include '../header.html'; ?>
+	<div id="container">
+		<section class="aside_section">
+			<div class="inner">
+				<aside class="side_menu">
+					<div class="sticky">
+						<article class="info_menu">
+							<ul>
+								<li class="active"><a href="order-list.html">주문 내역</a></li>
+								<li><a href="./points.html">포인트</a></li>
+								<li><a href="info_qna.html">문의 내역</a></li>
+								<li><a href="info.html">내 정보 관리</a></li>
+							</ul>
+						</article>
+					</div>
+				</aside>
+				<article class="content">
+					<h1 class="ct_title">주문/배송 목록</h1>
+					<ul class="category-btn-list">
+						<li>
+							<a class="active-category-btn" data-v='all'>주문내역</a>
+						</li>
+						<li>
+							<a data-v='pending'>준비중</a>
+						</li>
+						<li>
+							<a data-v='processing'>배송중</a>
+						</li>
+						<li>
+							<a data-v='completed'>배송완료</a>
+						</li>
+						<li>
+							<a data-v='cancelled'>취소</a>
+						</li>
+					</ul>
+					
+					<div class="spacing"></div>
+					<?php 
+					$orderSql = "SELECT * FROM orders WHERE user_ix='$userIx'";
+					$orderResult = $conn->query($orderSql);
+
+					if($orderResult->num_rows <= 0){
+					 ?>
+					
+					<div class="list-empty">
+						<div class="empty-state">
+							<h1>주문 내역이 없습니다.</h1>
+						</div>
+					</div>
+					<?php }else{ ?>
+					<div class="list-order">
+						<table class="list-table">
+							<thead>
+								<tr>
+									<th scope="col">주문정보</th>		
+									<th scope="col">금액</th>
+									<th scope="col">상태</th>
+									<th scope="col">활동</th>
+								</tr>
+							</thead>
+							<tbody id="orderData">
+								<tr data-ix="22">
+									<td class="align_left">
+										<div>
+											<img src="../STATIC/img/book/9791186993095.jpg">
+											<span class="ord_num">
+												<span class="label">주문번호 :</span>
+												<a >
+													<span class="text">1643706618</span>
+												</a>
+												<p>검은꽃 외 1권</p>
+											</span>
+
+										</div>   
+									</td>
+									<td>10,350원</td>
+									<td class="cmain fwb">배송준비중</td>
+									<td class="btnBox">
+										<button class="order-sub-btn order-cancel">주문취소</button>
+									</td>
+								</tr>
+								<tr>
+									<td class="align_left">
+										<div>
+											<img src="../STATIC/img/book/9791186993095.jpg">
+											<span class="ord_num">
+												<span class="label">주문번호 :</span>
+												<a >
+													<span class="text">1643706618</span>
+												</a>
+												<p>검은꽃 외 1권</p>
+											</span>
+
+										</div>
+									</td>
+									<td>10,500원</td>
+									<td class="cmain fwb">배송중</td>
+									<td class="btnBox">
+										<button class="order-sub-btn order-return">반품신청</button>
+									</td>
+								</tr>
+								<tr>
+									<td class="align_left">
+										<div>
+											<img src="../STATIC/img/book/9791186993095.jpg">
+											<span class="ord_num">
+												<span class="label">주문번호 :</span>
+												<a >
+													<span class="text">1643706618</span>
+												</a>
+												<p>검은꽃 외 1권</p>
+											</span>
+
+										</div>
+									</td>
+									<td>10,500원</td>
+									<td class="cmain fwb">배송완료</td>
+									<td class="btnBox">
+										<button class="order-sub-btn order-review">리뷰작성</button>
+									</td>
+								</tr>
+								<tr>
+									<td class="align_left">
+										<div>
+											<img src="../STATIC/img/book/9791186993095.jpg">
+											<span class="ord_num">
+												<span class="label">주문번호 :</span>
+												<a >
+													<span class="text">1643706618</span>
+												</a>
+												<p>검은꽃 외 1권</p>
+											</span>
+
+										</div>
+									</td>
+									<td>10,500원</td>
+									<td class="cmain fwb">취소완료</td>
+									<td class="btnBox">
+										<button class="order-sub-btn order-rebuy">재구매</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="pagenate"></div>
+					<?php } ?>
+				</article>
+			</div>
+		</section>
+	</div>
+	<!-- 배송지추가 화면 -->
+	<div id="deliveryAddModal" class="modal">
+	  	<div class="modal-content mh550">
+	    	<div class="modal-title mb5">
+	    		<h3>배송지 추가</h3>
+	    		<span class="close modalCloseBtn" id="addClose">&times;</span>
+	    	</div>
+	    	<div class="delivery-content">
+	    		<form id="newAddForm">
+	    			<h3>배송지이름</h3>
+		    		<input type="text" name="delivery_name" class="bdr7 mt15">
+		    		<h3 class="mt20">받는분</h3>
+		    		<input type="text" name="receiver_name" class="bdr7 mt10" placeholder="이름을 입력해주세요.">
+		    		<input type="text" name="receiver_contact" class="bdr7 mt10" placeholder="휴대폰번호를 -없이 입력해주세요.">
+		    		<h3 class="mt20">주소</h3>
+		    		<input type="text" name="new_address" class="bdr7 mt15">
+		    		<input type="text" name="new_address_detail" class="bdr7 mt10" placeholder="상세주소를 입력해주세요.">
+	    		</form>
+	    		<button id="addSearchBtn" class="subBtn">주소검색</button>
+	    	</div>
+	    	<div class="dpflex-center-center">
+	    		<button class="submitBtn" id="addSaveBtn">저장</button>
+	    	</div>
+	  	</div>
+	</div>
+
+	
+	<?php include '../footer.html'; ?>
+	<script type="text/javascript">
+	var currentPage = 1;
+	var dataType = 'all';
+
+	getOrderList(currentPage,dataType);
+	setPageButton(currentPage);
+
+
+	function getOrderList(page,type){
+		$.ajax({
+          	type: 'POST',
+          	url: '../API/order_list_api.php', // 서버 측의 파일 경로 또는 URL
+          	dataType: 'json',
+          	data: { page: page, type:type },
+          	success: function (response) {
+            // 서버로부터의 응답 처리
+            	console.log(response);
+            	$('#orderData').html("");
+            	$.each(response.data, function(index, item){
+	                $('#orderData').append('<tr data-ix='+item.order_ix+'><td class="align_left"><div><img src=.'+item.img_path+'><span class="ord_num"><span class="label">주문번호 :</span><a><span class="text">'+item.order_num+'</span></a><p>'+item.title+'</p></span></div></td><td>'+item.total_amount+'원</td><td class="cmain fwb">'+item.status_txt+'</td><td class="btnBox"><button class="order-sub-btn '+item.btn_class+'">'+item.btn_txt+'</button></td></tr>');
+	            });
+
+            	if ((page - 1) % 5 === 0) {
+                  loadPagination(response.startPage,response.endPage,response.totalPages);
+                  setPageButton(page);
+                }
+
+          	},
+          	error: function () {
+            // 오류 처리
+            	$('#result').text('Error occurred.');
+          	}
+        });
+	}
+
+	function loadPagination(startPage,endPage,totalPages){
+		var paginationHtml = '<ul>';
+
+		if(startPage!=1){
+			paginationHtml += '<li id="prev_btn" class="first_">';
+			paginationHtml += '<a><img src="STATICE/img/icon/tool/first_.svg"></a>';
+			paginationHtml += '</li>';
+		}
+
+		for(var i = startPage; i <= endPage; i++){
+			paginationHtml += '<li id="page-'+i+'" class="paginate_button_num" data-page="'+i+'">';
+			paginationHtml += '<a>'+i+'</a></li>';
+		}
+
+		if(endPage!=totalPages){
+			paginationHtml += '<li id="next-btn" class="last_">';
+			paginationHtml += '<a><img src="STATIC/img/icon/tool/last_.svg"></a>';
+			paginationHtml += '</li>';
+		}
+
+		paginationHtml += '</ul>';
+
+		$('.pagenate').html(paginationHtml);
+	}
+
+	// 페이지 클릭 이벤트 처리
+    $(document).on('click', '.paginate_button_num', function(){
+        var page = $(this).attr('data-page');
+        getOrderList(page,dataType);
+        currentPage = page;
+        setPageButton(currentPage);
+    });
+	
+	function setPageButton(currentPage) {
+        $(".paginate_button_num").removeClass('active');
+        $("#page-"+currentPage).addClass('active');
+    }
+
+    $(document).on("click", "#prev-btn", function() {
+        jumpPage -= 10;
+        loadTableData(jumpPage);
+        setPageButton(jumpPage);
+    });
+
+    $(document).on("click", "#next-btn", function() {
+        jumpPage += 10;
+        console.log(jumpPage);
+        loadTableData(jumpPage);
+        setPageButton(jumpPage);
+    });
+
+
+    $(".category-btn-list li a").click(function(){
+    	$(".category-btn-list li a").removeClass('active-category-btn');
+    	$(this).addClass('active-category-btn');
+
+    	dataType = $(this).attr('data-v');
+    	console.log(dataType);
+    	getOrderList(1,dataType);
+    });
+
+    $(document).on("click", ".order-cancel", function() {
+     	var orderIx = $(this).closest('tr').attr('data-ix');
+     	showSwalAlert('주문을 취소하시겠습니까?','확인',orderCancel,orderIx);
+    });
+
+    function orderCancel(orderIx){
+     	$.ajax({
+          	type: 'POST',
+          	url: '../API/order_cancel_api.php', // 서버 측의 파일 경로 또는 URL
+          	dataType: 'json',
+          	data: { orderIx: orderIx},
+          	success: function (response) {
+            // 서버로부터의 응답 처리
+            	console.log(response);
+            	
+
+          	},
+          	error: function () {
+            // 오류 처리
+            	$('#result').text('Error occurred.');
+          	}
+        });
+    }
+
+    $(document).on("click", ".order-review", function() {
+     	var orderIx = $(this).closest('tr').attr('data-ix');
+     	showSwalAlert('주문을 취소하시겠습니까?','확인',orderCancel,orderIx);
+    });
+
+	</script>
+</body>
+</html>

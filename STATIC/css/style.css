@@ -103,11 +103,11 @@
     /* font size */
 
     /* font weight */
-    .fw700{font-weight: 700;}
-    .fw600{font-weight: 600;}
-    .fw500{font-weight: 500;}
-    .fw400{font-weight: 400;}
-    .fwb{font-weight: bold;}
+    .fw700{font-weight: 700 !important;}
+    .fw600{font-weight: 600 !important;}
+    .fw500{font-weight: 500 !important;}
+    .fw400{font-weight: 400 !important;}
+    .fwb{font-weight: bold !important;}
     /* font weight */
 
     /*border-radius*/
@@ -373,6 +373,33 @@
     /*common*/
     .bt-bar{
         border-bottom: 1px solid #eaeaea;
+    }
+
+    /*modal*/
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 560px;
+      border-radius: 15px;
+      min-height: 650px;
+      position: relative;
+    }
+    .modal-title{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
 

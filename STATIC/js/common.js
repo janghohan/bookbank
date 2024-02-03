@@ -4,8 +4,20 @@ function newAlert(text){
     Swal.fire({
       text: text,
       showCancelButton: false,
-      confirmButtonColor: '#eb5d3e',
+      confirmButtonColor: '#4dac27',
       confirmButtonText: '확인',
+    });
+}
+
+function showSwalAlert(message, confirmButtonText, confirmCallback, ...args) {
+    Swal.fire({
+        text: message,
+        confirmButtonColor: '#4dac27',
+        confirmButtonText: confirmButtonText,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            confirmCallback(...args);
+        }
     });
 }
 // /* custom selector */

@@ -19,8 +19,11 @@ $returnDate = date("Y-m-d", strtotime("+$rentalDay days"));;//배송받은 다�
 $totalPrice = str_replace(",", "", $totalPrice);
 $total_amount = (int)$totalPrice + (int)$usePoint;
 
+
+$current_time_seconds = time();
+$order_num = $current_time_seconds;
 // 주문생성
-$orderSql = "INSERT INTO orders(user_ix,delivery_ix,total_amount,discount_amount,points_used,memo) VALUES('$user_ix','$deliveryIx','$total_amount','$totalPrice','$usePoint','$memo')";
+$orderSql = "INSERT INTO orders(order_num,user_ix,delivery_ix,total_amount,discount_amount,points_used,memo) VALUES('$order_num','$user_ix','$deliveryIx','$total_amount','$totalPrice','$usePoint','$memo')";
 
 
 
@@ -60,7 +63,7 @@ if($conn->query($orderSql)){
         if(!$conn->query($detailSql)) $detailError = true;
 
         //대여 히스토리 작성 sql
-        $historySql = "INSERT INTO rental_history(user_ix,onwership_ix,rental_date,return_date) VALUES('$user_ix','$ownership_ix','$rentalDate','$returnDate')";
+        $historySql = "INSERT INTO rental_history(user_ix,ownership_ix,rental_date,return_date) VALUES('$user_ix','$ownership_ix','$rentalDate','$returnDate')";
         if(!$conn->query($historySql)) $historyError = true;
 
         //재고감소 sql
