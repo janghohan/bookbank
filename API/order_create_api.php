@@ -1,4 +1,5 @@
 <?php
+//주문이 생성되는 api
 include '../dbConnect.php';
 
 $user_ix = isset($_COOKIE['user_ix']) ? $_COOKIE['user_ix'] : 0;
@@ -22,10 +23,9 @@ $total_amount = (int)$totalPrice + (int)$usePoint;
 
 $current_time_seconds = time();
 $order_num = $current_time_seconds;
+
 // 주문생성
 $orderSql = "INSERT INTO orders(order_num,user_ix,delivery_ix,total_amount,discount_amount,points_used,memo) VALUES('$order_num','$user_ix','$deliveryIx','$total_amount','$totalPrice','$usePoint','$memo')";
-
-
 
 $errorChkTxt = "";
 if($conn->query($orderSql)){
@@ -41,9 +41,7 @@ if($conn->query($orderSql)){
                 FROM tmp_order
                 WHERE tmp_order.user_ix = '1'";
 
-    if($ownerResult = $conn->query($ownerSql)){
-
-    }else{
+    if(!$ownerResult = $conn->query($ownerSql)){
         $errorChkTxt .= " ownerSelectError ";
     }
 
@@ -84,6 +82,12 @@ if($conn->query($orderSql)){
     //유저 포인트 변경 sql
     $pointSql = "UPDATE user SET points = points - $usePoint WHERE user_ix='$user_ix'";
     if(!$conn->query($pointSql)) $errorChkTxt .= " pointError ";
+
+    //포인트 이력 추가
+    if($usePoint!=0){
+        $pointCreateSql = "INSERT INTO points_history(user_ix,type,order_num,val) VALUES('$user_ix','사용','$order_num','$usePoint')";
+        $conn->query($pointCreateSql);
+    }
 
     //임시주문 삭제 sql
     $tmpOrderDelSql = "DELETE FROM tmp_order WHERE user_ix='$user_ix'";

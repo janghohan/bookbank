@@ -50,7 +50,7 @@ if ($orderResult->num_rows > 0) {
             $row['btn_class'] = 'order-cancel';
         }else if($row['status']=='processing'){
             $row['status_txt'] = '배송중';
-            $row['btn_txt'] = '반품신청';
+            $row['btn_txt'] = '회수신청';
             $row['btn_class'] = 'order-return';
         }else if($row['status']=='completed'){
             $row['status_txt'] = '배송완료';

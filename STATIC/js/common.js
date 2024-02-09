@@ -20,6 +20,25 @@ function showSwalAlert(message, confirmButtonText, confirmCallback, ...args) {
         }
     });
 }
+
+
+function chkSwalAlert(message,confirmCallback, ...args){
+	Swal.fire({
+	  	text: message,
+	  	showCancelButton: true,
+	  	confirmButtonColor: '#4dac27',
+	  	cancelButtonColor: '#767676',
+	  	confirmButtonText: '확인',
+	  	cancelButtonText: '취소',
+	}).then((result) => {
+	  	if (result.isConfirmed) {
+	   		confirmCallback(...args);
+	  	} else if (result.dismiss === Swal.DismissReason.cancel) {
+	    // Swal.fire('취소', '작업이 취소되었습니다.', 'error');
+	    // 여기에 취소 버튼을 눌렀을 때의 동작을 추가할 수 있습니다.
+	  	}
+	});
+}
 // /* custom selector */
 // function CustomSelectBox(selector){
 //     this.$selectBox = null,

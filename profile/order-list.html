@@ -18,6 +18,8 @@ $login_contact = str_replace("-", "", $_COOKIE['login_contact']);
 	<link rel="stylesheet" type="text/css" href="../STATIC/css/swiper-bundle.min.css"/>
 	<link rel="stylesheet" type="text/css" href="../STATIC/css/style.css"/>
 	<link rel="stylesheet" type="text/css" href="../STATIC/css/order-list.css"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+<style>
 </head>
 <style type="text/css">
 	.info_menu{
@@ -57,6 +59,12 @@ $login_contact = str_replace("-", "", $_COOKIE['login_contact']);
 						</li>
 						<li>
 							<a data-v='completed'>배송완료</a>
+						</li>
+						<li>
+							<a data-v='retrieval'>회수중</a>
+						</li>
+						<li>
+							<a data-v='returned'>회수완료</a>
 						</li>
 						<li>
 							<a data-v='cancelled'>취소</a>
@@ -177,28 +185,41 @@ $login_contact = str_replace("-", "", $_COOKIE['login_contact']);
 			</div>
 		</section>
 	</div>
-	<!-- 배송지추가 화면 -->
-	<div id="deliveryAddModal" class="modal">
+	<!-- 리뷰작성 화면 -->
+	<div id="reviewAddModal" class="modal">
 	  	<div class="modal-content mh550">
 	    	<div class="modal-title mb5">
-	    		<h3>배송지 추가</h3>
+	    		<h3>리뷰작성</h3>
 	    		<span class="close modalCloseBtn" id="addClose">&times;</span>
 	    	</div>
-	    	<div class="delivery-content">
-	    		<form id="newAddForm">
-	    			<h3>배송지이름</h3>
-		    		<input type="text" name="delivery_name" class="bdr7 mt15">
-		    		<h3 class="mt20">받는분</h3>
-		    		<input type="text" name="receiver_name" class="bdr7 mt10" placeholder="이름을 입력해주세요.">
-		    		<input type="text" name="receiver_contact" class="bdr7 mt10" placeholder="휴대폰번호를 -없이 입력해주세요.">
-		    		<h3 class="mt20">주소</h3>
-		    		<input type="text" name="new_address" class="bdr7 mt15">
-		    		<input type="text" name="new_address_detail" class="bdr7 mt10" placeholder="상세주소를 입력해주세요.">
+	    	<div class="review-content">
+	    		<select class="choiceBook">
+	    			<option value="">작별인사</option>
+	    		</select>
+	    		<div class="spacing"></div>
+	    		<div class="titleBox">
+	    			<img src="../STATIC/img/book/9791191114225.jpg" class="reviewImg">
+	    			<span class="pl10">
+	    				<span class="fs16 fwb pb5">작별인사</span>
+	    				<p>김영하</p>
+	    				<div class="stars" data-rating="">
+						    <i class="far fa-star" data-value="1"></i>
+						    <i class="far fa-star" data-value="2"></i>
+						    <i class="far fa-star" data-value="3"></i>
+						    <i class="far fa-star" data-value="4"></i>
+						    <i class="far fa-star" data-value="5"></i>
+						</div>
+						<input type="hidden" id="rating" name="rating" value="5">
+	    			</span>
+	    		</div>
+	    		
+	    		<form id="reviewForm">
+	    			<h3>리뷰작성</h3>
+		    		<textarea id="reviewTxt" placeholder="내용을 10자 이상 입력해주세요."></textarea>
 	    		</form>
-	    		<button id="addSearchBtn" class="subBtn">주소검색</button>
 	    	</div>
 	    	<div class="dpflex-center-center">
-	    		<button class="submitBtn" id="addSaveBtn">저장</button>
+	    		<button class="addBtn" id="addReviewBtn">리뷰작성</button>
 	    	</div>
 	  	</div>
 	</div>
@@ -208,6 +229,7 @@ $login_contact = str_replace("-", "", $_COOKIE['login_contact']);
 	<script type="text/javascript">
 	var currentPage = 1;
 	var dataType = 'all';
+	var reviewBookIx;
 
 	getOrderList(currentPage,dataType);
 	setPageButton(currentPage);
@@ -286,7 +308,6 @@ $login_contact = str_replace("-", "", $_COOKIE['login_contact']);
 
     $(document).on("click", "#next-btn", function() {
         jumpPage += 10;
-        console.log(jumpPage);
         loadTableData(jumpPage);
         setPageButton(jumpPage);
     });
@@ -303,7 +324,7 @@ $login_contact = str_replace("-", "", $_COOKIE['login_contact']);
 
     $(document).on("click", ".order-cancel", function() {
      	var orderIx = $(this).closest('tr').attr('data-ix');
-     	showSwalAlert('주문을 취소하시겠습니까?','확인',orderCancel,orderIx);
+     	chkSwalAlert('주문을 취소하시겠습니까?',orderCancel,orderIx);
     });
 
     function orderCancel(orderIx){
@@ -325,10 +346,107 @@ $login_contact = str_replace("-", "", $_COOKIE['login_contact']);
         });
     }
 
+    // 리뷰작성
     $(document).on("click", ".order-review", function() {
      	var orderIx = $(this).closest('tr').attr('data-ix');
-     	showSwalAlert('주문을 취소하시겠습니까?','확인',orderCancel,orderIx);
+     	console.log(orderIx);
+     	getInfo(orderIx);
+
+     	document.getElementById('reviewAddModal').style.display = 'block';
+     	$("#reviewTxt").val("");
+		// $("input[name='basicDelivery']").prop("checked",false);
+
+     	// showSwalAlert('주문을 취소하시겠습니까?','확인',orderCancel,orderIx);
     });
+
+	// 모달 닫기
+	$(".modalCloseBtn").click(function(){
+		chkSwalAlert('작성된 리뷰는 저장되지 않습니다. 닫으시겠습니까?',reviewClose,'');
+	});
+	function reviewClose(){
+		$(".modalCloseBtn").closest('.modal').css('display','none');
+	}
+
+	var choiceArray;
+
+	function getInfo(orderIx){
+		$.ajax({
+          	type: 'POST',
+          	url: '../API/orderIx_get_api.php', // 서버 측의 파일 경로 또는 URL
+          	dataType: 'json',
+          	data: { orderIx: orderIx},
+          	success: function (response) {
+            // 서버로부터의 응답 처리
+            	$(".choiceBook").html("");
+            	choiceArray = response.dataResult;
+            	$.each(response.dataResult, function(index, item){
+            		$(".choiceBook").append("<option value="+item.ownership_ix+" data-id="+index+">"+item.title+"</option>");
+            	});
+            	$(".titleBox").html('<img src=".'+response.dataResult[0].image_path+'" class="reviewImg"><span class="pl10"><span class="fs16 fwb pb5">'+response.dataResult[0].title+'</span><p>'+response.dataResult[0].author+'</p><div class="stars" data-rating=""><i class="far fa-star fas" data-value="1"></i><i class="far fa-star fas" data-value="2"></i><i class="far fa-star fas" data-value="3"></i><i class="far fa-star fas" data-value="4"></i><i class="far fa-star fas" data-value="5"></i></div><input type="hidden" id="rating" name="rating" value="5"></span>');
+            	
+
+          	},
+          	error: function () {
+            // 오류 처리
+            	$('#result').text('Error occurred.');
+          	}
+        });
+	}
+
+	// 리뷰작성 책 선택
+	$(document).on("change", ".choiceBook", function() {
+		var index = $(this).find(":selected").data('id');
+		$(".titleBox").html('<img src=".'+choiceArray[index].image_path+'" class="reviewImg"><span class="pl10"><span class="fs16 fwb pb5">'+choiceArray[index].title+'</span><p>'+choiceArray[index].author+'</p><div class="stars" data-rating=""><i class="far fa-star fas" data-value="1"></i><i class="far fa-star fas" data-value="2"></i><i class="far fa-star fas" data-value="3"></i><i class="far fa-star fas" data-value="4"></i><i class="far fa-star fas" data-value="5"></i></div><input type="hidden" id="rating" name="rating" value="5"></span>');
+		reviewBookIx = choiceArray[index].book_ix;
+	});
+
+
+	// 작성하기 버튼
+	$("#addReviewBtn").click(function(){
+		chkSwalAlert('리뷰를 작성 하시겠습니까?',reviewCreate,reviewBookIx);
+	});
+
+	function reviewCreate(reviewBookIx){
+		$.ajax({
+          	type: 'POST',
+          	url: '../API/review_create_api.php', // 서버 측의 파일 경로 또는 URL
+          	dataType: 'json',
+          	data: { reviewBookIx: reviewBookIx, reviewTxt : $("#reviewTxt").val(),reviewRate:$("input[name='rating']").val()},
+          	success: function (response) {
+            // 서버로부터의 응답 처리
+            	console.log(response);
+            	if(response.resultCode==1){
+            		newAlert('리뷰가 작성되었습니다.');
+            		$(".modalCloseBtn").closest('.modal').css('display','none');
+            	}else if(response.resultCode==-1){
+            		newAlert('이미 작성된 리뷰가 있습니다.');
+            	}else{
+            		newAlert('문제가 발생하였습니다. 관리자에게 문의해주세요.');
+            	}
+
+          	},
+          	error: function () {
+            // 오류 처리
+            	$('#result').text('Error occurred.');
+          	}
+        });
+	}
+
+	$(document).on("click", ".stars i", function(event) {
+		const star = $(this);
+		const value = star.attr('data-value');
+        document.getElementById('rating').value = value;
+
+        // 클릭된 별표와 그 이전의 모든 별표에 대해 클래스를 조작
+        // const stars = $(".stars i");
+        $('.stars i').each(function(index, element) {
+            if (index < value) {
+                element.classList.add('fas');
+            } else {
+                element.classList.remove('fas');
+            }
+        });
+	});
 
 	</script>
 </body>
