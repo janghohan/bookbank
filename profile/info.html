@@ -32,10 +32,9 @@ $login_contact = str_replace("-", "", $_COOKIE['login_contact']);
 					<div class="sticky">
 						<article class="info_menu">
 							<ul>
-								<li><a href="info_reserve.html">주문 내역</a></li>
+								<li><a href="./order-list.html">주문 내역</a></li>
 								<li><a href="./points.html">포인트</a></li>
-								<li><a href="info_qna.html">문의 내역</a></li>
-								<li class="active"><a href="info.html">내 정보 관리</a></li>
+								<li class="active"><a href="./info.html">내 정보 관리</a></li>
 							</ul>
 						</article>
 					</div>
@@ -167,7 +166,7 @@ $login_contact = str_replace("-", "", $_COOKIE['login_contact']);
 	});
 
 	$("#logoutBtn").click(function(){
-		location.href = './API/logout_api.php';
+		locationAlert('로그아웃 하시겠습니까?','../API/logout_api.php');
 	});
 	</script>
 </body>

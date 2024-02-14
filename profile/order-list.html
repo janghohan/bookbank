@@ -1,5 +1,7 @@
 <?php
 
+$type = isset($_GET['type']) ? $_GET['type'] : 'all';
+
 include '../dbConnect.php';
 $userIx = $_COOKIE['user_ix'];
 $login_contact = str_replace("-", "", $_COOKIE['login_contact']);
@@ -37,10 +39,9 @@ $login_contact = str_replace("-", "", $_COOKIE['login_contact']);
 					<div class="sticky">
 						<article class="info_menu">
 							<ul>
-								<li class="active"><a href="order-list.html">주문 내역</a></li>
+								<li class="active"><a href="./order-list.html">주문 내역</a></li>
 								<li><a href="./points.html">포인트</a></li>
-								<li><a href="info_qna.html">문의 내역</a></li>
-								<li><a href="info.html">내 정보 관리</a></li>
+								<li><a href="./info.html">내 정보 관리</a></li>
 							</ul>
 						</article>
 					</div>
@@ -231,8 +232,15 @@ $login_contact = str_replace("-", "", $_COOKIE['login_contact']);
 	var dataType = 'all';
 	var reviewBookIx;
 
-	getOrderList(currentPage,dataType);
-	setPageButton(currentPage);
+	$(document).ready(function() {
+		var type = "<?=$type?>";
+		getOrderList(currentPage,type);
+		setPageButton(currentPage);
+
+
+	});
+
+	
 
 
 	function getOrderList(page,type){
@@ -246,7 +254,14 @@ $login_contact = str_replace("-", "", $_COOKIE['login_contact']);
             	console.log(response);
             	$('#orderData').html("");
             	$.each(response.data, function(index, item){
+            		// console.log(i);
 	                $('#orderData').append('<tr data-ix='+item.order_ix+'><td class="align_left"><div><img src=.'+item.img_path+'><span class="ord_num"><span class="label">주문번호 :</span><a><span class="text">'+item.order_num+'</span></a><p>'+item.title+'</p></span></div></td><td>'+item.total_amount+'원</td><td class="cmain fwb">'+item.status_txt+'</td><td class="btnBox"><button class="order-sub-btn '+item.btn_class+'">'+item.btn_txt+'</button></td></tr>');
+
+	                if(item.status=='completed'){
+	                	$('#orderData tr:eq('+index+') .btnBox').append('<button class="order-sub-btn order-return">회수신청</button>');
+	                }
+
+
 	            });
 
             	if ((page - 1) % 5 === 0) {
@@ -335,8 +350,9 @@ $login_contact = str_replace("-", "", $_COOKIE['login_contact']);
           	data: { orderIx: orderIx},
           	success: function (response) {
             // 서버로부터의 응답 처리
-            	console.log(response);
-            	
+            	if(response.resultCode==1){
+            		locationAlert('주문이 취소되었습니다.','./order-list.html?type=cancelled');
+            	}
 
           	},
           	error: function () {
@@ -447,6 +463,36 @@ $login_contact = str_replace("-", "", $_COOKIE['login_contact']);
             }
         });
 	});
+
+
+
+	$(document).on("click", ".order-return", function(event) {
+		var orderIx = $(this).closest('tr').attr('data-ix');
+		chkSwalAlert('회수를 요청 하시겠습니까? 회수요청은 다시 취소할 수 없습니다.',returnCreate,orderIx);
+	});
+
+	function returnCreate(orderIx){
+		$.ajax({
+          	type: 'POST',
+          	url: '../API/order_return_api.php', // 서버 측의 파일 경로 또는 URL
+          	dataType: 'json',
+          	data: { orderIx: orderIx},
+          	success: function (response) {
+            // 서버로부터의 응답 처리
+            	console.log(response);
+            	if(response.resultCode==1){
+            		locationAlert('회수요청이 완료되었습니다.','./order-list.html?type=retrieval');
+            	}else{
+            		newAlert('문제가 발생하였습니다. 관리자에게 문의해주세요.');
+            	}
+
+          	},
+          	error: function () {
+            // 오류 처리
+            	$('#result').text('Error occurred.');
+          	}
+        });
+	}
 
 	</script>
 </body>

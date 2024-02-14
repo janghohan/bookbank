@@ -1,0 +1,204 @@
+.ct_title{
+	margin-bottom: 5px;
+}
+.sub_text{
+    color: #999999;
+}
+
+.grey-box{
+    display: flex;
+    padding: 24px;
+    background-color: rgb(245,247,250,0.8);
+    border-radius: 15px;
+    margin-top: 15px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.grey-box .callBtn{
+    display: flex;
+    background-color: rgb(245,247,250,0.8);
+    border: none;
+    align-items: center;
+    font-size: 20px;
+    color: #333333;
+}
+.grey-box .callBtn span{
+    padding-left: 5px;
+}
+
+.emailBox{
+    color: #999999;
+    font-size: 14px;
+    padding-top: 10px;
+}
+
+.kakao-btn{
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    cursor: pointer;
+    height: 48px;
+    border-radius: 10px;
+    border-width: 2px;
+    font-size: 1rem;
+    line-height: normal;
+    letter-spacing: 0px;
+    font-weight: 600;
+    background-color: rgb(255, 255, 255);
+    --tw-text-opacity: 1;
+    color: rgb(51 51 51 / var(--tw-text-opacity));
+    --tw-border-opacity: 1;
+    border-color: rgb(235 235 235 / var(--tw-border-opacity));
+    padding: 10px 18px 10px 16px;
+}
+
+.sub_title{
+    padding-top: 35px;
+    padding-bottom: 5px;
+    font-size: 1.125rem;
+    line-height: normal;
+    letter-spacing: 0px;
+    font-weight: 700;
+    --tw-text-opacity: 1;
+    color: #333333;
+}
+
+.faq_tab_area {
+    margin: 10px 0 20px 0;
+}
+
+.faq_tab_area ul{
+    display: flex;
+    gap: 6px 8px;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 50px;
+}
+
+.faq_tab_area li{
+    cursor: pointer;
+    height: 32px;
+    max-width: 212px;
+    padding: 8px 16px;
+    font-size: 0.8125rem;
+    line-height: 0.8125rem;
+    letter-spacing: 0px;
+    font-weight: 600;
+    flex: 0 0 auto;
+    cursor: pointer;
+    -webkit-box-align: center;
+    align-items: center;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border-radius: 100px;
+    border:1px solid #ebebeb;
+    border-width: 1.5px;
+    --tw-bg-opacity: 1;
+}
+.faq_his_area{
+    margin-top: 30px;
+}
+.faq_his_area ul {
+    border-top: 1px solid #222222;
+}
+.faq_his_area li {
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+.faq_his_area .subject_ {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 80px;
+    color: #333333;
+    font-weight: 550;
+    font-size: 16px;
+}
+
+.faq_tab_area li.active{
+    background-color: #4dac27;
+    color: #fff;
+}
+
+.faq_his_area .subject_ span:last-child {
+    flex-shrink: 0;
+    font-size: 14px;
+    color: #333333;
+    width: 130px;
+    padding: 0 20px;
+}
+
+.faq_his_area .subject_ .Q,
+.faq_his_area .drop_ .A {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #F5F5FA;
+    color: #c2c2c2;
+    margin-right: 20px;
+}
+.faq_his_area .subject_ .Q:before {
+    content: "Q";
+    font-weight: 700;
+    padding-bottom: 5px;
+}
+.faq_his_area .subject_ .conetnet {
+    flex-grow: 1;
+    padding-right: 50px;
+    padding-left: 5px;
+}
+
+.faq_his_area .subject_ .dropBtn {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    background-image: url(../img/icon/tool/drop_down.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    margin-right: 20px;
+}
+.faq_his_area .active .subject_ .dropBtn {
+    background-image: url(../img/icon/tool/drop_up.svg);
+}
+.faq_his_area .drop_ {
+    display: none;
+    margin-bottom: 30px;
+}
+.faq_his_area .drop_  > div {
+    background-color: #F9FDFF;
+    border-radius: 15px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px;
+    padding-left: 50px;
+}
+.faq_his_area .drop_ .content {
+    font-size: 14px;
+    color: #666;
+}
+
+.faq_his_area .drop_ .A {
+    background-color: #4dac27;
+    color: #fff;
+}
+.faq_his_area .drop_ .A:before {
+    content: "A";
+    font-weight: 700;
+    padding-bottom: 5px;
+}
+
+.faq_his_area .subject_ .conetnet > p { overflow: hidden; text-overflow: ellipsis; white-space: nowrap;  }
+
+
+

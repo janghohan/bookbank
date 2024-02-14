@@ -1,0 +1,134 @@
+<?php 
+include './dbConnect.php';
+include './API/visit_chk_api.php';
+ ?>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>북뱅크</title>
+	<meta name="naver-site-verification" content="ebbbda54b581c9fe94944c308e7b519afa458575" />
+	<meta name="description" content="북뱅크">
+	<meta name="robots" content="index, follow">
+	<meta name="code" charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1"/>
+	<meta property="og:type" content="website"> 
+	<meta property="og:title" content="북뱅크">
+	<meta property="og:description" content="도서대여,책대여,책방,책빌리는곳2">
+	<!-- <meta property="og:image" content="http://www.mysite.com/myimage.jpg"> -->
+	<meta property="og:url" content="http://jeojeon.com">
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<!-- <script type="text/javascript" src="STATIC/js/common.js"></script> -->
+	<script type="text/javascript" src="STATIC/js/swiper-bundle.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/swiper-bundle.min.css"/>
+	<link rel="stylesheet" type="text/css" href="STATIC/css/style.css"/>
+</head>
+<body>
+	<?php include 'header.html'; ?>	
+	
+	<style type="text/css">
+		#container{
+			margin-top: 80px;
+		}
+		.tool{
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+			cursor: pointer;
+		}
+		.tool img{
+			width: 60px;
+		}
+	</style>
+
+
+	<div id="container">
+		
+		<section class="campaign__">
+			<div class="inner">
+				<div class="title HOT">
+					<h2>대여 가능 도서</h2>
+				</div>
+				<section class="list_area scroll">
+					<?php 
+					$bookSql = "SELECT * FROM books WHERE stock_quantity > 0";
+					$bookResult = $conn->query($bookSql);
+
+					$bookCount = 0;
+					while($bookRow = $bookResult->fetch_assoc()){
+						$bookCount ++;
+
+						if($bookCount%4==1) echo "<ul>";
+					 ?>
+
+					 <li>
+						<a href="./detail.html?bookIx=<?=$bookRow['book_ix']?>">
+							<div class="imgBox">
+								<img src="<?=$bookRow['image_path']?>">
+							</div>
+							<div class="details">
+								<h3><?=$bookRow['title']?></h3>
+							</div>
+						</a>
+					</li>
+
+					<?php 
+					if($bookCount%4==0) echo "</ul>";
+					} 
+
+					if($bookCount%4!=0) echo "</ul>";
+					?>
+
+					<!-- 
+					<ul> 
+						
+						 <li>
+							<a href="detail.html">
+								<div class="imgBox">
+									<img src="STATIC/img/book/9788934942467.jpg">
+								</div>
+								<div class="details">
+									<h3>총균쇠</h3>
+									 <div class="tag_area">
+										<img src="STATIC/img/icon/asset/tag_blog.svg">
+										<img src="STATIC/img/icon/asset/tag_instar.svg">
+										<img src="STATIC/img/icon/asset/tag_cafe.svg">
+										<img src="STATIC/img/icon/asset/tag_store.svg">
+										<img src="STATIC/img/icon/asset/tag_ytb.svg">
+										<span>제품</span>
+									</div>
+									<div class="appli_area">
+										<div>
+											<span>신청</span>
+											<b>3</b>
+											<span>/</span>
+											<span>5명</span>
+										</div>
+										<div>
+											<div class="dday">D-13</div>
+										</div>
+									</div>
+									<div class="subject">프리미엄 기능성 편안한 신발 아치 깔창 2차</div>
+									<div class="desc">신발 아치깔창 1개</div>
+									<div class="point_tag">
+										<span class="point">공통 3,000P</span>
+										<span class="point bonus">보너스 50,000P</span>
+									</div>
+						 		</div>
+							</a>
+						</li> 
+						
+					</ul>  -->
+				</section>
+			</div>
+		</section>
+	</div>
+	<?php include 'footer.html'; ?>	
+
+	
+	<script type="text/javascript">
+			
+
+		
+	</script>
+</body>
+</html>

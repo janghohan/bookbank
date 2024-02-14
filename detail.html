@@ -280,7 +280,7 @@ $discountPercent = round((($price-$rentalPrice)/$price)*100);
 						<?=$bookRow['description']?>
 					</p>
 				</li>
-				<li class="intro_sub_info">
+			<!-- 	<li class="intro_sub_info">
 					<div class="caution_sub_title">
 						작가 이슬아
 					</div>
@@ -290,7 +290,7 @@ $discountPercent = round((($price-$rentalPrice)/$price)*100);
 					</p>
 				</li>
 
-				
+				 -->
 			</ul>
 		</section>
 		<style type="text/css">
@@ -380,10 +380,18 @@ $discountPercent = round((($price-$rentalPrice)/$price)*100);
 		$("#cartBtn").click(function(){
 			Swal.fire({
 		      	text: "장바구니에 담으시겠습니까?",
+	      		showCancelButton: true,
 		      	confirmButtonColor: '#4dac27',
-		      	confirmButtonText: '확인',
+		      	cancelButtonColor: '#767676',
+		      	confirmButtonText: '예',
+		      	cancelButtonText: '아니오',
 		    }).then((result) => {
-		    	cart()
+		    	if (result.isConfirmed) {
+		       		cart();
+		      	} else if (result.dismiss === Swal.DismissReason.cancel) {
+		        // Swal.fire('취소', '작업이 취소되었습니다.', 'error');
+		        // 여기에 취소 버튼을 눌렀을 때의 동작을 추가할 수 있습니다.
+		      	}
 		    });
 		});
 

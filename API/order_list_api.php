@@ -23,6 +23,10 @@ if($type=='all'){
     $orderSql = "SELECT * FROM orders WHERE user_ix='$userIx' AND status='completed' ORDER BY order_date DESC LIMIT $start, $itemsPerPage";
 }else if($type=='cancelled'){
     $orderSql = "SELECT * FROM orders WHERE user_ix='$userIx' AND status='cancelled' ORDER BY order_date DESC LIMIT $start, $itemsPerPage";
+}else if($type=='retrieval'){
+    $orderSql = "SELECT * FROM orders WHERE user_ix='$userIx' AND status='retrieval' ORDER BY order_date DESC LIMIT $start, $itemsPerPage";
+}else if($type=='returned'){
+    $orderSql = "SELECT * FROM orders WHERE user_ix='$userIx' AND status='returned' ORDER BY order_date DESC LIMIT $start, $itemsPerPage";
 }
 
 
@@ -56,10 +60,18 @@ if ($orderResult->num_rows > 0) {
             $row['status_txt'] = '배송완료';
             $row['btn_txt'] = '리뷰작성';
             $row['btn_class'] = 'order-review';
-        }if($row['status']=='cancelled'){
+        }else if($row['status']=='cancelled'){
             $row['status_txt'] = '주문취소';
             $row['btn_txt'] = '구매하기';
             $row['btn_class'] = 'order-rebuy';
+        }else if($row['status']=='retrieval'){
+            $row['status_txt'] = '회수중';
+            $row['btn_txt'] = '리뷰작성';
+            $row['btn_class'] = 'order-review';
+        }else if($row['status']=='returned'){
+            $row['status_txt'] = '회수완료';
+            $row['btn_txt'] = '리뷰작성';
+            $row['btn_class'] = 'order-review';
         }
     
         $rows[] = $row;
@@ -77,6 +89,10 @@ if($type=='all'){
     $totalSql = "SELECT COUNT(*) as count FROM orders WHERE user_ix='$userIx' AND status='completed' ORDER BY order_date DESC";
 }else if($type=='cancelled'){
     $totalSql = "SELECT COUNT(*) as count FROM orders WHERE user_ix='$userIx' AND status='cancelled' ORDER BY order_date DESC";
+}else if($type=='retrieval'){
+    $totalSql = "SELECT COUNT(*) as count FROM orders WHERE user_ix='$userIx' AND status='retrieval' ORDER BY order_date DESC";
+}else if($type=='returned'){
+    $totalSql = "SELECT COUNT(*) as count FROM orders WHERE user_ix='$userIx' AND status='returned' ORDER BY order_date DESC";
 }
 
 $totalRecordsResult = $conn->query($totalSql);

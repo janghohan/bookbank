@@ -16,6 +16,7 @@ $selectDetailsResult = $conn->query($selectDetailsSql);
 
 $ownershipUpdateError = false;
 $rentalDeleteError = false;
+$bookStockError = false;
 while($selectDetailsRow = $selectDetailsResult->fetch_assoc()){
 	$ownership_ix = $selectDetailsRow['ownership_ix'];
 
@@ -24,12 +25,17 @@ while($selectDetailsRow = $selectDetailsResult->fetch_assoc()){
 	//취소이기 때문에 rental_history에 남기진 않는다.
 	$rentalDeleteSql = "DELETE FROM rental_history WHERE ownership_ix='$ownership_ix'";
 
+	//books의 재고 다시 증가
+	$booksStockSql = "UPDATE books SET stock_quantity = stock_quantity + 1 WHERE book_ix IN (SELECT book_ix FROM ownership WHERE ownership_ix='$ownership_ix')";
+
 	if(!$conn->query($ownershipUpdateSql)) $ownershipUpdateError = true;
 	if(!$conn->query($rentalDeleteSql)) $rentalDeleteError = true;
+	if(!$conn->query($booksStockSql)) $bookStockError = true;
 }
 
 if($ownershipUpdateError) $errorChkTxt .= " ownershipUpdate Error";
 if($rentalDeleteError) $errorChkTxt .= " rentalDelete Error";
+if($bookStockError) $errorChkTxt .= " bookStock Error";
 
 //사용한 포인트 확인해서 취소시키기
 $pointSelectSql = "SELECT * FROM orders WHERE order_ix='$orderIx' AND user_ix='$user_ix'";
